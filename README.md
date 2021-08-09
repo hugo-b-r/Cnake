@@ -3,12 +3,12 @@ Cnake is a simple Snake game made in C for console. It will work in Linux and Wi
 
 ### Installation
 
-clone repo:
+Clone repo:
 ```shell
 git clone https://github.com/lemoustachu/Cnake.git
 ```
 
-achange directory:
+Change directory:
 ```shell
 cd Cnake
 ```
