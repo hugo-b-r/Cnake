@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.10)
+
+project(Cnake)
+
+#linking heders
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/header)
+add_subdirectory(src)

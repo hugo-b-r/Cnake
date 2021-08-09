@@ -3,6 +3,7 @@
 main.c
 
 main file for game logic
+
 */
 
 #include <stdio.h>
@@ -13,7 +14,7 @@ main file for game logic
 int main()
 {
   init();
-  
+
   _Bool continueGame = true;
   string game = "     \n     \n     \n     \n     \n";
   int score = 0;
