@@ -8,11 +8,14 @@ clone repo:
 git clone https://github.com/lemoustachu/Cnake.git
 ```
 
+achange directory:
 ```shell
-make
+cd Cnake
 ```
 
 and then:
 ```shell
-make install
+mkdir build
+cd build
+cmake ..
 ```
