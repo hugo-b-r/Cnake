@@ -14,8 +14,7 @@ cd Cnake
 ```
 
 and then:
-```shell
-mkdir build
-cd build
-cmake ..
+```bash
+make clean
+make
 ```
