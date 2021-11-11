@@ -8,13 +8,16 @@ OBJ  = $(SRC:.c=.o)
 OUTPUT_FOLDER = bin
 
 
-all: $(TARGET)
+all: dirs $(TARGET) 
 
 $(TARGET): $(OBJ)
 	$(CC) -o $(OUTPUT_FOLDER)/$(TARGET) $^ $(LDFLAGS)
 
 %.o: %.c
-	$(CC) -o $@ -c $< $(CFLAGS)
+	$(CC) `pkg-config --cflags --libs CSFML` -o $@ -c $< $(CFLAGS)
+
+dirs:
+	mkdir $(OUTPUT_FOLDER)
 
 clean:
 	rm -rf $(OBJ)
