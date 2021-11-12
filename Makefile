@@ -19,11 +19,11 @@ $(TARGET): $(OBJ)
 #`pkg-config --cflags --libs sdl2`
 
 dirs:
-	mkdir $(OUTPUT_FOLDER)
+	mkdir -p $(OUTPUT_FOLDER)
 
 clean:
 	rm -rf $(OBJ)
-	rm -r $(OUTPUT_FOLDER)
+	rm -f $(OUTPUT_FOLDER)/$(TARGET)
 
 mrproper: clean
 	rm -rf $(OUTPUT_FOLDER)
