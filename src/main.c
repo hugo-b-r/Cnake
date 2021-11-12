@@ -13,8 +13,8 @@ main file for game logic
 #include <SDL2/SDL_video.h>
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 1000;
-const int SCREEN_HEIGHT = 1000;
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
 
 int main(int, char **)
 {
@@ -33,7 +33,7 @@ int main(int, char **)
     //log
     printf("SDL2 succesfully loaded VIDEO and AUDIO.");
     //create the windows
-    window = SDL_CreateWindow("Cnake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 200, 200, SDL_WINDOW_RESIZABLE);
+    window = SDL_CreateWindow("Cnake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE);
     if( window == NULL )
     {
       printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
@@ -60,7 +60,7 @@ int main(int, char **)
   SDL_DestroyWindow( window );
 
   SDL_Quit();
-  
+
   return 0;
 }
  
