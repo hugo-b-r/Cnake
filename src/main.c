@@ -56,7 +56,7 @@ int main()
 
 	Set_Background(&window, &renderer, white);
 
-  SDL_SetRenderDrawColor(renderer, orange.r, orange.g, orange.b, orange.a)
+  SDL_SetRenderDrawColor(renderer, orange.r, orange.g, orange.b, orange.a);
 
   SDL_RenderDrawLine(renderer, 0, 0, 640, 480);
   SDL_RenderPresent(renderer);
