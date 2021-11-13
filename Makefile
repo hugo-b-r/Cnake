@@ -1,6 +1,6 @@
 CC = gcc
-CFLAGS = -Wall -O -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
-LDFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
+CFLAGS = -Wall -O -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -Wimplicit-function-declaration
+LDFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -Wimplicit-function-declaration
 TARGET = game
 
 SRC  = $(wildcard src/**/*.c) $(wildcard src/*.c) $(wildcard src/**/**/*.c) $(wildcard src/**/**/**/*.c)

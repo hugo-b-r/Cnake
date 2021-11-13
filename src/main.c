@@ -11,56 +11,88 @@ main file for game logic
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_video.h>
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_render.h>
+#include "init.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+int Set_Background(SDL_Window** window, SDL_Renderer** renderer, SDL_Color color);
+
+
 int main(int, char **)
 {
-  SDL_Window* window = NULL;
-  
-  //The surface contained by the window
-  SDL_Surface* screenSurface = NULL;
-  
-  if(SDL_InitSubSystem(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
-  {
-    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[debug] %s", SDL_GetError());
-    return -1;
-  }
-  else
-  {
-    //log
-    printf("SDL2 succesfully loaded VIDEO and AUDIO.");
-    //create the windows
-    window = SDL_CreateWindow("Cnake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE);
-    if( window == NULL )
+  	SDL_Window* window = NULL;
+	
+	SDL_Renderer* renderer = NULL;
+	
+	SDL_Color rouge = {255, 0, 0, 255};
+	SDL_Color orange = {255, 127, 40, 255};
+	SDL_Color vert = {0, 255, 0, 255};
+	SDL_Color white = {255, 255, 255, 255};
+
+	
+
+	Init_Subsystems(&window, &renderer);
+
+    Create_Window(&window, &renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    Create_Renderer(&window, &renderer);
+
+
+
+	Set_Background(&window, &renderer, rouge);
+	
+	SDL_Delay(1000);
+
+	Set_Background(&window, &renderer, orange);
+	
+	SDL_Delay(1000);
+
+	Set_Background(&window, &renderer, vert);
+
+	SDL_Delay(1000);
+
+	Set_Background(&window, &renderer, white);
+
+
+  	SDL_Event events;
+	_Bool isOpen = 1;
+	while (isOpen)
+	{
+    	while (SDL_PollEvent(&events))
+    	{
+      	switch (events.type)
+      		{
+      		case SDL_QUIT:
+					isOpen = 0;
+        			break;
+      		}
+
+    	}
+  	}
+	SDL_Delay(10000);
+	Game_Quit(&window, &renderer);
+}
+
+
+int Set_Background(SDL_Window** window, SDL_Renderer** renderer, SDL_Color color)
+{
+	if(0 != SDL_SetRenderDrawColor(*renderer, color.r, color.g, color.b, color.a))
     {
-      printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
+        fprintf(stderr, "Erreur SDL_SetRenderDrawColor : %s", SDL_GetError());
+        Game_Quit(window, renderer);
     }
-    else
+    
+    if(0 != SDL_RenderClear(*renderer))
     {
-      //Get window surface
-      screenSurface = SDL_GetWindowSurface( window );
-
-      //Fill the surface white
-      SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0xFF, 0xFF, 0xFF ) );
-            
-      //Update the surface
-      SDL_UpdateWindowSurface( window );
-
-      //Wait two seconds
-      SDL_Delay( 200000 );
-
+        fprintf(stderr, "Erreur SDL_SetRenderDrawColor : %s", SDL_GetError());
+        Game_Quit(window, renderer);
     }
 
-  }
-
-  //Destroy window
-  SDL_DestroyWindow( window );
-
-  SDL_Quit();
-
-  return 0;
+	SDL_RenderPresent(*renderer);
+	return 0;
 }
  
