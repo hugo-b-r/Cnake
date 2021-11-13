@@ -25,15 +25,15 @@ int Set_Background(SDL_Window** window, SDL_Renderer** renderer, SDL_Color color
 int main(int, char **)
 {
   	SDL_Window* window = NULL;
-	
+
 	SDL_Renderer* renderer = NULL;
-	
+
 	SDL_Color rouge = {255, 0, 0, 255};
 	SDL_Color orange = {255, 127, 40, 255};
 	SDL_Color vert = {0, 255, 0, 255};
 	SDL_Color white = {255, 255, 255, 255};
 
-	
+
 
 	Init_Subsystems(&window, &renderer);
 
@@ -44,11 +44,11 @@ int main(int, char **)
 
 
 	Set_Background(&window, &renderer, rouge);
-	
+
 	SDL_Delay(1000);
 
 	Set_Background(&window, &renderer, orange);
-	
+
 	SDL_Delay(1000);
 
 	Set_Background(&window, &renderer, vert);
@@ -57,8 +57,11 @@ int main(int, char **)
 
 	Set_Background(&window, &renderer, white);
 
+  SDL_Rect rect = {100, 100, 100, 100};
+  SDL_RenderFillRect(renderer, &rect); 
+  SDL_RenderPresent(renderer);
 
-  	SDL_Event events;
+  SDL_Event events;
 	_Bool isOpen = 1;
 	while (isOpen)
 	{
@@ -73,7 +76,6 @@ int main(int, char **)
 
     	}
   	}
-	SDL_Delay(10000);
 	Game_Quit(&window, &renderer);
 }
 
@@ -85,7 +87,7 @@ int Set_Background(SDL_Window** window, SDL_Renderer** renderer, SDL_Color color
         fprintf(stderr, "Erreur SDL_SetRenderDrawColor : %s", SDL_GetError());
         Game_Quit(window, renderer);
     }
-    
+
     if(0 != SDL_RenderClear(*renderer))
     {
         fprintf(stderr, "Erreur SDL_SetRenderDrawColor : %s", SDL_GetError());
@@ -95,4 +97,3 @@ int Set_Background(SDL_Window** window, SDL_Renderer** renderer, SDL_Color color
 	SDL_RenderPresent(*renderer);
 	return 0;
 }
- 

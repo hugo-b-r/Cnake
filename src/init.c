@@ -17,7 +17,7 @@ init functions
 
 
 
-
+//init subsystems of SDL2
 void Init_Subsystems(SDL_Window** window, SDL_Renderer** renderer)
 {
     if(SDL_InitSubSystem(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
@@ -36,7 +36,7 @@ void Init_Subsystems(SDL_Window** window, SDL_Renderer** renderer)
 
 
 
-
+//to create a window
 void Create_Window(SDL_Window** window, SDL_Renderer** renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT)
 {
     //create the windows
@@ -55,7 +55,7 @@ void Create_Window(SDL_Window** window, SDL_Renderer** renderer, int SCREEN_WIDT
 
 
 
-
+//to create a renderer from a window
 void Create_Renderer(SDL_Window** window, SDL_Renderer** renderer)
 {
     //create renderer
@@ -75,7 +75,7 @@ void Create_Renderer(SDL_Window** window, SDL_Renderer** renderer)
 
 
 
-
+//to quit the game, we destroy, if possible, renderer and then window
 void Game_Quit(SDL_Window** window, SDL_Renderer** renderer)
 {
     if(*renderer != NULL)
