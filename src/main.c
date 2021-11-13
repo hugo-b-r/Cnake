@@ -22,9 +22,9 @@ const int SCREEN_HEIGHT = 480;
 int Set_Background(SDL_Window** window, SDL_Renderer** renderer, SDL_Color color);
 
 
-int main(int, char **)
+int main()
 {
-  	SDL_Window* window = NULL;
+  SDL_Window* window = NULL;
 
 	SDL_Renderer* renderer = NULL;
 
@@ -34,12 +34,11 @@ int main(int, char **)
 	SDL_Color white = {255, 255, 255, 255};
 
 
-
 	Init_Subsystems(&window, &renderer);
 
-    Create_Window(&window, &renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+  Create_Window(&window, &renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    Create_Renderer(&window, &renderer);
+  Create_Renderer(&window, &renderer);
 
 
 
@@ -57,8 +56,9 @@ int main(int, char **)
 
 	Set_Background(&window, &renderer, white);
 
-  SDL_Rect rect = {100, 100, 100, 100};
-  SDL_RenderFillRect(renderer, &rect); 
+  SDL_SetRenderDrawColor(renderer, orange.r, orange.g, orange.b, orange.a)
+
+  SDL_RenderDrawLine(renderer, 0, 0, 640, 480);
   SDL_RenderPresent(renderer);
 
   SDL_Event events;
