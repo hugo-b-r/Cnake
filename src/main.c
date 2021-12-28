@@ -2,7 +2,7 @@
 
 main.c
 
-main file for game logic
+main file for game
 
 */
 
@@ -15,15 +15,16 @@ main file for game logic
 #include <SDL2/SDL_render.h>
 #include "init.h"
 
-//Screen dimension constants
+
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
 int Set_Background(SDL_Window** window, SDL_Renderer** renderer, SDL_Color color);
 
 
-int main(int argc, char* argv[]) 
+int main(int argc, char* argv[])
 {
+
 	SDL_Window* window = NULL;
 
 	SDL_Renderer* renderer = NULL;
@@ -36,31 +37,11 @@ int main(int argc, char* argv[])
 
 	Init_Subsystems(&window, &renderer);
 
-  	Create_Window(&window, &renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+  Create_Window(&window, &renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-  	Create_Renderer(&window, &renderer);
+  Create_Renderer(&window, &renderer);
 
 
-
-	Set_Background(&window, &renderer, rouge);
-
-	SDL_Delay(1000);
-
-	Set_Background(&window, &renderer, orange);
-
-	SDL_Delay(1000);
-
-	Set_Background(&window, &renderer, vert);
-
-	SDL_Delay(1000);
-
-	Set_Background(&window, &renderer, white);
-/*
-	SDL_SetRenderDrawColor(renderer, orange.r, orange.g, orange.b, orange.a);
-
-	SDL_RenderDrawLine(renderer, 0, 0, 640, 480);
-	SDL_RenderPresent(renderer);
-*/
 	SDL_Event events;
 	_Bool isOpen = 1;
 	while (isOpen)
