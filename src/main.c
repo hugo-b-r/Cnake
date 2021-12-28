@@ -13,7 +13,9 @@ main file for game
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_render.h>
+
 #include "init.h"
+#include "mechanism.h"
 
 
 const int SCREEN_WIDTH = 640;
