@@ -25,8 +25,5 @@ header for init functions
 
         void Create_Renderer(SDL_Window** window, SDL_Renderer** renderer);
 
-        void Game_Quit(SDL_Window** window, SDL_Renderer** renderer);
-        
 
     #endif
-
