@@ -5,6 +5,7 @@ mechanism.c
 game logic
 
 */
+
 struct position
 {
   int x;

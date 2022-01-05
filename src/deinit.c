@@ -6,6 +6,9 @@ deinit functions
 
 */
 
+#include <SDL2/SDL.h>
+
+
 void Game_Quit(SDL_Window** window, SDL_Renderer** renderer)
 {
     if(*renderer != NULL)
