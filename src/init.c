@@ -71,3 +71,15 @@ void Create_Renderer(SDL_Window** window, SDL_Renderer** renderer)
     }
 
 }
+
+
+
+
+void Init_SDL(SDL_Window** window, SDL_Renderer** renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT)
+{
+  Init_Subsystems(window, renderer);
+
+  Create_Window(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+  Create_Renderer(window, renderer);
+}

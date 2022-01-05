@@ -31,10 +31,7 @@ int main(int argc, char* argv[])
 	SDL_Window* window = NULL;
 	SDL_Renderer* renderer = NULL;
 
-	Init_Subsystems(&window, &renderer);
-  Create_Window(&window, &renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
-  Create_Renderer(&window, &renderer);
-
+	Init_SDL(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	SDL_Event events;
 	_Bool isOpen = 1;
