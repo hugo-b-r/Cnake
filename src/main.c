@@ -17,6 +17,7 @@ main file for game
 #include "init.h"
 #include "mechanism/mechanism.h"
 #include "deinit.h"
+#include "graphics/generic.h"
 
 
 const int SCREEN_WIDTH = 640;
@@ -31,7 +32,11 @@ int main(int argc, char* argv[])
 	SDL_Window* window = NULL;
 	SDL_Renderer* renderer = NULL;
 
-	Init_SDL(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+	Init_SDL(&window, &renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+
+	Draw_Button(&renderer, 50, 50, 200, 200);
 
 	SDL_Event events;
 	_Bool isOpen = 1;
