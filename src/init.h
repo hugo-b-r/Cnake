@@ -11,19 +11,16 @@ header for init functions
 
     #define __INIT_H__
 
+    #include <SDL2/SDL_ttf.h>
 
-        #include <SDL2/SDL.h>
-        #include <SDL2/SDL_video.h>
-        #include <SDL2/SDL_events.h>
-        #include <SDL2/SDL_render.h>
+    void Init_Subsystems(SDL_Window** window, SDL_Renderer** renderer);
 
+    void Load_TTF_Font(TTF_Font** font, SDL_Window** window, SDL_Renderer** renderer);
 
+    void Create_Window(SDL_Window** window, SDL_Renderer** renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT);
 
-        void Init_Subsystems(SDL_Window** window, SDL_Renderer** renderer);
+    void Create_Renderer(SDL_Window** window, SDL_Renderer** renderer);
 
-        void Create_Window(SDL_Window** window, SDL_Renderer** renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT);
+    void Init_SDL(SDL_Window** window, SDL_Renderer** renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, TTF_Font** font);
 
-        void Create_Renderer(SDL_Window** window, SDL_Renderer** renderer);
-
-
-    #endif
+#endif

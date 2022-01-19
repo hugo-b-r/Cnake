@@ -14,7 +14,8 @@ struct position
 
 struct player
 {
-  struct position player_position;
+  struct position player_position[400];
+  struct position head;
   int id;
   int points;
 };

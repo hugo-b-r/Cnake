@@ -12,7 +12,10 @@ init functions
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_ttf.h>
+
 #include "init.h"
+#include "deinit.h"
 
 
 
@@ -23,14 +26,24 @@ void Init_Subsystems(SDL_Window** window, SDL_Renderer** renderer)
     if(SDL_InitSubSystem(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
   	{
    		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[debug] %s", SDL_GetError());
-    	Game_Quit(window,  renderer);
+    	Game_Quit(window, renderer, NULL);
   	}
   	else
   	{
   		//log
-    	printf("SDL2 succesfully loaded VIDEO and AUDIO!\n");
+    	printf("Successfully loaded VIDEO and AUDIO!\n");
     }
 
+    if(TTF_Init() < 0)
+    {
+      SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[debug] %s", SDL_GetError());
+      Game_Quit(window, renderer, NULL);
+    }
+    else
+    {
+      //log
+      printf("Successfully loaded TTF!\n");
+    }
 }
 
 
@@ -44,11 +57,11 @@ void Create_Window(SDL_Window** window, SDL_Renderer** renderer, int SCREEN_WIDT
     if(*window == NULL )
     {
       	fprintf(stderr, "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
-        Game_Quit(window,  renderer);
+        Game_Quit(window, renderer, NULL);
     }
     else
     {
-        printf("SDL successfully created a window!\n");
+        printf("Successfully created a window!\n");
     }
 }
 
@@ -62,12 +75,12 @@ void Create_Renderer(SDL_Window** window, SDL_Renderer** renderer)
     *renderer = SDL_CreateRenderer(*window, -1, SDL_RENDERER_ACCELERATED);
 	if(*renderer == NULL)
     {
-        fprintf(stderr, "Erreur SDL_CreateRenderer : %s", SDL_GetError());
-        Game_Quit(window, renderer);
+        fprintf(stderr, "Erreur SDL_CreateRenderer : %s\n", SDL_GetError());
+        Game_Quit(window, renderer, NULL);
     }
     else
     {
-        printf("SDL successfully created a renderer!\n\n");
+        printf("Successfully created a renderer!\n");
     }
 
 }
@@ -75,11 +88,30 @@ void Create_Renderer(SDL_Window** window, SDL_Renderer** renderer)
 
 
 
-void Init_SDL(SDL_Window** window, SDL_Renderer** renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT)
+void Load_TTF_Font(TTF_Font** font, SDL_Window** window, SDL_Renderer** renderer)
+{
+  *font = TTF_OpenFont("../font/arial.ttf", 16);
+  if(*font == NULL)
+  {
+    printf("Could not load font! Error: %s\n", TTF_GetError());
+    Game_Quit(window, renderer, font);
+  }
+  else
+  {
+    printf("Successfuly loaded font!\n");
+  }
+}
+
+
+
+
+void Init_SDL(SDL_Window** window, SDL_Renderer** renderer, int SCREEN_WIDTH, int SCREEN_HEIGHT, TTF_Font** font)
 {
   Init_Subsystems(window, renderer);
 
   Create_Window(window, renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 
   Create_Renderer(window, renderer);
+
+  Load_TTF_Font(font, window, renderer);
 }

@@ -1,18 +1,17 @@
-UNAME_S = $(shell uname -s)
+UNAME_O = $(shell uname -o)
+
+ifeq ($(UNAME_O), Msys)
+LDFLAGS = -lmingw32
+endif
 
 CC = gcc
-CFLAGS = -Wall -O -lSDL2main -lSDL2 -lSDL2_image -Wimplicit-function-declaration
-LDFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -Wimplicit-function-declaration
+CFLAGS = -Wall -O -lSDL2main -lSDL2 -lSDL2_image
+LDFLAGS += -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 TARGET = game
 
 SRC  = $(wildcard src/**/*.c) $(wildcard src/*.c) $(wildcard src/**/**/*.c) $(wildcard src/**/**/**/*.c)
 OBJ  = $(SRC:.c=.o)
 OUTPUT_FOLDER = bin
-
-ifeq ($(UNAME_S), *MINGW64_NT*)
-	LDFLAGS += -lmingw32
-	CFLAGS += -lmingw32
-endif
 
 all: dirs $(TARGET)
 

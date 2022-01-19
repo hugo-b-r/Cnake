@@ -7,19 +7,22 @@ deinit functions
 */
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 
-void Game_Quit(SDL_Window** window, SDL_Renderer** renderer)
+void Game_Quit(SDL_Window** window, SDL_Renderer** renderer, TTF_Font** font)
 {
+    if(font != NULL)
+    {
+        TTF_CloseFont(*font);
+    }
     if(*renderer != NULL)
     {
-        //Destroy renderer
 	    SDL_DestroyRenderer(*renderer);
     }
 
     if(*window != NULL)
     {
-        //Destroy window
   	    SDL_DestroyWindow(*window);
     }
 

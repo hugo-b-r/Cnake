@@ -23,6 +23,8 @@ main file for game
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+
+
 int Set_Background(SDL_Window** window, SDL_Renderer** renderer, SDL_Color color);
 
 
@@ -31,12 +33,27 @@ int main(int argc, char* argv[])
 
 	SDL_Window* window = NULL;
 	SDL_Renderer* renderer = NULL;
+	TTF_Font* font;
+	SDL_Color font_color = { 255, 255, 255 };
 
-	Init_SDL(&window, &renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+	Init_SDL(&window, &renderer, SCREEN_WIDTH, SCREEN_HEIGHT, &font);
 
-	SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
 
-	Draw_Button(&renderer, 50, 50, 200, 200);
+
+	Draw_Button(&renderer, SCREEN_WIDTH/2-100, SCREEN_HEIGHT/2, 200, 20);
+
+
+	SDL_Surface * surface_text = TTF_RenderText_Solid(font, "Test button", font_color);
+
+
+	SDL_Texture * text_texture = SDL_CreateTextureFromSurface(renderer, surface_text);
+	int texW =  0;
+	int texH = 0;
+	SDL_QueryTexture(text_texture, NULL, NULL, &texW, &texH);
+	SDL_Rect dstrect = { SCREEN_WIDTH/2-100, SCREEN_HEIGHT/2, 0, 0 };
+
+	SDL_RenderCopy(renderer, text_texture, NULL, &dstrect);
+	SDL_RenderPresent(renderer);
 
 	SDL_Event events;
 	_Bool isOpen = 1;
@@ -53,5 +70,5 @@ int main(int argc, char* argv[])
 
     	}
   	}
-	Game_Quit(&window, &renderer);
+	Game_Quit(&window, &renderer, &font);
 }
