@@ -1,7 +1,0 @@
-/*
-
-deinit.c
-
-menu functions
-
-*/

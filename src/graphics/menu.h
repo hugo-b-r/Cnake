@@ -1,7 +1,0 @@
-/*
-
-menu.h
-
-menu prototypes
-
-*/
