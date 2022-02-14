@@ -18,6 +18,7 @@ OBJ  = $(SRC:.c=.o)
 OUTPUT_FOLDER = bin
 
 all: dirs $(TARGET)
+	@echo -e "Done.\n"
 
 $(TARGET): $(OBJ)
 	$(CC) -o $(OUTPUT_FOLDER)/$(TARGET) $^ $(LDFLAGS)
@@ -33,6 +34,7 @@ dirs:
 clean:
 	rm -rf $(OBJ)
 	rm -f $(OUTPUT_FOLDER)/$(TARGET)
+	@echo -e "Clean.\n"
 
 mrproper: clean
 	rm -rf $(OUTPUT_FOLDER)
