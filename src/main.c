@@ -14,28 +14,26 @@ main file for game
 #define PLAYGROUND_X 50
 #define PLAYGROUND_Y 30
 
-void newPos(int *x, int *y, int orientation)
+void newPos(int *x, int *y, int orientation, char *command)
 {
     switch (orientation) {
     case 0:
-        if (*y != PLAYGROUND_Y - 1) {
-            *y += 1;
-        }
+        *y += 1;
         break;
     case 90:
-        if (*x != PLAYGROUND_X - 2 || *x != PLAYGROUND_X - 2) {
-            *x += 2;
-        }
+        *x += 1;
         break;
     case 180:
-        if (*y != 0) {
-            *y -= 1;
-        }
+        *y -= 1;
         break;
     case 270:
-        if (*x != 0 || *x != 0) {
-            *x -= 2;
-        }
+        *x -= 1;
+        break;
+    }
+
+    // if border
+    if (*x >= PLAYGROUND_X || *y >= PLAYGROUND_Y || *x <= 0 || *y <= 0) {
+        *command ='x';
     }
 }
 
@@ -73,8 +71,8 @@ int main(int argc, char* argv[])
     char buffer[PLAYGROUND_X][PLAYGROUND_Y];
     clearBuffer(&buffer);
 
-    int x = 0;
-    int y = 0;
+    int x = PLAYGROUND_X / 2;
+    int y = PLAYGROUND_Y / 2;
 
     int orientation = 0;
 
@@ -99,11 +97,12 @@ int main(int argc, char* argv[])
                 break;
 
             case 'x':
+                printf("Ouch...");
                 return EXIT_SUCCESS;
             }
         }
 
-        newPos( &x, &y, orientation );
+        newPos(&x, &y, orientation, &command);
 
         clearBuffer(&buffer);
 
