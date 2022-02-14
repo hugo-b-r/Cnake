@@ -9,7 +9,6 @@ main file for game
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <conio.h>
 
 #include "mechanism.h"
 
