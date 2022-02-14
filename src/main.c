@@ -23,7 +23,7 @@ void newPos(int *x, int *y, int orientation)
         }
         break;
     case 90:
-        if (*x != PLAYGROUND_X - 1) {
+        if (*x != PLAYGROUND_X - 2 || *x != PLAYGROUND_X - 2) {
             *x += 2;
         }
         break;
@@ -33,7 +33,7 @@ void newPos(int *x, int *y, int orientation)
         }
         break;
     case 270:
-        if (*x != 0) {
+        if (*x != 0 || *x != 0) {
             *x -= 2;
         }
     }
@@ -45,7 +45,7 @@ void clearBuffer(char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y])
     for (int i = PLAYGROUND_Y - 1; i > 0; i--) {
 
         for (int j = 0; j < PLAYGROUND_X; j++) {
-            (*buffer)[j][i] = '_';
+            (*buffer)[j][i] = ' ';
         }
     }
 }
