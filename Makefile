@@ -9,7 +9,7 @@ endif
 
 
 CC = gcc
-CFLAGS = -Wall -O #-lSDL2main -lSDL2 -lSDL2_image
+CFLAGS = -Wall -O -g #-lSDL2main -lSDL2 -lSDL2_image
 #LDFLAGS += -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 TARGET = game
 
@@ -36,3 +36,5 @@ clean:
 
 mrproper: clean
 	rm -rf $(OUTPUT_FOLDER)
+
+cleanandbuild: clean all

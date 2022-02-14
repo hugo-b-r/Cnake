@@ -8,7 +8,6 @@ main file for game
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <time.h>
 #include <conio.h>
 
@@ -20,7 +19,11 @@ int main(int argc, char* argv[])
 {
     char command = 'a';
 
-    struct game Game = { .Player1.orientation = 180, .Player1.length = 0, .Player1.Head_Str_Pos = 0, .Player1.Tail_Str_Pos = 0, .Player1.id = 0, .Player1.points = 0, .Player1.Poss[0][0] = 5, .Player1.Poss[1][0] = 5 };
+    struct game Game = { .Player1.orientation = 180, .Player1.length = 2, .Player1.Head_Str_Pos = 1, .Player1.Tail_Str_Pos = 0, .Player1.id = 0, .Player1.points = 0};
+    Game.Player1.Poss[0][0] = 5;
+    Game.Player1.Poss[1][0] = 5;
+    Game.Player1.Poss[0][1] = 5;
+    Game.Player1.Poss[1][1] = 6;
 
     clearBuffer(&(Game.buffer));
 
@@ -50,7 +53,8 @@ int main(int argc, char* argv[])
         Game.Player1.Poss[0][Game.Player1.Tail_Str_Pos] = newX( Game.Player1.orientation, Game.Player1.Poss[0][Game.Player1.Head_Str_Pos] );
         Game.Player1.Poss[1][Game.Player1.Tail_Str_Pos] = newY( Game.Player1.orientation, Game.Player1.Poss[1][Game.Player1.Head_Str_Pos] );
 
-        Game.Player1.Head_Str_Pos  += 1;
+        Game.Player1.Head_Str_Pos = Game.Player1.Tail_Str_Pos;
+        Game.Player1.Tail_Str_Pos += 1;
 
         clearBuffer(&(Game.buffer));
 
@@ -58,6 +62,7 @@ int main(int argc, char* argv[])
         for(int i = 0; i < Game.Player1.length; i++){
 
             Game.buffer[Game.Player1.Poss[0][i]][Game.Player1.Poss[1][i]] = 'o';
+
         }
 
 
