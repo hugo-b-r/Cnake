@@ -10,29 +10,6 @@ main file for game
 #include <stdlib.h>
 #include <time.h>
 
-struct position
-{
-    int x;
-    int y;
-};
-
-struct player
-{
-    int Head_Str_Pos;
-    int Tail_Str_Pos;
-    int length;
-    int orientation;
-    int id;
-    int points;
-    int Poss[2][100];
-};
-
-struct game
-{
-    struct player Player1;
-    struct position Apple_Pos;
-    char buffer[10][10];
-};
 
 char getCommand();
 
@@ -49,13 +26,14 @@ int main(int argc, char* argv[])
 {
     char command = 'a';
 
-    struct game Game = { .Player1.orientation = 180, .Player1.length = 2, .Player1.Head_Str_Pos = 1, .Player1.Tail_Str_Pos = 0, .Player1.id = 0, .Player1.points = 0};
-    Game.Player1.Poss[0][0] = 5;
-    Game.Player1.Poss[1][0] = 5;
-    Game.Player1.Poss[0][1] = 5;
-    Game.Player1.Poss[1][1] = 6;
+    char buffer[10][10];
+    clearBuffer(&buffer);
 
-    clearBuffer(&(Game.buffer));
+    int positions[2][10];
+
+    int tail_position = 0;
+    int head_position = 0;
+    int length = 1;
 
     while (command != 'x') {
 
@@ -64,39 +42,37 @@ int main(int argc, char* argv[])
 
         switch (command) {
         case 'z':
-            Game.Player1.orientation = 0;
+            orientation = 0;
             break;
 
         case 'q':
-            Game.Player1.orientation = 270;
+            orientation = 270;
             break;
 
         case 's':
-            Game.Player1.orientation = 180;
+            orientation = 180;
             break;
 
         case 'd':
-            Game.Player1.orientation = 90;
+            orientation = 90;
             break;
         }
 
-        Game.Player1.Poss[0][Game.Player1.Tail_Str_Pos] = newX( Game.Player1.orientation, Game.Player1.Poss[0][Game.Player1.Head_Str_Pos] );
-        Game.Player1.Poss[1][Game.Player1.Tail_Str_Pos] = newY( Game.Player1.orientation, Game.Player1.Poss[1][Game.Player1.Head_Str_Pos] );
+        newPos( &(positions[0][tail_position]), &(positions[1][tail_position]), orientation  );
 
-        Game.Player1.Head_Str_Pos = Game.Player1.Tail_Str_Pos;
-        Game.Player1.Tail_Str_Pos += 1;
+        tail_position += 1;
+        head_position += 1;
 
-        clearBuffer(&(Game.buffer));
+        clearBuffer(&(buffer));
 
 
-        for(int i = 0; i < Game.Player1.length; i++){
+        for(int i = 0; i < length; i++){
 
-            Game.buffer[Game.Player1.Poss[0][i]][Game.Player1.Poss[1][i]] = 'o';
+            buffer[positions[0][i]][positions[1][i]] = 'o';
 
         }
 
-
-        printBuffer(Game.buffer);
+        printBuffer(buffer);
 
     }
 
@@ -113,7 +89,9 @@ char getCommand()
 
         #include <conio.h>
 
-        return getch();
+        if (kbhit()) {
+            return geth();
+        }
 
     #elif defined(linux)
 
@@ -123,35 +101,22 @@ char getCommand()
 }
 
 
-
-int newX (int orientation, int oldX)
+void newPos(int *x, int *y, int orientation)
 {
-    int newX = oldX;
-
-    if (orientation == 90) {
-        newX += 1;
-    } else {
-        newX -= 1;
+    switch (orientation) {
+    case 0:
+        *x += 1;
+        break;
+    case 90:
+        *y += 1;
+        break;
+    case 180:
+        *x -= 1;
+        break;
+    case 270:
+        *y -= 1;
     }
-
-    return newX;
 }
-
-
-
-int newY (int orientation, int oldY)
-{
-    int newY = oldY;
-
-    if (orientation == 180) {
-        newY += 1;
-    } else {
-        newY -= 1;
-    }
-
-    return newY;
-}
-
 
 
 void clearBuffer(char (*buffer)[10][10])
