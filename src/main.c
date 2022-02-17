@@ -13,7 +13,7 @@ main file for game
 
 #define PLAYGROUND_X 50
 #define PLAYGROUND_Y 30
-#define LENGTH 7
+#define LENGTH PLAYGROUND_X*PLAYGROUND_Y
 
 
 
@@ -31,10 +31,10 @@ void incrPos(int *tail_position, int *head_position)
 
 
 
-void newPos(int *tail_position, int *head_position, int (*position)[2][LENGTH], int orientation, char *command)
+void newPos(int *tail_position, int *head_position, int (*positions)[2][LENGTH], int orientation, char *command, int *length, int *length_to_add)
 {
-    int x = (*position)[0][*head_position];
-    int y = (*position)[1][*head_position];
+    int x = (*positions)[0][*head_position];
+    int y = (*positions)[1][*head_position];
 
     switch (orientation) {
     case 0:
@@ -56,11 +56,18 @@ void newPos(int *tail_position, int *head_position, int (*position)[2][LENGTH], 
         *command ='x';
     }
 
-    (*position)[0][*tail_position] = x;
-    (*position)[1][*tail_position] = y;
+    if (length_to_add > 0) {
+        for (int i = length-tail_position-1; i >= 0; i--) {
+            (*positions)[0][*tail_position + i] = (*positions)[0][*tail_position + i - 1];
+            (*positions)[1][*tail_position + i] = (*positions)[1][*tail_position + i - 1];
+        }
+        *length += 1;
+        *length_to_add -= 1;
+    }
 
+    (*positions)[0][*tail_position] = x;
+    (*positions)[1][*tail_position] = y;
     incrPos(tail_position, head_position);
-
 }
 
 
@@ -98,14 +105,16 @@ int main(int argc, char* argv[])
     char buffer[PLAYGROUND_X][PLAYGROUND_Y];
     clearBuffer(&buffer);
 
+    int length = 2;
+    int length_to_add = 0;
     int positions[2][LENGTH];
-    int head_position = LENGTH-1;
+    int head_position = length-1;
     int tail_position = 0;
 
-    for (int i = 0; i < LENGTH; i++) {
+    for (int i = 0; i < length; i++) {
         positions[0][i] = PLAYGROUND_X/2;
         positions[1][i] = PLAYGROUND_Y/2;
-        positions[1][i] -= LENGTH;
+        positions[1][i] -= length;
         positions[1][i] += i;
         printf("%d, ", positions[1][i]);
     }
@@ -137,11 +146,11 @@ int main(int argc, char* argv[])
             }
         }
 
-        newPos(&tail_position, &head_position, &positions, orientation, &command);
+        newPos(&tail_position, &head_position, &positions, orientation, &command, &length, &length_to_add);
 
         clearBuffer(&buffer);
 
-        for (int i = 0; i < LENGTH; i++) {
+        for (int i = 0; i < length; i++) {
             buffer[positions[0][i]][positions[1][i]] = 'o';
         }
 
