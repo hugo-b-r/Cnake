@@ -11,8 +11,8 @@ main file for game
 #include <time.h>
 #include <conio.h>
 
-#define PLAYGROUND_X 35
-#define PLAYGROUND_Y 20
+#define PLAYGROUND_X 50
+#define PLAYGROUND_Y 30
 #define LENGTH 7
 
 
