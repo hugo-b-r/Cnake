@@ -128,19 +128,27 @@ int main(int argc, char* argv[])
         if (kbhit()) {
             switch (getch()) {
             case 'z':
-                orientation = 0;
+                if (orientation != 180) {
+                    orientation = 0;
+                }
                 break;
 
             case 'q':
-                orientation = 270;
+                if (orientation != 90) {
+                    orientation = 270;
+                }
                 break;
 
             case 's':
-                orientation = 180;
+                if (orientation != 0) {
+                    orientation = 180;
+                }
                 break;
 
             case 'd':
-                orientation = 90;
+                if (orientation != 270) {
+                    orientation = 90;
+                }
                 break;
 
             case 'x':
