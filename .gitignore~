@@ -1,6 +1,5 @@
 bin/game
 
-.swp
 *.icloud
 .DS_Store
 .vscode
