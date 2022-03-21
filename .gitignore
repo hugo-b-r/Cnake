@@ -1,5 +1,9 @@
 bin/game
 
+#vim temporary files
+*.c~
+*.*~
+
 .swp
 *.icloud
 .DS_Store
