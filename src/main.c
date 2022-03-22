@@ -13,7 +13,23 @@ main file for game
 
 #define PLAYGROUND_X 35
 #define PLAYGROUND_Y 20
-#define LENGTH 7
+#define LENGTH 10
+
+
+
+void quit(int type)
+{
+    switch (type) {
+        case 1:
+            printf("ouch!");
+            break;
+        case 2:
+            printf("Good Job!");
+            break;
+    }
+    exit(0);
+}
+
 
 
 
@@ -31,7 +47,7 @@ void incrPos(int *tail_position, int *head_position)
 
 
 
-void newPos(int *tail_position, int *head_position, int (*position)[2][LENGTH], int orientation, char *command)
+void newPos(int *tail_position, int *head_position, int (*position)[2][LENGTH], int orientation, int length)
 {
     int x = (*position)[0][*head_position];
     int y = (*position)[1][*head_position];
@@ -51,9 +67,17 @@ void newPos(int *tail_position, int *head_position, int (*position)[2][LENGTH], 
         break;
     }
 
+
+    //if on itself
+    for (int i = 0; i < length+1; i++) {
+        if (x == (*position)[0][i] && y == (*position)[1][i]) {
+            quit(1);
+        }
+    }
+
     // if border
     if (x >= PLAYGROUND_X || y >= PLAYGROUND_Y || x <= 0 || y <= 0) {
-        *command ='x';
+       quit(1); 
     }
 
     (*position)[0][*tail_position] = x;
@@ -152,12 +176,11 @@ int main(int argc, char* argv[])
                 break;
 
             case 'x':
-                printf("Ouch...");
-                return EXIT_SUCCESS;
+                quit(1);
             }
         }
 
-        newPos(&tail_position, &head_position, &positions, orientation, &command);
+        newPos(&tail_position, &head_position, &positions, orientation, LENGTH);
 
         clearBuffer(&buffer);
 
