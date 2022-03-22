@@ -1,8 +1,9 @@
 bin/game
 
 #vim temporary files
-*.c~
-*.*~
+*~
+*.swp
+*.swo
 
 .swp
 *.icloud
