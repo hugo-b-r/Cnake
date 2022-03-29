@@ -9,11 +9,49 @@ main file for game
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <conio.h>
 
 #define PLAYGROUND_X 35
 #define PLAYGROUND_Y 20
 #define LENGTH 5
+
+
+
+#if defined(_WIN32) || defined(_WIN64)
+    #include <conio.h>
+    #define KEYBOARDHIT kbhit()
+    #define GETCHAR getch()
+/*#elif defined(__linux__)*/
+#endif
+
+
+
+
+void clearBuffer(char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y])
+{
+    for (int i = PLAYGROUND_Y - 1; i > 0; i--) {
+
+        for (int j = 0; j < PLAYGROUND_X; j++) {
+            (*buffer)[j][i] = ' ';
+        }
+    }
+}
+
+
+
+
+
+void initVar(int (*positions)[2][LENGTH], int *orientation, char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y]) 
+{
+    clearBuffer(&(*buffer));
+    
+    for (int i = 0; i < LENGTH; i++) {
+        (*positions)[0][i] = PLAYGROUND_X/2;
+        (*positions)[1][i] = PLAYGROUND_Y/2;
+        (*positions)[1][i] -= LENGTH/2;
+        (*positions)[1][i] += i;      
+    }
+}
+
 
 
 
@@ -28,6 +66,42 @@ void quit(int type)
             break;
     }
     exit(0);
+}
+
+
+
+void testEvents(int *orientation)
+{ 
+    if (KEYBOARDHIT) {
+        switch (GETCHAR) {
+        case 'z':
+            if (*orientation != 180) {
+                *orientation = 0;
+            }
+            break;
+
+        case 'q':
+            if (*orientation != 90) {
+                *orientation = 270;
+            }
+            break;
+
+        case 's':
+            if (*orientation != 0) {
+                *orientation = 180;
+            }
+            break;
+
+        case 'd':
+            if (*orientation != 270) {
+                *orientation = 90;
+            }
+            break;
+
+        case 'x':
+            quit(3);
+        }
+    }
 }
 
 
@@ -89,17 +163,6 @@ void newPos(int *tail_position, int *head_position, int (*position)[2][LENGTH], 
 
 
 
-void clearBuffer(char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y])
-{
-    for (int i = PLAYGROUND_Y - 1; i > 0; i--) {
-
-        for (int j = 0; j < PLAYGROUND_X; j++) {
-            (*buffer)[j][i] = ' ';
-        }
-    }
-}
-
-
 
 void printBuffer(char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y])
 {
@@ -138,54 +201,19 @@ int main(int argc, char* argv[])
     int fruit_x = rand() % (PLAYGROUND_X) + 1;
     int fruit_y = rand() % (PLAYGROUND_Y) + 1;
 
-    char buffer[PLAYGROUND_X][PLAYGROUND_Y];
-    clearBuffer(&buffer);
+    char buffer[PLAYGROUND_X][PLAYGROUND_Y];   
 
     int positions[2][LENGTH];
     int head_position = LENGTH-1;
-    int tail_position = 0;
-
-    for (int i = 0; i < LENGTH; i++) {
-        positions[0][i] = PLAYGROUND_X/2;
-        positions[1][i] = PLAYGROUND_Y/2;
-        positions[1][i] -= LENGTH/2;
-        positions[1][i] += i;      
-    }
+    int tail_position = 0;  
 
     int orientation = 0;
+    
+    initVar(&positions, &orientation, &buffer);
 
     while (command != 'x') {
-
-        if (kbhit()) {
-            switch (getch()) {
-            case 'z':
-                if (orientation != 180) {
-                    orientation = 0;
-                }
-                break;
-
-            case 'q':
-                if (orientation != 90) {
-                    orientation = 270;
-                }
-                break;
-
-            case 's':
-                if (orientation != 0) {
-                    orientation = 180;
-                }
-                break;
-
-            case 'd':
-                if (orientation != 270) {
-                    orientation = 90;
-                }
-                break;
-
-            case 'x':
-                quit(3);
-            }
-        }
+        
+        testEvents(&orientation);
 
         newPos(&tail_position, &head_position, &positions, orientation, LENGTH);
         
