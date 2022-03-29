@@ -13,7 +13,7 @@ main file for game
 
 #define PLAYGROUND_X 35
 #define PLAYGROUND_Y 20
-#define LENGTH 10
+#define LENGTH 5
 
 
 
@@ -21,10 +21,10 @@ void quit(int type)
 {
     switch (type) {
         case 1:
-            printf("ouch!");
-            break;
-        case 2:
-            printf("Good Job!");
+            printf("\nOuch!\n");
+            break; 
+        case 2: 
+            printf("\nGood Job!\n");
             break;
     }
     exit(0);
@@ -130,6 +130,13 @@ void printBuffer(char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y])
 int main(int argc, char* argv[])
 {
     char command = 'a';
+    
+    int points = 0;
+    
+    srand(time(0));
+
+    int fruit_x = rand() % (PLAYGROUND_X) + 1;
+    int fruit_y = rand() % (PLAYGROUND_Y) + 1;
 
     char buffer[PLAYGROUND_X][PLAYGROUND_Y];
     clearBuffer(&buffer);
@@ -141,10 +148,10 @@ int main(int argc, char* argv[])
     for (int i = 0; i < LENGTH; i++) {
         positions[0][i] = PLAYGROUND_X/2;
         positions[1][i] = PLAYGROUND_Y/2;
-        positions[1][i] -= LENGTH;
-        positions[1][i] += i;
-        printf("%d, ", positions[1][i]);
+        positions[1][i] -= LENGTH/2;
+        positions[1][i] += i;      
     }
+
     int orientation = 0;
 
     while (command != 'x') {
@@ -176,11 +183,20 @@ int main(int argc, char* argv[])
                 break;
 
             case 'x':
-                quit(1);
+                quit(3);
             }
         }
 
         newPos(&tail_position, &head_position, &positions, orientation, LENGTH);
+        
+        //if on fruit
+        if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {
+            
+            fruit_x = rand() % (PLAYGROUND_X);
+            fruit_y = rand() % (PLAYGROUND_Y);
+            points += 1;
+
+        }
 
         clearBuffer(&buffer);
 
@@ -188,9 +204,12 @@ int main(int argc, char* argv[])
             buffer[positions[0][i]][positions[1][i]] = 'o';
         }
 
+        buffer[fruit_x][fruit_y] = 'z';
+
         system("cls");
 
         printBuffer(&buffer);
+        printf("\npoints: %d\n", points);
 
     }
 }
