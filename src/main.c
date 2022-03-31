@@ -70,37 +70,34 @@ void quit(int type)
 
 
 
-void testEvents(int *orientation)
+void testEvents(int *orientation, char *command)
 { 
-    if (KEYBOARDHIT) {
-        switch (GETCHAR) {
-        case 'z':
-            if (*orientation != 180) {
-                *orientation = 0;
-            }
-            break;
-
-        case 'q':
-            if (*orientation != 90) {
-                *orientation = 270;
-            }
-            break;
-
-        case 's':
-            if (*orientation != 0) {
-                *orientation = 180;
-            }
-            break;
-
-        case 'd':
-            if (*orientation != 270) {
-                *orientation = 90;
-            }
-            break;
-
-        case 'x':
-            quit(3);
+    switch (*command) {
+    case 'z':
+        if (*orientation != 180) {
+            *orientation = 0;
         }
+        break;
+
+    case 'q':
+        if (*orientation != 90) {
+            *orientation = 270;
+        }
+        break;
+
+    case 's':
+        if (*orientation != 0) {
+            *orientation = 180;
+        }
+       break;
+ 
+    case 'd':
+        if (*orientation != 270) {
+            *orientation = 90;
+        }
+        break;
+    case 'x':
+        quit(3);
     }
 }
 
@@ -192,12 +189,13 @@ void printBuffer(char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y])
 
 int main(int argc, char* argv[])
 {
+    srand(time(0));
+   
     char command = 'a';
     
     int points = 0;
     
-    srand(time(0));
-
+    //fruit pos
     int fruit_x = rand() % (PLAYGROUND_X) + 1;
     int fruit_y = rand() % (PLAYGROUND_Y) + 1;
 
@@ -205,39 +203,49 @@ int main(int argc, char* argv[])
 
     int positions[2][LENGTH];
     int head_position = LENGTH-1;
-    int tail_position = 0;  
+    int tail_position = 0; 
+    //speed set up
+    int last_clock = clock();
+    int move_time = 300;
 
     int orientation = 0;
     
     initVar(&positions, &orientation, &buffer);
 
     while (command != 'x') {
-        
-        testEvents(&orientation);
+        if (KEYBOARDHIT) {
+            command = GETCHAR;
+        }
 
-        newPos(&tail_position, &head_position, &positions, orientation, LENGTH);
-        
-        //if on fruit
-        if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {
+        if (last_clock + move_time <= clock()) {
             
-            fruit_x = rand() % (PLAYGROUND_X);
-            fruit_y = rand() % (PLAYGROUND_Y);
-            points += 1;
+            testEvents(&orientation, &command);
+            
+            newPos(&tail_position, &head_position, &positions, orientation, LENGTH);
+            
+            //if on fruit
+            if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {
+            
+                fruit_x = rand() % (PLAYGROUND_X);
+                fruit_y = rand() % (PLAYGROUND_Y);
+                points += 1;
+                move_time -= 30;
+            }
+       
+            clearBuffer(&buffer);
 
+            for (int i = 0; i < LENGTH; i++) {
+                buffer[positions[0][i]][positions[1][i]] = 'o';
+            }
+
+            buffer[fruit_x][fruit_y] = 'z';
+
+            system("cls");
+
+            printBuffer(&buffer);
+            printf("\npoints: %d\n", points);
+
+            last_clock = clock();
         }
-
-        clearBuffer(&buffer);
-
-        for (int i = 0; i < LENGTH; i++) {
-            buffer[positions[0][i]][positions[1][i]] = 'o';
-        }
-
-        buffer[fruit_x][fruit_y] = 'z';
-
-        system("cls");
-
-        printBuffer(&buffer);
-        printf("\npoints: %d\n", points);
-
     }
 }
