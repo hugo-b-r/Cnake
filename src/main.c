@@ -70,6 +70,27 @@ void quit(int type)
 
 
 
+
+void getKeyboardEntry(char *command)
+{
+    if (KEYBOARDHIT) {
+        *command = GETCHAR;
+    }
+}
+
+
+
+
+void pauseLoop(char *command)
+{
+    while (*command == 'p') {
+        getKeyboardEntry(command);
+    }
+}
+
+
+
+
 void testEvents(int *orientation, char *command)
 { 
     switch (*command) {
@@ -98,6 +119,10 @@ void testEvents(int *orientation, char *command)
         break;
     case 'x':
         quit(3);
+        break;
+    case 'p':
+        pauseLoop(command);
+        break;
     }
 }
 
@@ -213,9 +238,8 @@ int main(int argc, char* argv[])
     initVar(&positions, &orientation, &buffer);
 
     while (command != 'x') {
-        if (KEYBOARDHIT) {
-            command = GETCHAR;
-        }
+        
+        getKeyboardEntry(&command);
 
         if (last_clock + move_time <= clock()) {
             
