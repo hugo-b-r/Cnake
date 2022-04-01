@@ -26,6 +26,18 @@ main file for game
 
 
 
+void incrLength(int (*positions)[2][100], int *length, int length_diff, int head_position)
+{
+    for (int i = 0; i < *length - head_position - 1; i++) {
+        (*positions)[0][*length - i - 1 + length_diff] = (*positions)[0][*length - i - 1];
+        (*positions)[1][*length - i - 1 + length_diff] = (*positions)[1][*length - i - 1];
+    }
+    *length += length_diff;
+}
+
+
+
+
 void clearBuffer(char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y])
 {
     for (int i = PLAYGROUND_Y - 1; i >= 0; i--) {
@@ -40,7 +52,7 @@ void clearBuffer(char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y])
 
 
 
-void initVar(int (*positions)[2][LENGTH], int *orientation, char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y]) 
+void initVar(int (*positions)[2][100], int *orientation, char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y]) 
 {
     clearBuffer(&(*buffer));
     
@@ -129,21 +141,21 @@ void testEvents(int *orientation, char *command)
 
 
 
-void incrPos(int *tail_position, int *head_position)
+void incrPos(int *tail_position, int *head_position, int length)
 {
     (*head_position)++;
-    if (*head_position >= LENGTH) {
+    if (*head_position >= length) {
         *head_position  = 0;
     }
     (*tail_position)++;
-    if (*tail_position >= LENGTH) {
+    if (*tail_position >= length) {
         *tail_position  = 0;
     }
 }
 
 
 
-void newPos(int *tail_position, int *head_position, int (*position)[2][LENGTH], int orientation, int length)
+void newPos(int *tail_position, int *head_position, int (*position)[2][100], int orientation, int length)
 {
     int x = (*position)[0][*head_position];
     int y = (*position)[1][*head_position];
@@ -179,7 +191,7 @@ void newPos(int *tail_position, int *head_position, int (*position)[2][LENGTH], 
     (*position)[0][*tail_position] = x;
     (*position)[1][*tail_position] = y;
 
-    incrPos(tail_position, head_position);
+    incrPos(tail_position, head_position, length);
 
 }
 
@@ -225,8 +237,9 @@ int main(int argc, char* argv[])
     int fruit_y = rand() % (PLAYGROUND_Y) + 1;
 
     char buffer[PLAYGROUND_X][PLAYGROUND_Y];   
-
-    int positions[2][LENGTH];
+    
+    int length = LENGTH;
+    int positions[2][100];
     int head_position = LENGTH-1;
     int tail_position = 0; 
     //speed set up
@@ -245,20 +258,21 @@ int main(int argc, char* argv[])
             
             testEvents(&orientation, &command);
             
-            newPos(&tail_position, &head_position, &positions, orientation, LENGTH);
+            newPos(&tail_position, &head_position, &positions, orientation, length);
             
             //if on fruit
             if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {
             
                 fruit_x = rand() % (PLAYGROUND_X);
                 fruit_y = rand() % (PLAYGROUND_Y);
+                incrLength(&positions, &length, 1, head_position);
                 points += 1;
-                move_time -= 30;
+                move_time -= 20;
             }
        
             clearBuffer(&buffer);
 
-            for (int i = 0; i < LENGTH; i++) {
+            for (int i = 0; i < length; i++) {
                 buffer[positions[0][i]][positions[1][i]] = 'o';
             }
 
