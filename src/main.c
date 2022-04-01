@@ -28,7 +28,7 @@ main file for game
 
 void clearBuffer(char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y])
 {
-    for (int i = PLAYGROUND_Y - 1; i > 0; i--) {
+    for (int i = PLAYGROUND_Y - 1; i >= 0; i--) {
 
         for (int j = 0; j < PLAYGROUND_X; j++) {
             (*buffer)[j][i] = ' ';
@@ -172,7 +172,7 @@ void newPos(int *tail_position, int *head_position, int (*position)[2][LENGTH], 
     }
 
     // if border
-    if (x >= PLAYGROUND_X || y >= PLAYGROUND_Y || x <= 0 || y <= 0) {
+    if ((x > PLAYGROUND_X-1) || (y > PLAYGROUND_Y-1) || (x < 0) || (y < 0)) {
        quit(1); 
     }
 
@@ -188,13 +188,13 @@ void newPos(int *tail_position, int *head_position, int (*position)[2][LENGTH], 
 
 void printBuffer(char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y])
 {
-    
+    //print top border   
     for (int i = 0; i < PLAYGROUND_X + 2; i++) {
         printf("#");
     }
     printf("\n");
-
-    for (int i = PLAYGROUND_Y - 1; i > 0; i--) {
+    
+    for (int i = PLAYGROUND_Y - 1; i >= 0; i--) {
         
         printf("#");
         for (int j = 0; j < PLAYGROUND_X; j++) {
@@ -203,7 +203,7 @@ void printBuffer(char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y])
 
         printf("#\n");
     }
-
+    //printf bottom border
     for (int i = 0; i < PLAYGROUND_X + 2; i++) {
         printf("#");
     }
