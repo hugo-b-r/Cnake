@@ -10,18 +10,9 @@ main file for game
 #include <stdlib.h>
 #include <time.h>
 
-#define PLAYGROUND_X 35
-#define PLAYGROUND_Y 20
-#define LENGTH 5
-
-
-
-#if defined(_WIN32) || defined(_WIN64)
-    #include <conio.h>
-    #define KEYBOARDHIT kbhit()
-    #define GETCHAR getch()
-/*#elif defined(__linux__)*/
-#endif
+#include "positions.h"
+#include "init.h"
+#include "buffer.h"
 
 
 
@@ -33,51 +24,6 @@ void incrLength(int (*positions)[2][100], int *length, int length_diff, int head
         (*positions)[1][*length - i - 1 + length_diff] = (*positions)[1][*length - i - 1];
     }
     *length += length_diff;
-}
-
-
-
-
-void clearBuffer(char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y])
-{
-    for (int i = PLAYGROUND_Y - 1; i >= 0; i--) {
-
-        for (int j = 0; j < PLAYGROUND_X; j++) {
-            (*buffer)[j][i] = ' ';
-        }
-    }
-}
-
-
-
-
-
-void initVar(int (*positions)[2][100], int *orientation, char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y]) 
-{
-    clearBuffer(&(*buffer));
-    
-    for (int i = 0; i < LENGTH; i++) {
-        (*positions)[0][i] = PLAYGROUND_X/2;
-        (*positions)[1][i] = PLAYGROUND_Y/2;
-        (*positions)[1][i] -= LENGTH/2;
-        (*positions)[1][i] += i;      
-    }
-}
-
-
-
-
-void quit(int type)
-{
-    switch (type) {
-        case 1:
-            printf("\nOuch!\n");
-            break; 
-        case 2: 
-            printf("\nGood Job!\n");
-            break;
-    }
-    exit(0);
 }
 
 
@@ -141,89 +87,6 @@ void testEvents(int *orientation, char *command)
 
 
 
-void incrPos(int *tail_position, int *head_position, int length)
-{
-    (*head_position)++;
-    if (*head_position >= length) {
-        *head_position  = 0;
-    }
-    (*tail_position)++;
-    if (*tail_position >= length) {
-        *tail_position  = 0;
-    }
-}
-
-
-
-void newPos(int *tail_position, int *head_position, int (*position)[2][100], int orientation, int length)
-{
-    int x = (*position)[0][*head_position];
-    int y = (*position)[1][*head_position];
-
-    switch (orientation) {
-    case 0:
-        y += 1;
-        break;
-    case 90:
-        x += 1;
-        break;
-    case 180:
-        y -= 1;
-        break;
-    case 270:
-        x -= 1;
-        break;
-    }
-
-
-    //if on itself
-    for (int i = 0; i < length+1; i++) {
-        if (x == (*position)[0][i] && y == (*position)[1][i]) {
-            quit(1);
-        }
-    }
-
-    // if border
-    if ((x > PLAYGROUND_X-1) || (y > PLAYGROUND_Y-1) || (x < 0) || (y < 0)) {
-       quit(1); 
-    }
-
-    (*position)[0][*tail_position] = x;
-    (*position)[1][*tail_position] = y;
-
-    incrPos(tail_position, head_position, length);
-
-}
-
-
-
-
-void printBuffer(char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y])
-{
-    //print top border   
-    for (int i = 0; i < PLAYGROUND_X + 2; i++) {
-        printf("#");
-    }
-    printf("\n");
-    
-    for (int i = PLAYGROUND_Y - 1; i >= 0; i--) {
-        
-        printf("#");
-        for (int j = 0; j < PLAYGROUND_X; j++) {
-            printf("%c", (*buffer)[j][i]);
-        }
-
-        printf("#\n");
-    }
-    //printf bottom border
-    for (int i = 0; i < PLAYGROUND_X + 2; i++) {
-        printf("#");
-    }
-    printf("\n");
-}
-
-
-
 int main(int argc, char* argv[])
 {
     srand(time(0));
@@ -233,8 +96,8 @@ int main(int argc, char* argv[])
     int points = 0;
     
     //fruit pos
-    int fruit_x = rand() % (PLAYGROUND_X) + 1;
-    int fruit_y = rand() % (PLAYGROUND_Y) + 1;
+    int fruit_x = rand() % (PLAYGROUND_X);
+    int fruit_y = rand() % (PLAYGROUND_Y);
 
     char buffer[PLAYGROUND_X][PLAYGROUND_Y];   
     
@@ -267,7 +130,7 @@ int main(int argc, char* argv[])
                 fruit_y = rand() % (PLAYGROUND_Y);
                 incrLength(&positions, &length, 1, head_position);
                 points += 1;
-                move_time -= 20;
+                move_time -= 10;
             }
        
             clearBuffer(&buffer);
@@ -284,6 +147,12 @@ int main(int argc, char* argv[])
             printf("\npoints: %d\n", points);
 
             last_clock = clock();
+            
+            printf("\nx: %d", positions[0][head_position]);
+            printf("\ny: %d", positions[1][head_position]);
+            printf("\nfruit_x: %d", fruit_x);
+            printf("\nfruit_y: %d", fruit_y);
         }
     }
 }
+
