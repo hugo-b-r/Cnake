@@ -18,3 +18,11 @@ and then:
 make clean
 make
 ```
+
+### TO-DO
+
+- [ ] log system
+- [ ] save system
+- [ ] menu
+- [ ] choice of difficulty
+- [ ] maybe network games (multiplayer)
