@@ -136,28 +136,6 @@ int main(int argc, char* argv[])
             
             last_clock = clock();
             
-
-
-
-
-            /*
-            printf("\nx: %d", positions[0][head_position]);
-            printf("\ny: %d", positions[1][head_position]);
-            printf("\nfruit_x: %d", fruit_x);
-            printf("\nfruit_y: %d", fruit_y);
-            printf("\n");
-            printf("head_position: %d", head_position);
-            printf("\n");
-
-            for (int i = 0; i < 30; i++) {
-                printf("%d, ", positions[0][i+1]);
-            }
-            printf("\n");
-
-            for (int i = 0; i < 30; i++) {
-                printf("%d, ", positions[1][i+1]);
-            }
-            */
         }
 
         clearBuffer(&buffer);

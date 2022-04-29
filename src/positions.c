@@ -59,7 +59,6 @@ void newPos(int *tail_position, int *head_position, int (*positions)[2][100], in
 
     // if border
     if ( (x > PLAYGROUND_X-1) || (y > PLAYGROUND_Y-1) || (x < 0) || (y < 0) ) {
-        printf("\n%d, %d, head: %d, length: %d", x, y, *head_position, length);
         quit(1); 
     }
 
