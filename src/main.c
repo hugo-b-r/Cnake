@@ -18,7 +18,7 @@ main file for game
 
 
 void incrLength(int (*positions)[2][100], int *length, int length_diff, int head_position)
-{
+{   
     for (int i = 0; i < *length - head_position - 1; i++) {
         (*positions)[0][*length - i - 1 + length_diff] = (*positions)[0][*length - i - 1];
         (*positions)[1][*length - i - 1 + length_diff] = (*positions)[1][*length - i - 1];
@@ -116,10 +116,10 @@ int main(int argc, char* argv[])
     while (command != 'x') {
         
         getKeyboardEntry(&command);
+        testEvents(&orientation, &command);
 
         if (last_clock + move_time <= clock()) {
             
-            testEvents(&orientation, &command);
             
             newPos(&tail_position, &head_position, &positions, orientation, length);
             
@@ -132,27 +132,48 @@ int main(int argc, char* argv[])
                 points += 1;
                 move_time -= 10;
             }
-       
-            clearBuffer(&buffer);
 
-            for (int i = 0; i < length; i++) {
-                buffer[positions[0][i]][positions[1][i]] = 'o';
-            }
-
-            buffer[fruit_x][fruit_y] = 'z';
-
-            system("cls");
-
-            printBuffer(&buffer);
-            printf("\npoints: %d\n", points);
-
+            
             last_clock = clock();
             
+
+
+
+
+            /*
             printf("\nx: %d", positions[0][head_position]);
             printf("\ny: %d", positions[1][head_position]);
             printf("\nfruit_x: %d", fruit_x);
             printf("\nfruit_y: %d", fruit_y);
+            printf("\n");
+            printf("head_position: %d", head_position);
+            printf("\n");
+
+            for (int i = 0; i < 30; i++) {
+                printf("%d, ", positions[0][i+1]);
+            }
+            printf("\n");
+
+            for (int i = 0; i < 30; i++) {
+                printf("%d, ", positions[1][i+1]);
+            }
+            */
         }
+
+        clearBuffer(&buffer);
+
+        for (int i = 0; i < length; i++) {
+            if (!((positions[0][i] == -1) && (positions[1][i] == -1))) {
+                buffer[positions[0][i]][positions[1][i]] = 'o';
+            }
+        }
+
+        buffer[fruit_x][fruit_y] = 'z';
+
+        system("cls");
+
+        printBuffer(&buffer);
+        printf("\npoints: %d\n", points);
+
     }
 }
-
