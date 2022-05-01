@@ -52,7 +52,6 @@ void newPos(int *tail_position, int *head_position, int (*positions)[2][100], in
     //if on itself
     for (int i = 0; i < length+1; i++) {
         if (x == (*positions)[0][i] && y == (*positions)[1][i]) {
-            printf("\n%d, %d, %d", i, (*positions)[0][i], (*positions)[1][i]);
             quit(1);
         }
     }

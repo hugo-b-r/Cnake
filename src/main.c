@@ -10,15 +10,10 @@ main file for game
 #include <stdlib.h>
 #include <time.h>
 
-<<<<<<< HEAD
-#define PLAYGROUND_X 50
-#define PLAYGROUND_Y 30
-#define LENGTH PLAYGROUND_X*PLAYGROUND_Y
-=======
 #include "positions.h"
 #include "init.h"
 #include "buffer.h"
->>>>>>> dev
+
 
 
 
@@ -44,52 +39,12 @@ void getKeyboardEntry(char *command)
 
 
 
-<<<<<<< HEAD
-void newPos(int *tail_position, int *head_position, int (*positions)[2][LENGTH], int orientation, char *command, int *length, int *length_to_add)
-{
-    int x = (*positions)[0][*head_position];
-    int y = (*positions)[1][*head_position];
-
-    switch (orientation) {
-    case 0:
-        y += 1;
-        break;
-    case 90:
-        x += 1;
-        break;
-    case 180:
-        y -= 1;
-        break;
-    case 270:
-        x -= 1;
-        break;
-    }
-
-    // if border
-    if (x >= PLAYGROUND_X || y >= PLAYGROUND_Y || x <= 0 || y <= 0) {
-        *command ='x';
-    }
-
-    if (length_to_add > 0) {
-        for (int i = length-tail_position-1; i >= 0; i--) {
-            (*positions)[0][*tail_position + i] = (*positions)[0][*tail_position + i - 1];
-            (*positions)[1][*tail_position + i] = (*positions)[1][*tail_position + i - 1];
-        }
-        *length += 1;
-        *length_to_add -= 1;
-    }
-
-    (*positions)[0][*tail_position] = x;
-    (*positions)[1][*tail_position] = y;
-    incrPos(tail_position, head_position);
-=======
 
 void pauseLoop(char *command)
 {
     while (*command == 'p') {
         getKeyboardEntry(command);
     }
->>>>>>> dev
 }
 
 
@@ -180,7 +135,9 @@ int main(int argc, char* argv[])
                 move_time -= 10;
             }
 
-        newPos(&tail_position, &head_position, &positions, orientation, &command, &length, &length_to_add);
+            last_clock = clock();
+            
+        }
 
         clearBuffer(&buffer);
 
