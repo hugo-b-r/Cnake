@@ -13,29 +13,14 @@ main file for game
 #include "positions.h"
 #include "init.h"
 #include "buffer.h"
+#include "game.h"
+#include "entries.h"
 
 
 
 
 
-void incrLength(int (*positions)[2][100], int *length, int length_diff, int head_position)
-{   
-    for (int i = 0; i < ((*length) - head_position - 1); i++) {
-        (*positions)[0][(*length) - i - 1 + length_diff] = (*positions)[0][(*length) - i - 1];
-        (*positions)[1][(*length) - i - 1 + length_diff] = (*positions)[1][(*length) - i - 1];
-    }
-    (*length) += length_diff;
-}
 
-
-
-
-void getKeyboardEntry(char *command)
-{
-    if (KEYBOARDHIT) {
-        *command = GETCHAR;
-    }
-}
 
 
 
@@ -50,110 +35,23 @@ void pauseLoop(char *command)
 
 
 
-void testEvents(int *orientation, char *command)
-{ 
-    switch (*command) {
-    case 'z':
-        if (*orientation != 180) {
-            *orientation = 0;
-        }
-        break;
-
-    case 'q':
-        if (*orientation != 90) {
-            *orientation = 270;
-        }
-        break;
-
-    case 's':
-        if (*orientation != 0) {
-            *orientation = 180;
-        }
-       break;
- 
-    case 'd':
-        if (*orientation != 270) {
-            *orientation = 90;
-        }
-        break;
-
-    case 'x':
-        quit(3);
-        break;
-        
-    case 'p':
-        pauseLoop(command);
-        break;
-    }
-}
-
-
-
-
 int main(int argc, char* argv[])
 {
-    srand(time(0));
-   
-    char command = 'a';
-    
-    int points = 0;
-    
-    //fruit pos
-    int fruit_x = rand() % (PLAYGROUND_X);
-    int fruit_y = rand() % (PLAYGROUND_Y);
+    char command_buffer = '1';
+    int level = 1;
 
-    char buffer[PLAYGROUND_X][PLAYGROUND_Y];   
-    
-    int length = LENGTH;
-    int positions[2][100];
-    int head_position = LENGTH-1;
-     
-    //speed set up
-    int last_clock = clock();
-    int move_time = 300;
+    printf("\n\n");
+    printf("\x1B[36mWelcome in Cnake !!\033[0m\t\t");
+    printf("\n\n");
+    printf("Start a new game (0)");
+    printf("Preferences (1)");
+    command_buffer = getchar();
 
-    int orientation = 0;
-    
-    initVar(&positions, &orientation, &buffer);
-
-    while (command != 'x') {
-        
-        getKeyboardEntry(&command);
-        testEvents(&orientation, &command);
-
-        if (last_clock + move_time <= clock()) {
-            
-            newPos(&head_position, &positions, orientation, length);
-            
-            //if on fruit
-            if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {
-                
-                fruit_x = rand() % (PLAYGROUND_X);
-                fruit_y = rand() % (PLAYGROUND_Y);
-                 
-                incrLength(&positions, &length, 1, head_position);
-                points += 1;
-                move_time -= 10;
-            }
-
-            last_clock = clock();
-            
-        }
-
-        clearBuffer(&buffer);
-
-        for (int i = 0; i < length; i++) {
-            if (!((positions[0][i] == -1) && (positions[1][i] == -1))) {
-                buffer[positions[0][i]][positions[1][i]] = 'o';
-            }
-        }
-
-        buffer[fruit_x][fruit_y] = 'z';
-
-        system("cls");
-
-        printBuffer(&buffer);
-        printf("\npoints: %d\n", points);
-
+    switch(command_buffer) {
+        case ('1'):
+            game(level, PLAYGROUND_X, PLAYGROUND_Y);
+            break;
+        case ('2');
+            preferences()
     }
 }
