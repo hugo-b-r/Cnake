@@ -21,26 +21,6 @@ function for init and deinit
 
 
 
-void initVar(int (*positions)[2][100], int *orientation, char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y]) 
-{
-    clearBuffer(buffer);
-    
-    for (int i = 0; i < 100; i++) {
-        (*positions)[0][i] = -1;    
-        (*positions)[1][i] = -1; 
-    }
-
-    for (int i = 0; i < LENGTH; i++) {
-        (*positions)[0][i] = PLAYGROUND_X/2;
-        (*positions)[1][i] = PLAYGROUND_Y/2;
-        (*positions)[1][i] -= LENGTH/2;
-        (*positions)[1][i] += i;      
-    }
-}
-
-
-
-
 void quit(int type)
 {
     switch (type) {

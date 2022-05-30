@@ -23,8 +23,6 @@ function for init and deinit
 /*#elif defined(__linux__)*/
 #endif
 
-void initVar(int (*positions)[2][100], int *orientation, char (*buffer)[PLAYGROUND_X][PLAYGROUND_Y]) ;
-
 void quit(int type);
 
 #endif

@@ -5,6 +5,7 @@ game.c
 structure of a game and game related functions
 
 */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -40,9 +41,7 @@ void game(int level, int playground_width, int playground_height)
     
     //fruit pos
     int fruit_x = rand() % (playground_width);
-    int fruit_y = rand() % (playground_height);
-
-    char buffer[playground_width][playground_height];   
+    int fruit_y = rand() % (playground_height);  
     
     int length = LENGTH;
     int positions[2][100];
@@ -53,8 +52,6 @@ void game(int level, int playground_width, int playground_height)
     int move_time = 300;
 
     int orientation = 0;
-    
-    initVar(&positions, &orientation, &buffer);
 
     while (command != 'x') {
         
