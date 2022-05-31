@@ -12,9 +12,18 @@ structure of a game and game related functions
 
 #include "positions.h"
 #include "init.h"
-#include "buffer.h"
 #include "game.h"
 #include "entries.h"
+
+
+
+
+void pauseLoop(char *command)
+{
+    while (*command == 'p') {
+        getEvent(command);
+    }
+}
 
 
 
@@ -31,31 +40,43 @@ void incrLength(int (*positions)[2][100], int *length, int length_diff, int head
 
 
 
-void game(int level, int playground_width, int playground_height)
+void game(int *level, int playground_width, int playground_height)
 {
-    srand(time(0));
-   
+    int orientation = 0;
+
     char command = 'a';
-    
-    int level = 0;
-    
-    //fruit pos
-    int fruit_x = rand() % (playground_width);
-    int fruit_y = rand() % (playground_height);  
-    
-    int length = LENGTH;
+
+
+    int length = *level + DEFAULT_LENGTH;
     int positions[2][100];
-    int head_position = LENGTH-1;
+    int head_position = length - 1;
+
+    for (int i = 0; i < 100; i++) {
+        positions[0][i] = -1;    
+        positions[1][i] = -1; 
+    }
+
+    for (int i = 0; i < length; i++) {
+        positions[0][i] = playground_width/2;
+        positions[1][i] = playground_height/2;
+        positions[1][i] -= length/2;
+        positions[1][i] += i;      
+    }
+
      
     //speed set up
     int last_clock = clock();
     int move_time = 300;
 
-    int orientation = 0;
+    srand(time(0));
+    //fruit pos
+    int fruit_x = rand() % (playground_width);
+    int fruit_y = rand() % (playground_height);  
+
 
     while (command != 'x') {
         
-        getKeyboardEntry(&command);
+        getEvent(&command);
         testEvents(&orientation, &command);
 
         if (last_clock + move_time <= clock()) {
@@ -73,24 +94,27 @@ void game(int level, int playground_width, int playground_height)
                 move_time -= 10;
             }
 
+
             last_clock = clock();
-            
         }
 
-        clearBuffer(&buffer);
-
-        for (int i = 0; i < length; i++) {
-            if (!((positions[0][i] == -1) && (positions[1][i] == -1))) {
-                buffer[positions[0][i]][positions[1][i]] = 'o';
+        for (int i = 0; i < playground_height; i++) {
+            for (int j = 0; j < playground_width; j++) {
+                
+                for (int k = 0; k < length; k++) {
+                    if (j == positions[0][k] || i == positions[1][k]) {
+                        printf("\x1B[36mo\033[0m\t\t");
+                    }
+                }
+                if (j == fruit_x || i == fruit_y) {
+                    printf("z");
+                }
             }
         }
 
-        buffer[fruit_x][fruit_y] = 'z';
-
         system("cls");
 
-        printBuffer(&buffer);
-        printf("\npoints: %d\n", level);
+        printf("\npoints: %d\n", *level);
 
     }
 }

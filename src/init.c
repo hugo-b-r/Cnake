@@ -10,7 +10,6 @@ function for init and deinit
 #include <stdlib.h>
 #include <time.h>
 
-#include "buffer.h"
 
 
 

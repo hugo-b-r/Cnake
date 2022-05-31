@@ -12,7 +12,6 @@ main file for game
 
 #include "positions.h"
 #include "init.h"
-#include "buffer.h"
 #include "game.h"
 #include "entries.h"
 
@@ -25,20 +24,10 @@ main file for game
 
 
 
-void pauseLoop(char *command)
-{
-    while (*command == 'p') {
-        getKeyboardEntry(command);
-    }
-}
-
-
-
-
 int main(int argc, char* argv[])
 {
     char command_buffer = '1';
-    int level = 1;
+    int level = 0;
 
     printf("\n\n");
     printf("\x1B[36mWelcome in Cnake !!\033[0m\t\t");
@@ -49,9 +38,9 @@ int main(int argc, char* argv[])
 
     switch(command_buffer) {
         case ('1'):
-            game(level, PLAYGROUND_X, PLAYGROUND_Y);
+            game(&level, PLAYGROUND_X, PLAYGROUND_Y);
             break;
-        case ('2');
-            preferences()
+        case ('2'):
+            preferences();
     }
 }
