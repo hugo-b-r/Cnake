@@ -14,6 +14,18 @@ structure of a game and game related functions
 #include "init.h"
 #include "game.h"
 #include "entries.h"
+#include "preferences.h"
+
+
+
+
+void flushBuffer() {
+    int c = 0;
+    while (c != '\n' && c != EOF)
+    {
+        c = getchar();
+    }
+}
 
 
 
@@ -40,7 +52,7 @@ void incrLength(int (*positions)[2][100], int *length, int length_diff, int head
 
 
 
-void game(int *level, int playground_width, int playground_height)
+void game(int *level, int playground_width, int playground_height, int *game_continue)
 {
     int orientation = 0;
 
@@ -66,7 +78,7 @@ void game(int *level, int playground_width, int playground_height)
      
     //speed set up
     int last_clock = clock();
-    int move_time = 300;
+    int move_time = 300 - (*level * 10);
 
     srand(time(0));
     //fruit pos
@@ -90,31 +102,37 @@ void game(int *level, int playground_width, int playground_height)
                 fruit_y = rand() % (playground_height);
                  
                 incrLength(&positions, &length, 1, head_position);
-                level += 1;
+                *level += 1;
                 move_time -= 10;
             }
-
 
             last_clock = clock();
         }
 
-        for (int i = 0; i < playground_height; i++) {
+
+        system("cls");
+        
+        for (int i = playground_height - 1; i >= 0; i--) {
             for (int j = 0; j < playground_width; j++) {
                 
                 for (int k = 0; k < length; k++) {
-                    if (j == positions[0][k] || i == positions[1][k]) {
-                        printf("\x1B[36mo\033[0m\t\t");
+                    if (j == positions[0][k] && i == positions[1][k]) {
+                        printf("o");
+                        goto hell;
                     }
+                    // could be better to check only one time instead of two if on or not
                 }
-                if (j == fruit_x || i == fruit_y) {
+                if (j == fruit_x && i == fruit_y) {
                     printf("z");
                 }
+                else {
+                    printf(" ");
+                }
+                hell:
             }
+            printf("\n");
         }
-
-        system("cls");
-
         printf("\npoints: %d\n", *level);
-
     }
+    printf("\n");
 }

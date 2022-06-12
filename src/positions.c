@@ -15,7 +15,7 @@ functions for positions matrix manipulations
 
 
 
-void newPosInjection(int *head_position, int length, int (*positions)[2][100], int x, int y) {
+void newPosStorage(int *head_position, int length, int (*positions)[2][100], int x, int y) {
     
     if ( *head_position + 1 == length) {
         (*positions)[0][0] = x;
@@ -40,7 +40,7 @@ void incrPos(int *head_position, int length)
 
 
 
-void newPos(int *head_position, int (*positions)[2][100], int orientation, int length)
+void newPos(int *head_position, int (*positions)[2][100], int orientation, int length, char *command)
 {
     int x = (*positions)[0][*head_position];
     int y = (*positions)[1][*head_position];
@@ -63,20 +63,20 @@ void newPos(int *head_position, int (*positions)[2][100], int orientation, int l
     //if on itself
     for (int i = 0; i < length; i++) {
         if ( (x == (*positions)[0][i]) && (y == (*positions)[1][i]) ) {
-            newPosInjection(head_position, length, positions, x, y);
-            printf("\nYou can't go on yourself");
-            quit(1);
+            newPosStorage(head_position, length, positions, x, y);
+            printf("\nOuch. You can't go on yourself");
+            *command = 'x';
         }
     }
 
     // if border
     if ( (x > (PLAYGROUND_X-1)) || (y > (PLAYGROUND_Y)) || (x < 0) || (y < 0) ) {
-        newPosInjection(head_position, length, positions, x, y);
+        newPosStorage(head_position, length, positions, x, y);
         printf("\nYou have touched border.");
         quit(1); 
     } else {
 
-        newPosInjection(head_position, length, positions, x, y);
+        newPosStorage(head_position, length, positions, x, y);
 
         incrPos(head_position, length);
 

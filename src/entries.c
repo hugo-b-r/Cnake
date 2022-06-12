@@ -47,7 +47,7 @@ void testEvents(int *orientation, char *command)
             if (*orientation != 270) *orientation = 90;
             break;
 
-        case 'x':
+        case 'k':
             quit(3);
             break;
         

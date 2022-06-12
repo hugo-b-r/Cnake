@@ -29,6 +29,8 @@ void quit(int type)
         case 2: 
             printf("\nGood Job!\n");
             break;
+        case 3:
+            printf("\nBye bye !\n\n");
     }
-    exit(0);
+     exit(0);
 }

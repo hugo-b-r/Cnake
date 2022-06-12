@@ -14,11 +14,7 @@ main file for game
 #include "init.h"
 #include "game.h"
 #include "entries.h"
-
-
-
-
-
+#include "preferences.h"
 
 
 
@@ -26,21 +22,39 @@ main file for game
 
 int main(int argc, char* argv[])
 {
-    char command_buffer = '1';
+    int game_continue = 1;
     int level = 0;
+    char buffer = '0';
+
+    int playground_width = PLAYGROUND_X;
+    int playground_height = PLAYGROUND_Y;
 
     printf("\n\n");
     printf("\x1B[36mWelcome in Cnake !!\033[0m\t\t");
     printf("\n\n");
-    printf("Start a new game (0)");
-    printf("Preferences (1)");
-    command_buffer = getchar();
+    while (game_continue) {
+        printf("- (1) Start a new game\n");
+        printf("- (2) Preferences\n");
+        printf("- (k) Quit\n");
+        printf(">");
 
-    switch(command_buffer) {
-        case ('1'):
-            game(&level, PLAYGROUND_X, PLAYGROUND_Y);
-            break;
-        case ('2'):
-            preferences();
-    }
+        scanf("%c", &buffer);
+        flushBuffer();
+
+        switch (buffer) {
+            case '1':
+                game(&level, playground_width, playground_height, &game_continue);
+                break;
+        
+            case '2':
+                preferences(&level, &playground_width, &playground_height);
+                break;
+        
+            case 'k':
+                return EXIT_SUCCESS;
+            
+            default:
+                continue;
+        }
+    } 
 }
