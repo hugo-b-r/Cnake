@@ -17,14 +17,15 @@ structure of a game and game related functions
 
 
 
+
 #if defined(WIN32)
     #include "windows_controls.h"
+    #include "windows_gfx.h"
 /*#elif defined (linux)
     #include "controls/linux_controls.h"
 #elif defined (NUMWORKS)
     #include "controls/numworks_controls.h"*/
 #endif
-
 
 
 
@@ -119,30 +120,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
             last_clock = clock();
         }
 
-
-        system("cls");
-        
-        for (int i = playground_height - 1; i >= 0; i--) {
-            for (int j = 0; j < playground_width; j++) {
-                
-                for (int k = 0; k < length; k++) {
-                    if (j == positions[0][k] && i == positions[1][k]) {
-                        printf("o");
-                        goto hell;
-                    }
-                    // could be better to check only one time instead of two if on or not
-                }
-                if (j == fruit_x && i == fruit_y) {
-                    printf("z");
-                }
-                else {
-                    printf(" ");
-                }
-                hell:
-            }
-            printf("\n");
-        }
-        printf("\npoints: %d\n", *level);
+        reDraw(playground_width, playground_height, length, positions, fruit_x, fruit_y, level);
     }
     printf("\n");
 }
