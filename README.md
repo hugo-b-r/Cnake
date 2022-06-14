@@ -22,7 +22,6 @@ make
 ### TO-DO
 
 - [ ] log system
-- [ ] save system
 - [x] menu
 - [x] choice of difficulty
 - [ ] maybe network games (multiplayer)
