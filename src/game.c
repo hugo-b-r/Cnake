@@ -30,16 +30,6 @@ structure of a game and game related functions
 
 
 
-void flushBuffer() {
-    int c = 0;
-    while (c != '\n' && c != EOF)
-    {
-        c = getchar();
-    }
-}
-
-
-
 
 void pauseLoop(int *command)
 {
@@ -89,7 +79,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
      
     //speed set up
     int last_clock = clock();
-    int move_time = 300 - (*level * 10);
+    int move_time = 100 - (*level * 10);
 
     srand(time(0));
     //fruit pos
@@ -107,7 +97,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 
         if (last_clock + move_time <= clock()) {
             
-            newPos(&head_position, &positions, orientation, length, &command);
+            newPos(&head_position, &positions, orientation, length, &command, playground_width, playground_height);
             
             //if on fruit
             if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {

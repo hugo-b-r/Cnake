@@ -13,6 +13,6 @@ void newPosStorage(int *head_position, int length, int (*positions)[2][100], int
 
 void incrPos(int *head_position, int length);
 
-void newPos(int *head_position, int (*positions)[2][100], int orientation, int length, int *command);
+void newPos(int *head_position, int (*positions)[2][100], int orientation, int length, int *command, int playground_width, int playground_height);
 
 #endif

@@ -14,40 +14,32 @@ functions for preferences
 #include "game.h"
 #include "preferences.h"
 
+#if defined(WIN32)
+    #include "windows_controls.h"
+    #include "windows_gfx.h"
+/*#elif defined (linux)
+    #include "controls/linux_controls.h"
+#elif defined (NUMWORKS)
+    #include "controls/numworks_controls.h"*/
+#endif
+
 
 
 
 
 void preferences(int *level, int *playground_width, int *playground_height) {
-    char buffer = '0';
-    
-    printf("\n");
-    printf("- (1) Level\n");
-    printf("- (2) Width of the playground\n");
-    printf("- (3) Height of the playground\n");
-    printf("- (x) Return to main menu\n");
-    printf("- (k) Quit\n");
-    printf(">");
-
-    scanf("%c", &buffer);
         
-    switch (buffer) {
+    switch (preferencesMenu()) {
         case '1':
-            printf("\nWhat level do you want to start with ? \n");
-            printf(">");
-            scanf("%d", level);
+            *level = askLevel();
             break;
 
         case '2':
-            printf("\nWhat width do you want to play with ? \n");
-            printf(">");
-            scanf("%d", playground_width);
+            *playground_width = askPlaygroundWidth();
             break;
 
         case '3':
-            printf("\nWhat height do you want to play with ? \n");
-            printf(">");
-            scanf("%d", playground_height);
+            *playground_height = askPlaygroundHeight();
             break;
 
         case 'x':
@@ -57,5 +49,4 @@ void preferences(int *level, int *playground_width, int *playground_height) {
             quit(3);
     }
     printf("\n");
-    flushBuffer();
 }

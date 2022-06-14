@@ -41,7 +41,7 @@ void incrPos(int *head_position, int length)
 
 
 
-void newPos(int *head_position, int (*positions)[2][100], int orientation, int length, int *command)
+void newPos(int *head_position, int (*positions)[2][100], int orientation, int length, int *command, int playground_width, int playground_height)
 {
     int x = (*positions)[0][*head_position];
     int y = (*positions)[1][*head_position];
@@ -65,15 +65,15 @@ void newPos(int *head_position, int (*positions)[2][100], int orientation, int l
     for (int i = 0; i < length; i++) {
         if ( (x == (*positions)[0][i]) && (y == (*positions)[1][i]) ) {
             newPosStorage(head_position, length, positions, x, y);
-            printf("\nOuch. You can't go on yourself.\n");
+            printf("\nOuch. You diedaeting yourself.\n");
             *command = ENDGAME;
         }
     }
 
     // if border
-    if ( (x > (PLAYGROUND_X-1)) || (y > (PLAYGROUND_Y)) || (x < 0) || (y < 0) ) {
+    if ( (x > (playground_width-1)) || (y > (playground_height)) || (x < 0) || (y < 0) ) {
         newPosStorage(head_position, length, positions, x, y);
-        printf("\nYou have touched border.\n");
+        printf("\nYou died crushed against the wall.\n");
         *command = ENDGAME;
         return;
     } else {
