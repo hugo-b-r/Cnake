@@ -1,5 +1,22 @@
+
+CC = gcc
+
+SRC_DIR := src
+OBJ_DIR := obj
+BIN_DIR := bin
+
+TARGET = $(BIN_DIR)/game
+
+SRC := $(wildcard $(SRC_DIR)/*.c) 
+OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+CFLAGS := -Wall
+CPPFLAGS := -Iinc -MMD -MP
+LDFLAGS := -Llib
+LDLIBS :=
+
 ifeq ($(OS), Windows_NT)
-	LDFLAGS = -lmingw32
+	LDLIBS = -lmingw32
 	CFLAGS += -D WIN32
 	ifeq ($(PROCESSOR_ARCHITEW6432),AMD64)
         CCFLAGS += -D AMD64
@@ -32,34 +49,26 @@ else
 endif
 
 
-CC = gcc
-CFLAGS += -Wall -O -g
-TARGET = game
+.PHONY: all clean
 
-SRC  += $(wildcard src/*.c) $(wildcard src/**/**/*.c) $(wildcard src/**/**/**/*.c) 
-OBJ  = $(SRC:.c=.o)
-OUTPUT_FOLDER = bin
-
-all: dirs $(TARGET)
+all: $(TARGET)
 	@echo -e "Done.\n"
 
-$(TARGET): $(OBJ)
-	$(CC) -o $(OUTPUT_FOLDER)/$(TARGET) $^ $(LDFLAGS)
+$(TARGET): $(OBJ) | $(BIN_DIR)
+	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
-%.o: %.c
-	$(CC) -o $@ -c $< $(CFLAGS)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
-#`pkg-config --cflags --libs sdl2`
+$(BIN_DIR) $(OBJ_DIR):
+	mkdir -p $@
 
-dirs:
-	mkdir -p $(OUTPUT_FOLDER)
+
 
 clean:
-	rm -rf $(OBJ)
-	rm -f $(OUTPUT_FOLDER)/$(TARGET)
+	$(RM) -rv $(BIN_DIR) $(OBJ_DIR)
 	@echo -e "Clean.\n"
 
-mrproper: clean
-	rm -rf $(OUTPUT_FOLDER)
-
 cleanandbuild: clean all
+
+-include $(OBJ:.o=.d)
