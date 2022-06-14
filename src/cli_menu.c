@@ -1,12 +1,10 @@
 /*
 
-windows_gfx.c
+cli_menu.c
 
-file for windows gfx
+file for cli menus
 
 */
-
-
 
 #include <stdio.h>
 #include <stdlib.h>

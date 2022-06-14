@@ -1,13 +1,13 @@
 /*
 
-windows_gfx.h
+cli_menu.h
 
-file for windows gfx
+file for cli menus
 
 */
 
-#ifndef _WINDOWS_GFX_H_
-#define _WINDOWS_GFX_H_
+#ifndef _CLI_MENU_H_
+#define _CLI_MENU_H_
 
 void reDraw(int playground_width, int playground_height, int length, int positions[2][100], int fruit_x, int fruit_y, int *level);
 

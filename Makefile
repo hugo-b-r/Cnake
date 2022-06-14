@@ -51,7 +51,7 @@ endif
 
 .PHONY: all clean
 
-all: $(TARGET)
+all: $(TARGET) cli
 	@echo -e "Done.\n"
 
 $(TARGET): $(OBJ) | $(BIN_DIR)
@@ -63,7 +63,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(BIN_DIR) $(OBJ_DIR):
 	mkdir -p $@
 
-
+cli:
+    CFLAGS += -D CLI
 
 clean:
 	$(RM) -rv $(BIN_DIR) $(OBJ_DIR)

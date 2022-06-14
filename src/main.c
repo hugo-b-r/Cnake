@@ -17,12 +17,16 @@ main file for game
 
 #if defined(WIN32)
     #include "windows_controls.h"
-    #include "windows_gfx.h"
 /*#elif defined (linux)
     #include "controls/linux_controls.h"
 #elif defined (NUMWORKS)
     #include "controls/numworks_controls.h"*/
 #endif
+
+#if defined(CLI)
+    #include "cli_menu.h"
+#endif
+
 
 
 
