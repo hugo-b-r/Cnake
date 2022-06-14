@@ -1,5 +1,5 @@
 # Cnake
-Cnake is a simple Snake game made in C with CSFML. It will work in Linux and Windows, maybe MacOS. I'll do it on my free time.
+Cnake is a simple Snake game made in C. It will work in Linux and Windows, maybe MacOS. I'll do it on my free time.
 
 ### Installation
 
@@ -23,6 +23,6 @@ make
 
 - [ ] log system
 - [ ] save system
-- [ ] menu
-- [ ] choice of difficulty
+- [x] menu
+- [x] choice of difficulty
 - [ ] maybe network games (multiplayer)
