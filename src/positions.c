@@ -11,6 +11,7 @@ functions for positions matrix manipulations
 #include <time.h>
 
 #include "init.h"
+#include "positions.h"
 
 
 
@@ -40,7 +41,7 @@ void incrPos(int *head_position, int length)
 
 
 
-void newPos(int *head_position, int (*positions)[2][100], int orientation, int length, char *command)
+void newPos(int *head_position, int (*positions)[2][100], int orientation, int length, int *command)
 {
     int x = (*positions)[0][*head_position];
     int y = (*positions)[1][*head_position];
@@ -65,7 +66,7 @@ void newPos(int *head_position, int (*positions)[2][100], int orientation, int l
         if ( (x == (*positions)[0][i]) && (y == (*positions)[1][i]) ) {
             newPosStorage(head_position, length, positions, x, y);
             printf("\nOuch. You can't go on yourself");
-            *command = 'x';
+            *command = ENDGAME;
         }
     }
 

@@ -14,14 +14,13 @@ function for init and deinit
 #define PLAYGROUND_Y 20
 #define DEFAULT_LENGTH 5
 
-
-
-#if defined(_WIN32) || defined(_WIN64)
-    #include <conio.h>
-    #define KEYBOARDHIT kbhit()
-    #define GETCHAR getch()
-/*#elif defined(__linux__)*/
-#endif
+#define UP 0
+#define LEFT 270
+#define DOWN 180
+#define RIGHT 90
+#define PAUSE 361
+#define ENDGAME 362
+#define QUIT 363
 
 void quit(int type);
 

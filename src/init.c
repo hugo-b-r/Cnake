@@ -11,8 +11,6 @@ function for init and deinit
 #include <time.h>
 
 
-
-
 #define PLAYGROUND_X 35
 #define PLAYGROUND_Y 20
 #define LENGTH 5

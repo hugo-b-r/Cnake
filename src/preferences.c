@@ -10,10 +10,10 @@ functions for preferences
 #include <stdlib.h>
 #include <time.h>
 
-#include "game.h"
-#include "entries.h"
-#include "preferences.h"
 #include "init.h"
+#include "game.h"
+#include "preferences.h"
+
 
 
 

@@ -11,7 +11,7 @@ structure of a game and game related functions
 
 void flushBuffer();
 
-void pauseLoop(char *command);
+void pauseLoop(int *command);
 
 void incrLength(int (*positions)[2][100], int *length, int length_diff, int head_position);
 

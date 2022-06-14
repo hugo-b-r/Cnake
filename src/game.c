@@ -10,11 +10,21 @@ structure of a game and game related functions
 #include <stdlib.h>
 #include <time.h>
 
-#include "positions.h"
 #include "init.h"
 #include "game.h"
-#include "entries.h"
+#include "positions.h"
 #include "preferences.h"
+
+
+
+#if defined(WIN32)
+    #include "windows_controls.h"
+/*#elif defined (linux)
+    #include "controls/linux_controls.h"
+#elif defined (NUMWORKS)
+    #include "controls/numworks_controls.h"*/
+#endif
+
 
 
 
@@ -30,9 +40,9 @@ void flushBuffer() {
 
 
 
-void pauseLoop(char *command)
+void pauseLoop(int *command)
 {
-    while (*command == 'p') {
+    while (*command == PAUSE) {
         getEvent(command);
     }
 }
@@ -56,7 +66,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 {
     int orientation = 0;
 
-    char command = 'a';
+    int command = -1;
 
 
     int length = *level + DEFAULT_LENGTH;
@@ -86,14 +96,14 @@ void game(int *level, int playground_width, int playground_height, int *game_con
     int fruit_y = rand() % (playground_height);  
 
 
-    while (command != 'x') {
+    while (command != ENDGAME) {
         
         getEvent(&command);
-        testEvents(&orientation, &command);
+        translateControl(&orientation, &command);
 
         if (last_clock + move_time <= clock()) {
             
-            newPos(&head_position, &positions, orientation, length);
+            newPos(&head_position, &positions, orientation, length, &command);
             
             //if on fruit
             if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {

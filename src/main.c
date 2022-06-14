@@ -10,11 +10,11 @@ main file for game
 #include <stdlib.h>
 #include <time.h>
 
-#include "positions.h"
 #include "init.h"
+#include "positions.h"
 #include "game.h"
-#include "entries.h"
 #include "preferences.h"
+
 
 
 
