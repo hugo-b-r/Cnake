@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
                 break;
         
             case 'k':
-                return EXIT_SUCCESS;
+                quit(3);
             
             default:
                 continue;

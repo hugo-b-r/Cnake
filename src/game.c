@@ -99,6 +99,9 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 
     while (command != ENDGAME) {
         
+        
+        reDraw(playground_width, playground_height, length, positions, fruit_x, fruit_y, level);
+
         getEvent(&command);
         translateControl(&orientation, &command);
 
@@ -119,8 +122,6 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 
             last_clock = clock();
         }
-
-        reDraw(playground_width, playground_height, length, positions, fruit_x, fruit_y, level);
     }
     printf("\n");
 }

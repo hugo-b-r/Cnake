@@ -16,8 +16,14 @@ file for windows gfx
 void reDraw(int playground_width, int playground_height, int length, int positions[2][100], int fruit_x, int fruit_y, int *level) {
 
     system("cls");
-        
+    
+    for (int i = 0; i <= playground_width+1; i++) {
+        printf("#");
+    }
+    printf("\n");
+
     for (int i = playground_height - 1; i >= 0; i--) {
+        printf("#");
         for (int j = 0; j < playground_width; j++) {
             for (int k = 0; k < length; k++) {
                 if (j == positions[0][k] && i == positions[1][k]) {
@@ -34,7 +40,12 @@ void reDraw(int playground_width, int playground_height, int length, int positio
             }
             hell:
         }
-        printf("\n");
+        printf("#\n");
     }
+    for (int i = 0; i <= playground_width+1; i++) {
+        printf("#");
+    }
+    printf("\n");
+
     printf("\npoints: %d\n", *level);
 }

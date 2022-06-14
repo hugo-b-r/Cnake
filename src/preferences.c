@@ -57,4 +57,5 @@ void preferences(int *level, int *playground_width, int *playground_height) {
             quit(3);
     }
     printf("\n");
+    flushBuffer();
 }

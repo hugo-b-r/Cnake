@@ -65,7 +65,7 @@ void newPos(int *head_position, int (*positions)[2][100], int orientation, int l
     for (int i = 0; i < length; i++) {
         if ( (x == (*positions)[0][i]) && (y == (*positions)[1][i]) ) {
             newPosStorage(head_position, length, positions, x, y);
-            printf("\nOuch. You can't go on yourself");
+            printf("\nOuch. You can't go on yourself.\n");
             *command = ENDGAME;
         }
     }
@@ -73,8 +73,9 @@ void newPos(int *head_position, int (*positions)[2][100], int orientation, int l
     // if border
     if ( (x > (PLAYGROUND_X-1)) || (y > (PLAYGROUND_Y)) || (x < 0) || (y < 0) ) {
         newPosStorage(head_position, length, positions, x, y);
-        printf("\nYou have touched border.");
-        quit(1); 
+        printf("\nYou have touched border.\n");
+        *command = ENDGAME;
+        return;
     } else {
 
         newPosStorage(head_position, length, positions, x, y);
