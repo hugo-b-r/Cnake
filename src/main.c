@@ -14,24 +14,25 @@ main file for game
 #include "positions.h"
 #include "game.h"
 #include "preferences.h"
-
-#if defined(WIN32)
-    #include "windows_controls.h"
-/*#elif defined (linux)
-    #include "controls/linux_controls.h"
-#elif defined (NUMWORKS)
-    #include "controls/numworks_controls.h"*/
-#endif
-
-#if defined(CLI)
-    #include "cli_menu.h"
-#endif
+#include "controls.h"
+#include "menu.h"
 
 
 
+#if defined(NUMWORKS)
+
+#include "extapp_api.h"
+
+int extapp_main()
+{
+
+#elif defined(WIN32) || defined(__linux__)
 
 int main(int argc, char* argv[])
 {
+
+#endif
+
     int game_continue = 1;
     int level = 0;
 
@@ -39,19 +40,23 @@ int main(int argc, char* argv[])
     int playground_height = PLAYGROUND_Y;
 
     welcomeMessage();
+    #if defined (NUMWORKS)
+        waitForKeyPressed();
+        extapp_msleep(1000);
+    #endif
 
     while (game_continue) {
         
         switch (defaultMenu()) {
-            case '1':
+            case 0:
                 game(&level, playground_width, playground_height, &game_continue);
                 break;
         
-            case '2':
+            case 1:
                 preferences(&level, &playground_width, &playground_height);
                 break;
         
-            case 'k':
+            case 2:
                 quit(3);
             
             default:

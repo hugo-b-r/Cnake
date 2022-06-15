@@ -13,21 +13,8 @@ functions for preferences
 #include "init.h"
 #include "game.h"
 #include "preferences.h"
-
-#if defined(WIN32)
-    #include "windows_controls.h"
-/*#elif defined (linux)
-    #include "controls/linux_controls.h"
-*/
-#endif
-
-#if defined(CLI)
-    #include "cli_menu.h"
-#elif defined (NUMWORKS)
-    #include "numworks_menu.h"*/
-#endif
-
-
+#include "controls.h"
+#include "menu.h"
 
 
 
@@ -36,22 +23,23 @@ functions for preferences
 void preferences(int *level, int *playground_width, int *playground_height) {
         
     switch (preferencesMenu()) {
-        case '1':
+        case 0:
             *level = askLevel();
             break;
-
-        case '2':
+        #if defined(WIN32) || defined(__linux__)
+        case 1:
             *playground_width = askPlaygroundWidth();
             break;
 
-        case '3':
+        case 2:
             *playground_height = askPlaygroundHeight();
             break;
+        #endif
 
-        case 'x':
+        case 3:
             return;   
         
-        case 'k':
+        case 4:
             quit(3);
     }
     printf("\n");

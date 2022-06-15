@@ -10,9 +10,13 @@ function for init and deinit
 #include <stdlib.h>
 #include <time.h>
 
-
-#define PLAYGROUND_X 35
-#define PLAYGROUND_Y 20
+#if defined(CLI)
+    #define PLAYGROUND_X 35
+    #define PLAYGROUND_Y 20
+#elif defined(NUMWORKS)
+    #define PLAYGROUND_X 32 
+    #define PLAYGROUND_Y 21
+#endif
 #define LENGTH 5
 
 
@@ -30,5 +34,5 @@ void quit(int type)
         case 3:
             printf("\nBye bye !\n\n");
     }
-     exit(0);
+    //exit(0);
 }

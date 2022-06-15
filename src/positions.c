@@ -65,7 +65,7 @@ void newPos(int *head_position, int (*positions)[2][100], int orientation, int l
     for (int i = 0; i < length; i++) {
         if ( (x == (*positions)[0][i]) && (y == (*positions)[1][i]) ) {
             newPosStorage(head_position, length, positions, x, y);
-            printf("\nOuch. You diedaeting yourself.\n");
+            printf("\nOuch. You died eating yourself.\n");
             *command = ENDGAME;
         }
     }
