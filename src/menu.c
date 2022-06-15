@@ -22,11 +22,11 @@ file for controls functions
 
     void reDraw(int playground_width, int playground_height, int length, int positions[2][100], int fruit_x, int fruit_y, int *level) {
 
-        extapp_pushRectUniform(0, 18, 12, 320, 0xFFF0);
-        extapp_pushRectUniform(0, 210, 12, 320, 0x0000);
+        extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
+        extapp_pushRectUniform(0, 228, 320, 12, 0x0000);
         
         for (int i = 0; i < 100; i++) {
-            extapp_pushRectUniform(positions[0][i]*10, positions[0][i]*10, 10, 10, 0x00F0);
+            extapp_pushRectUniform(positions[0][i]*10, 240-(positions[0][i]*10), 10, 10, 0x0F00);
         }
 
         extapp_pushRectUniform(fruit_x, 24 - fruit_y, 10, 10, 0xF000);
@@ -38,7 +38,10 @@ file for controls functions
 
 
     void welcomeMessage() {
+        extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
         extapp_drawTextLarge("Welcome in Cnake !", 0, 20 * 1, 0x00F0, 0xFFFF, false);
+        extapp_waitForVBlank();
+        extapp_msleep(1000);
     }
 
 
@@ -46,20 +49,18 @@ file for controls functions
 
     int defaultMenu() {
 
-        extapp_pushRectUniform(0, 18, 12, 320, 0xFFF0);
+        extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
         int choice = 10;
         
-        extapp_drawTextSmall("(1) Start a new game", 0, 20 * 1, 0x0F00, 0xFFFF, false);
-        extapp_drawTextSmall("(2) Preferences", 0, 20 * 2, 0x0F00, 0xFFFF, false);
-        extapp_drawTextSmall("(3) Quit", 0, 20 * 3, 0x0F00, 0xFFFF, false);
+        extapp_drawTextSmall("(0) Start a new game", 0, 20 * 1, 0x0F00, 0xFFFF, false);
+        extapp_drawTextSmall("(1) Preferences", 0, 20 * 2, 0x0F00, 0xFFFF, false);
+        extapp_drawTextSmall("(2) Quit", 0, 20 * 3, 0x0F00, 0xFFFF, false);
 
         extapp_waitForVBlank();
-        
-        while (choice == 10) {
-            if (numworksFiguresInput()) {
-                choice = numworksFiguresInput();
-            }
-        }
+
+        waitForKeyPressed();
+        choice = numworksFiguresInput();
+
         return choice;  
     }
 
@@ -67,20 +68,17 @@ file for controls functions
 
 
     int preferencesMenu() {
-        extapp_pushRectUniform(0, 18, 12, 320, 0xFFF0);
+        extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
         int choice = 10;
         
         extapp_drawTextSmall("(0) Level", 0, 20 * 1, 0x0F00, 0xFFFF, false);
-        extapp_drawTextSmall("(1) Return to main menu", 0, 20 * 4, 0x0F00, 0xFFFF, false);
-        extapp_drawTextSmall("(2) Quit", 0, 20 * 5, 0x0F00, 0xFFFF, false);
+        extapp_drawTextSmall("(1) Return to main menu", 0, 20 * 2, 0x0F00, 0xFFFF, false);
+        extapp_drawTextSmall("(2) Quit", 0, 20 * 3, 0x0F00, 0xFFFF, false);
 
         extapp_waitForVBlank();
         
-        while (choice == 10) {
-            if (numworksFiguresInput()) {
-                choice = numworksFiguresInput();
-            }
-        }
+       waitForKeyPressed();
+        choice = numworksFiguresInput();
 
         if (choice == 1) choice = 3;
         if (choice == 2) choice = 4;
@@ -92,6 +90,9 @@ file for controls functions
 
 
     int askLevel() {
+
+        extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
+
         int level = 0;
 
         extapp_drawTextSmall("Enter level:", 0, 20 * 1, 0x0F00, 0xFFFF, false);
@@ -103,16 +104,16 @@ file for controls functions
             level += numworksFiguresInput();
         }
         while (1) {
-            switch ((uint64_t) extapp_scanKeyboard) {
+            switch (extapp_getKey(true, NULL)) {
                 
-                case SCANCODE_Backspace:
+                case KEY_CTRL_DEL:
                     level /= 10;
                     break;
                 
-                case SCANCODE_OK:
+                case KEY_CTRL_OK:
                     return level;
                 
-                case SCANCODE_EXE:
+                case KEY_CTRL_EXE:
                     return level;
             }
         }
@@ -188,6 +189,7 @@ file for controls functions
 
 
     int defaultMenu() {
+        
         int choice = 0;
         
         printf("- (0) Start a new game\n");

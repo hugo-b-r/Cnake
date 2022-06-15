@@ -77,8 +77,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
     int fruit_y = rand() % (playground_height);  
 
 
-    while (command != ENDGAME) {
-        
+    while (command != ENDGAME && command != QUIT) {
         
         reDraw(playground_width, playground_height, length, positions, fruit_x, fruit_y, level);
 
@@ -104,4 +103,6 @@ void game(int *level, int playground_width, int playground_height, int *game_con
         }
     }
     printf("\n");
+
+    if (command == QUIT) *game_continue = 0;
 }

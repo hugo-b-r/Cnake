@@ -21,33 +21,34 @@ file for controls functions
 
     void getEvent(int *command)
     {
-        switch (extapp_scanKeyboard()) {
-            case SCANCODE_Up:
+        int key = extapp_getKey(true, NULL);
+        switch (key) {
+            case KEY_CTRL_UP:
                 *command = UP;
                 break;
 
-            case SCANCODE_Left:
+            case KEY_CTRL_LEFT:
                 *command = LEFT;
                 break;
 
-            case SCANCODE_Down:
+            case KEY_CTRL_DOWN:
                 *command = DOWN;
                 break;
 
-            case SCANCODE_Right:
+            case KEY_CTRL_RIGHT:
                 *command = RIGHT;
                 break;
             
-            case SCANCODE_OK:
+            case KEY_CTRL_OK:
                 *command = PAUSE;
                 break;
             
-            case SCANCODE_Back:
+            case KEY_CTRL_EXIT:
                 *command = ENDGAME;
                 break;
             
-            case SCANCODE_Home:
-                quit(3);
+            case KEY_CTRL_MENU:
+                *command = QUIT;
         }
     }
 
@@ -82,37 +83,38 @@ file for controls functions
 
 
 
-    uint64_t numworksFiguresInput()
+    int numworksFiguresInput()
     {
-        switch ((uint64_t) extapp_scanKeyboard) {
-            case SCANCODE_Zero:
+        int key = extapp_getKey(true, NULL);
+        switch (key) {
+            case KEY_CHAR_0:
                 return 0;
 
-            case SCANCODE_One:
+            case KEY_CHAR_1:
                 return 1;
 
-            case SCANCODE_Two:
+            case KEY_CHAR_2:
                 return 2;
                 
-            case SCANCODE_Three:
+            case KEY_CHAR_3:
                 return 3;
 
-            case SCANCODE_Four:
+            case KEY_CHAR_4:
                 return 4;
                 
-            case SCANCODE_Five:
+            case KEY_CHAR_5:
                 return 5;
 
-            case SCANCODE_Six:
+            case KEY_CHAR_6:
                 return 6;
 
-            case SCANCODE_Seven:
+            case KEY_CHAR_7:
                 return 7;
                 
-            case SCANCODE_Eight:
+            case KEY_CHAR_8:
                 return 8;
 
-            case SCANCODE_Nine:
+            case KEY_CHAR_9:
                 return 9; 
         }
     }

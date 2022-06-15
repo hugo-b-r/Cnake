@@ -19,20 +19,9 @@ main file for game
 
 
 
-#if defined(NUMWORKS)
 
-#include "extapp_api.h"
-
-int extapp_main()
+int main()
 {
-
-#elif defined(WIN32) || defined(__linux__)
-
-int main(int argc, char* argv[])
-{
-
-#endif
-
     int game_continue = 1;
     int level = 0;
 
@@ -40,10 +29,6 @@ int main(int argc, char* argv[])
     int playground_height = PLAYGROUND_Y;
 
     welcomeMessage();
-    #if defined (NUMWORKS)
-        waitForKeyPressed();
-        extapp_msleep(1000);
-    #endif
 
     while (game_continue) {
         
@@ -57,10 +42,25 @@ int main(int argc, char* argv[])
                 break;
         
             case 2:
-                quit(3);
+                return 0;
             
             default:
                 continue;
         }
-    } 
+    }
+    return 0; 
 }
+
+
+
+
+#if defined(NUMWORKS)
+
+#include "extapp_api.h"
+
+int extapp_main()
+{
+    return main();
+}
+
+#endif
