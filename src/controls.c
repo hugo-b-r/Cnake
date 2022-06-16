@@ -11,6 +11,7 @@ file for controls functions
 #include <stdint.h>
 #if defined(NUMWORKS)
     #include "extapp_api.h"
+    #include "peripherals.h"
 #endif
 
 #include "init.h"
@@ -20,36 +21,15 @@ file for controls functions
 #if defined(NUMWORKS)
 
     void getEvent(int *command)
-    {
-        int key = extapp_getKey(true, NULL);
-        switch (key) {
-            case KEY_CTRL_UP:
-                *command = UP;
-                break;
-
-            case KEY_CTRL_LEFT:
-                *command = LEFT;
-                break;
-
-            case KEY_CTRL_DOWN:
-                *command = DOWN;
-                break;
-
-            case KEY_CTRL_RIGHT:
-                *command = RIGHT;
-                break;
-            
-            case KEY_CTRL_OK:
-                *command = PAUSE;
-                break;
-            
-            case KEY_CTRL_EXIT:
-                *command = ENDGAME;
-                break;
-            
-            case KEY_CTRL_MENU:
-                *command = QUIT;
-        }
+    {   
+        if (extapp_isKeydown(KEY_CTRL_UP)) *command = UP;
+        if (extapp_isKeydown(KEY_CTRL_LEFT)) *command = LEFT;
+        if (extapp_isKeydown(KEY_CTRL_DOWN)) *command = DOWN;
+        if (extapp_isKeydown(KEY_CTRL_RIGHT)) *command = RIGHT;
+        if (extapp_isKeydown(KEY_CTRL_OK)) *command = PAUSE;
+        if (extapp_isKeydown(KEY_CTRL_EXIT)) *command = ENDGAME;
+        if (extapp_isKeydown(KEY_CTRL_MENU)) *command = QUIT;
+        
     }
 
 
@@ -85,6 +65,7 @@ file for controls functions
 
     int numworksFiguresInput()
     {
+        waitForKeyPressed();
         int key = extapp_getKey(true, NULL);
         switch (key) {
             case KEY_CHAR_0:

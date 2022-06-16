@@ -10,15 +10,6 @@ function for init and deinit
 #include <stdlib.h>
 #include <time.h>
 
-#if defined(CLI)
-    #define PLAYGROUND_X 35
-    #define PLAYGROUND_Y 20
-#elif defined(NUMWORKS)
-    #define PLAYGROUND_X 32 
-    #define PLAYGROUND_Y 21
-#endif
-#define LENGTH 5
-
 
 
 

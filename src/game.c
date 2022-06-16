@@ -17,6 +17,10 @@ structure of a game and game related functions
 #include "controls.h"
 #include "menu.h"
 
+#if defined(NUMWORKS)
+    #include "extapp_api.h"
+#endif
+
 
 
 
@@ -68,8 +72,8 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 
      
     //speed set up
-    int last_clock = clock();
-    int move_time = 100 - (*level * 10);
+    int last_clock = TIME;
+    int move_time = DEFAULT_SPEED - (*level * DEFAULT_MOVE_TIME);
 
     srand(time(0));
     //fruit pos
@@ -84,7 +88,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
         getEvent(&command);
         translateControl(&orientation, &command);
 
-        if (last_clock + move_time <= clock()) {
+        if (last_clock + move_time <= TIME) {
             
             newPos(&head_position, &positions, orientation, length, &command, playground_width, playground_height);
             
@@ -96,10 +100,10 @@ void game(int *level, int playground_width, int playground_height, int *game_con
                  
                 incrLength(&positions, &length, 1, head_position);
                 *level += 1;
-                move_time -= 10;
+                move_time -= DEFAULT_MOVE_TIME;
             }
 
-            last_clock = clock();
+            last_clock = TIME;
         }
     }
     printf("\n");

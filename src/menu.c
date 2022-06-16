@@ -22,16 +22,21 @@ file for controls functions
 
     void reDraw(int playground_width, int playground_height, int length, int positions[2][100], int fruit_x, int fruit_y, int *level) {
 
-        extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
-        extapp_pushRectUniform(0, 228, 320, 12, 0x0000);
-        
-        for (int i = 0; i < 100; i++) {
-            extapp_pushRectUniform(positions[0][i]*10, 240-(positions[0][i]*10), 10, 10, 0x0F00);
+        extapp_waitForVBlank();
+        extapp_pushRectUniform(0, 18, 320, 200, 0xFFFF);
+        extapp_pushRectUniform(0, 218, 320, 22, 0x0000);
+        extapp_drawTextLarge("Points:", 0, 222, 0xFFFF, 0x0000, false);
+
+        extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0xF000);
+
+        for (int i = 0; i < 2; i++) {
+            extapp_pushRectUniform(positions[0][i]*10, 208 - (positions[1][i]*10), 10, 10, 0x0F00);
+        }
+        extapp_waitForVBlank();
+        for (int i = 2; i < length; i++) {
+            extapp_pushRectUniform(positions[0][i]*10, 208 - (positions[1][i]*10), 10, 10, 0x0F00);
         }
 
-        extapp_pushRectUniform(fruit_x, 24 - fruit_y, 10, 10, 0xF000);
-
-        extapp_drawTextSmall("Points:", 0, 222, 0xFFFF, 0x0000, false);
     }
 
 
@@ -39,9 +44,9 @@ file for controls functions
 
     void welcomeMessage() {
         extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
-        extapp_drawTextLarge("Welcome in Cnake !", 0, 20 * 1, 0x00F0, 0xFFFF, false);
+        /*extapp_drawTextLarge("Welcome in Cnake !", 0, 20 * 1, 0x00F0, 0xFFFF, false);
         extapp_waitForVBlank();
-        extapp_msleep(1000);
+        extapp_msleep(1000);*/
     }
 
 
@@ -52,13 +57,18 @@ file for controls functions
         extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
         int choice = 10;
         
-        extapp_drawTextSmall("(0) Start a new game", 0, 20 * 1, 0x0F00, 0xFFFF, false);
-        extapp_drawTextSmall("(1) Preferences", 0, 20 * 2, 0x0F00, 0xFFFF, false);
-        extapp_drawTextSmall("(2) Quit", 0, 20 * 3, 0x0F00, 0xFFFF, false);
+        extapp_drawTextSmall("(0) Start a new game", 0, 20 * 1, 0x0000, 0xFFFF, false);
+        extapp_drawTextSmall("(1) Preferences", 0, 20 * 2, 0x0000, 0xFFFF, false);
+        extapp_drawTextSmall("(2) Quit", 0, 20 * 3, 0x0000, 0xFFFF, false);
 
         extapp_waitForVBlank();
 
         waitForKeyPressed();
+        if (extapp_isKeydown(KEY_CTRL_QUIT)) {
+            choice = 2;
+            return choice;
+        }
+
         choice = numworksFiguresInput();
 
         return choice;  
@@ -71,9 +81,9 @@ file for controls functions
         extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
         int choice = 10;
         
-        extapp_drawTextSmall("(0) Level", 0, 20 * 1, 0x0F00, 0xFFFF, false);
-        extapp_drawTextSmall("(1) Return to main menu", 0, 20 * 2, 0x0F00, 0xFFFF, false);
-        extapp_drawTextSmall("(2) Quit", 0, 20 * 3, 0x0F00, 0xFFFF, false);
+        extapp_drawTextSmall("(0) Level", 0, 20 * 1, 0x0000, 0xFFFF, false);
+        extapp_drawTextSmall("(1) Return to main menu", 0, 20 * 2, 0x0000, 0xFFFF, false);
+        extapp_drawTextSmall("(2) Quit", 0, 20 * 3, 0x0000, 0xFFFF, false);
 
         extapp_waitForVBlank();
         
@@ -95,7 +105,7 @@ file for controls functions
 
         int level = 0;
 
-        extapp_drawTextSmall("Enter level:", 0, 20 * 1, 0x0F00, 0xFFFF, false);
+        extapp_drawTextSmall("Enter level:", 0, 20 * 1, 0x0000, 0xFFFF, false);
 
         extapp_waitForVBlank();
         //find a way to draw numbers
