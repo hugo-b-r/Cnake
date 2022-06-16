@@ -20,22 +20,9 @@ file for controls functions
 
     #include <stdint.h>
 
-    void reDraw(int playground_width, int playground_height, int length, int positions[2][100], int fruit_x, int fruit_y, int *level) {
-
-        extapp_waitForVBlank();
-        extapp_pushRectUniform(0, 18, 320, 200, 0xFFFF);
-        extapp_pushRectUniform(0, 218, 320, 22, 0x0000);
-        extapp_drawTextLarge("Points:", 0, 222, 0xFFFF, 0x0000, false);
-
-        extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0xF000);
-
-        for (int i = 0; i < 2; i++) {
-            extapp_pushRectUniform(positions[0][i]*10, 208 - (positions[1][i]*10), 10, 10, 0x0F00);
-        }
-        extapp_waitForVBlank();
-        for (int i = 2; i < length; i++) {
-            extapp_pushRectUniform(positions[0][i]*10, 208 - (positions[1][i]*10), 10, 10, 0x0F00);
-        }
+    void reDraw(int playground_width, int playground_height, int length, int (*positions)[2][100], int fruit_x, int fruit_y, int *level) {
+        
+        extapp_pushRectUniform(70, 218, 100, 22, 0x0000);
 
     }
 

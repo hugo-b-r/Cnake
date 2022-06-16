@@ -78,13 +78,27 @@ void game(int *level, int playground_width, int playground_height, int *game_con
     srand(time(0));
     //fruit pos
     int fruit_x = rand() % (playground_width);
-    int fruit_y = rand() % (playground_height);  
+    int fruit_y = rand() % (playground_height);
 
+    #if defined(NUMWORKS)
+
+    extapp_waitForVBlank();
+    extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
+
+    for (int i = 0; i < length; i++) {
+        extapp_pushRectUniform(positions[0][i]*10, 208 - (positions[1][i]*10), 10, 10, 0x0F00);
+    }
+    extapp_waitForVBlank();
+
+    extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0xF000);
+    extapp_pushRectUniform(0, 218, 320, 22, 0x0000);
+    extapp_drawTextLarge("Points:", 0, 222, 0xFFFF, 0x0000, false);
+    extapp_waitForVBlank();
+
+    #endif
 
     while (command != ENDGAME && command != QUIT) {
         
-        reDraw(playground_width, playground_height, length, positions, fruit_x, fruit_y, level);
-
         getEvent(&command);
         translateControl(&orientation, &command);
 
@@ -95,18 +109,24 @@ void game(int *level, int playground_width, int playground_height, int *game_con
             //if on fruit
             if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {
                 
+                extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0x0F00); //snake is on the fruit in this case
                 fruit_x = rand() % (playground_width);
                 fruit_y = rand() % (playground_height);
-                 
+                extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0xF000);
+
                 incrLength(&positions, &length, 1, head_position);
                 *level += 1;
                 move_time -= DEFAULT_MOVE_TIME;
             }
 
             last_clock = TIME;
+
+            reDraw(playground_width, playground_height, length, positions, fruit_x, fruit_y, level);
         }
     }
     printf("\n");
+
+    *level = 0;
 
     if (command == QUIT) *game_continue = 0;
 }
