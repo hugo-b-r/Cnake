@@ -6,8 +6,16 @@ file for controls functions
 
 */
 
-#ifndef _MENU_NUMWORKS_H_
-#define _MENU_NUMWORKS_H_
+#ifndef _MENU_H_
+#define _MENU_H_
+
+void removeFruit(int fruit_x, int fruit_y) ;
+
+void addNewFruit(int fruit_x, int fruit_y);
+
+void removeTail(int *head_position, int length, int (*positions)[2][100]);
+
+void addNewHead(int head_position, int (*positions)[2][100]);
 
 void reDraw(int playground_width, int playground_height, int length, int positions[2][100], int fruit_x, int fruit_y, int *level);
 

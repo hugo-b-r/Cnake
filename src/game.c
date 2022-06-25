@@ -24,7 +24,6 @@ structure of a game and game related functions
 
 
 
-
 void pauseLoop(int *command)
 {
     while (*command == PAUSE) {
@@ -80,6 +79,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
     int fruit_x = rand() % (playground_width);
     int fruit_y = rand() % (playground_height);
 
+
     #if defined(NUMWORKS)
 
     extapp_waitForVBlank();
@@ -97,6 +97,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 
     #endif
 
+
     while (command != ENDGAME && command != QUIT) {
         
         getEvent(&command);
@@ -104,35 +105,17 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 
         if (last_clock + move_time <= TIME) {
 
-            #if defined(NUMWORKS)
-
-            extapp_waitForVBlank();
-
-            if (*head_position == (length - 1)) {
-                extapp_pushRectUniform((*positions)[0][0]*10, 208 - ((*positions)[1][0]*10), 10, 10, 0xFFFF);
-            } 
-            else {
-                extapp_pushRectUniform((*positions)[0][*head_position + 1]*10, 208 - ((*positions)[1][*head_position + 1]*10), 10, 10, 0xFFFF);
-            } 
-
-            #endif
-            
+            removeTail(&head_position, length, &positions);
             newPos(&head_position, &positions, orientation, length, &command, playground_width, playground_height);
-
-            #if defined(WIN32)
-
-            extapp_pushRectUniform(positions[0][head_position]*10, 208 - (positions[1][head_position]*10), 10, 10, 0x0F00);
-
-            #endif
+            addNewHead(head_position, &positions);
             
             //if on fruit
             if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {
-                
-                extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0x0F00); //snake is on the fruit in this case
+                removeFruit(fruit_x, fruit_y);
                 fruit_x = rand() % (playground_width);
                 fruit_y = rand() % (playground_height);
-                extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0xF000);
-
+                addNewFruit(fruit_x, fruit_y);
+                
                 incrLength(&positions, &length, 1, head_position);
                 *level += 1;
                 move_time -= DEFAULT_MOVE_TIME;

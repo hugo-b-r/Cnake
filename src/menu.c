@@ -7,10 +7,6 @@ file for controls functions
 */
 
 
-#if defined(NUMWORKS)
-    #include "extapp_api.h"
-    #include "peripherals.h"
-#endif
 
 #include "controls.h"
 
@@ -19,6 +15,48 @@ file for controls functions
 #if defined(NUMWORKS)
 
     #include <stdint.h>
+    
+    #include "extapp_api.h"
+    #include "peripherals.h"
+
+
+
+    void removeFruit(int fruit_x, int fruit_y) {
+        extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0x0F00);
+    }
+
+
+
+
+    void addNewFruit(int fruit_x, int fruit_y) {
+        extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0xF000);
+    }
+
+
+
+
+    void removeTail(int *head_position, int length, int (*positions)[2][100]) {
+
+        extapp_waitForVBlank();
+        if (*head_position == (length - 1)) {
+            extapp_pushRectUniform((*positions)[0][0]*10, 208 - ((*positions)[1][0]*10), 10, 10, 0xFFFF);
+        } 
+        else {
+            extapp_pushRectUniform((*positions)[0][*head_position + 1]*10, 208 - ((*positions)[1][*head_position + 1]*10), 10, 10, 0xFFFF);
+        }
+    }
+
+
+
+
+    void addNewHead(int head_position, int (*positions)[2][100]) {
+
+        extapp_pushRectUniform(positions[0][head_position]*10, 208 - (positions[1][head_position]*10), 10, 10, 0x0F00);
+    
+    }
+
+
+
 
     void reDraw(int playground_width, int playground_height, int length, int (*positions)[2][100], int fruit_x, int fruit_y, int *level) {
         
@@ -121,6 +159,60 @@ file for controls functions
 
     #include <stdio.h>
     #include <stdlib.h>
+    #include <windows.h>
+
+
+
+    void removeFruit(int fruit_x, int fruit_y) {
+        COORD coord;
+        coord.X = fruit_x + 1;
+        coord.Y = fruit_y + 1;
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+        printf("\bo");
+    }
+
+
+
+
+    void addNewFruit(int fruit_x, int fruit_y) {
+        COORD coord;
+        coord.X = fruit_x + 1;
+        coord.Y = fruit_y + 1;
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+        printf("\bz");
+    }
+
+
+
+
+    void removeTail(int *head_position, int length, int (*positions)[2][100]) {
+        
+        COORD coord;
+
+        if (*head_position == (length - 1)) {
+            
+            coord.X = (*positions)[0][0] + 1;
+            coord.Y = (*positions)[1][0] + 1;
+        } 
+        else {
+            coord.X = (*positions)[0][*head_position + 1] + 1;
+            coord.Y = (*positions)[1][*head_position + 1] + 1;
+        }
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+        printf("\b ");
+    }
+
+
+
+
+    void addNewHead(int head_position, int (*positions)[2][100]) {
+
+        COORD coord;
+        coord.X = (*positions)[0][head_position];
+        coord.Y = (*positions)[1][head_position];
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+        printf("\bo");
+    }
 
 
 
