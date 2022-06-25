@@ -103,8 +103,27 @@ void game(int *level, int playground_width, int playground_height, int *game_con
         translateControl(&orientation, &command);
 
         if (last_clock + move_time <= TIME) {
+
+            #if defined(NUMWORKS)
+
+            extapp_waitForVBlank();
+
+            if (*head_position == (length - 1)) {
+                extapp_pushRectUniform((*positions)[0][0]*10, 208 - ((*positions)[1][0]*10), 10, 10, 0xFFFF);
+            } 
+            else {
+                extapp_pushRectUniform((*positions)[0][*head_position + 1]*10, 208 - ((*positions)[1][*head_position + 1]*10), 10, 10, 0xFFFF);
+            } 
+
+            #endif
             
             newPos(&head_position, &positions, orientation, length, &command, playground_width, playground_height);
+
+            #if defined(WIN32)
+
+            extapp_pushRectUniform(positions[0][head_position]*10, 208 - (positions[1][head_position]*10), 10, 10, 0x0F00);
+
+            #endif
             
             //if on fruit
             if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {

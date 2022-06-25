@@ -83,21 +83,6 @@ void newPos(int *head_position, int (*positions)[2][100], int orientation, int l
         *command = ENDGAME;
         return;
     } else {
-        
-        #if defined(NUMWORKS)
-
-        extapp_waitForVBlank();
-
-        if (*head_position == (length - 1)) {
-            extapp_pushRectUniform((*positions)[0][0]*10, 208 - ((*positions)[1][0]*10), 10, 10, 0xFFFF);
-        } 
-        else {
-            extapp_pushRectUniform((*positions)[0][*head_position + 1]*10, 208 - ((*positions)[1][*head_position + 1]*10), 10, 10, 0xFFFF);
-        } 
-
-        extapp_pushRectUniform(x*10, 208 - (y*10), 10, 10, 0x0F00);
-
-        #endif
 
         newPosStorage(head_position, length, positions, x, y);
 
