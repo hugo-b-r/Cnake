@@ -79,23 +79,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
     int fruit_x = rand() % (playground_width);
     int fruit_y = rand() % (playground_height);
 
-
-    #if defined(NUMWORKS)
-
-    extapp_waitForVBlank();
-    extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
-
-    for (int i = 0; i < length; i++) {
-        extapp_pushRectUniform(positions[0][i]*10, 208 - (positions[1][i]*10), 10, 10, 0x0F00);
-    }
-    extapp_waitForVBlank();
-
-    extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0xF000);
-    extapp_pushRectUniform(0, 218, 320, 22, 0x0000);
-    extapp_drawTextLarge("Points:", 0, 222, 0xFFFF, 0x0000, false);
-    extapp_waitForVBlank();
-
-    #endif
+    firstImage(playground_width, playground_height, length, positions, fruit_x, fruit_y, level);
 
 
     while (command != ENDGAME && command != QUIT) {
@@ -105,16 +89,16 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 
         if (last_clock + move_time <= TIME) {
 
-            removeTail(&head_position, length, &positions);
+            removeTail(&head_position, length, &positions, playground_height);
             newPos(&head_position, &positions, orientation, length, &command, playground_width, playground_height);
-            addNewHead(head_position, &positions);
+            addNewHead(head_position, &positions, playground_height);
             
             //if on fruit
             if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {
-                removeFruit(fruit_x, fruit_y);
+                removeFruit(fruit_x, fruit_y, playground_height);
                 fruit_x = rand() % (playground_width);
                 fruit_y = rand() % (playground_height);
-                addNewFruit(fruit_x, fruit_y);
+                addNewFruit(fruit_x, fruit_y, playground_height);
                 
                 incrLength(&positions, &length, 1, head_position);
                 *level += 1;

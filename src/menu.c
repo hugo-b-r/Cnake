@@ -20,22 +20,38 @@ file for controls functions
     #include "peripherals.h"
 
 
+    void firstImage(int playground_width, int playground_height, int length, int positions[2][100], int fruit_x, int fruit_y, int *level) {
+        extapp_waitForVBlank();
+        extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
 
-    void removeFruit(int fruit_x, int fruit_y) {
+        for (int i = 0; i < length; i++) {
+            extapp_pushRectUniform(positions[0][i]*10, 208 - (positions[1][i]*10), 10, 10, 0x0F00);
+        }
+        extapp_waitForVBlank();
+
+        extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0xF000);
+        extapp_pushRectUniform(0, 218, 320, 22, 0x0000);
+        extapp_drawTextLarge("Points:", 0, 222, 0xFFFF, 0x0000, false);
+        extapp_waitForVBlank();
+    }
+
+
+
+    void removeFruit(int fruit_x, int fruit_y, int playground_height) {
         extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0x0F00);
     }
 
 
 
 
-    void addNewFruit(int fruit_x, int fruit_y) {
+    void addNewFruit(int fruit_x, int fruit_y, int playground_height) {
         extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0xF000);
     }
 
 
 
 
-    void removeTail(int *head_position, int length, int (*positions)[2][100]) {
+    void removeTail(int *head_position, int length, int (*positions)[2][100], int playground_height) {
 
         extapp_waitForVBlank();
         if (*head_position == (length - 1)) {
@@ -49,7 +65,7 @@ file for controls functions
 
 
 
-    void addNewHead(int head_position, int (*positions)[2][100]) {
+    void addNewHead(int head_position, int (*positions)[2][100], int playground_height) {
 
         extapp_pushRectUniform(positions[0][head_position]*10, 208 - (positions[1][head_position]*10), 10, 10, 0x0F00);
     
@@ -163,73 +179,8 @@ file for controls functions
 
 
 
-    void removeFruit(int fruit_x, int fruit_y) {
-        COORD coord;
-        coord.X = fruit_x + 1;
-        coord.Y = fruit_y + 1;
-        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-        printf("\bo");
-    }
-
-
-
-
-    void addNewFruit(int fruit_x, int fruit_y) {
-        COORD coord;
-        coord.X = fruit_x + 1;
-        coord.Y = fruit_y + 1;
-        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-        printf("\bz");
-    }
-
-
-
-
-    void removeTail(int *head_position, int length, int (*positions)[2][100]) {
+    void firstImage(int playground_width, int playground_height, int length, int positions[2][100], int fruit_x, int fruit_y, int *level) {
         
-        COORD coord;
-
-        if (*head_position == (length - 1)) {
-            
-            coord.X = (*positions)[0][0] + 1;
-            coord.Y = (*positions)[1][0] + 1;
-        } 
-        else {
-            coord.X = (*positions)[0][*head_position + 1] + 1;
-            coord.Y = (*positions)[1][*head_position + 1] + 1;
-        }
-        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-        printf("\b ");
-    }
-
-
-
-
-    void addNewHead(int head_position, int (*positions)[2][100]) {
-
-        COORD coord;
-        coord.X = (*positions)[0][head_position];
-        coord.Y = (*positions)[1][head_position];
-        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-        printf("\bo");
-    }
-
-
-
-
-    void flushBuffer() {
-        int c = 0;
-        while (c != '\n' && c != EOF)
-        {
-            c = getchar();
-        }
-    }
-
-
-
-
-    void reDraw(int playground_width, int playground_height, int length, int positions[2][100], int fruit_x, int fruit_y, int *level) {
-
         system("cls");
         
         for (int i = 0; i <= playground_width+1; i++) {
@@ -245,7 +196,6 @@ file for controls functions
                         printf("o");
                         goto hell;
                     }
-                    // could be better to check only one time instead of two if on or not
                 }
                 if (j == fruit_x && i == fruit_y) {
                     printf("z");
@@ -263,6 +213,83 @@ file for controls functions
         printf("\n");
 
         printf("\npoints: %d\n", *level);
+    }
+
+
+
+    void removeFruit(int fruit_x, int fruit_y, int playground_height) {
+        COORD coord;
+        coord.X = fruit_x + 1;
+        coord.Y = playground_height - fruit_y;
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+        printf("o");
+    }
+
+
+
+
+    void addNewFruit(int fruit_x, int fruit_y, int playground_height) {
+        COORD coord;
+        coord.X = fruit_x + 1;
+        coord.Y = playground_height - fruit_y;
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+        printf("z");
+    }
+
+
+
+
+    void removeTail(int *head_position, int length, int (*positions)[2][100], int playground_height) {
+        
+        COORD coord;
+
+        if (*head_position == (length - 1)) {
+            
+            coord.X = (*positions)[0][0] + 1;
+            coord.Y = playground_height - (*positions)[1][0];
+        } 
+        else {
+            coord.X = (*positions)[0][*head_position + 1] + 1;
+            coord.Y = playground_height - (*positions)[1][*head_position + 1];
+        }
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+        printf(" ");
+    }
+
+
+
+
+    void addNewHead(int head_position, int (*positions)[2][100], int playground_height) {
+
+        COORD coord;
+        coord.X = (*positions)[0][head_position] + 1;
+        coord.Y = playground_height - (*positions)[1][head_position];
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+        printf("o");
+    }
+
+
+
+
+    void flushBuffer() {
+        int c = 0;
+        while (c != '\n' && c != EOF)
+        {
+            c = getchar();
+        }
+    }
+
+
+
+
+    void reDraw(int playground_width, int playground_height, int length, int positions[2][100], int fruit_x, int fruit_y, int *level) {
+        COORD coord;
+        coord.X = 8;
+        coord.Y = playground_height + 3;
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+        //do a init image like for NUMWORkS, maybe in a method
+        // go to height + 2# + 2; x = length("level = ");case <10 blabla, case <100 blabla...
+        printf("%d", *level);
     }
 
 
