@@ -19,9 +19,12 @@ make clean
 make
 ```
 
-### TO-DO
+### Roadmap
 
-- [ ] log system
 - [x] menu
 - [x] choice of difficulty
+- [ ] create more general functions in menu.c
+- [ ] get level input and output on numworks calculator
+- [ ] add linux support
+- [ ] log system
 - [ ] maybe network games (multiplayer)
