@@ -26,9 +26,7 @@ structure of a game and game related functions
 
 void pauseLoop(int *command)
 {
-    while (*command == PAUSE) {
-        getEvent(command);
-    }
+    while (*command == PAUSE) getEvent(command);
 }
 
 
@@ -88,8 +86,20 @@ void game(int *level, int playground_width, int playground_height, int *game_con
         translateControl(&orientation, &command);
 
         if (last_clock + move_time <= TIME) {
-
-            removeTail(&head_position, length, &positions, playground_height);
+            if (head_position == 0) {
+                if (positions[0][length - 1] == fruit_x && positions[1][length - 1] == fruit_y) {
+                    addNewFruit(fruit_x, fruit_y, playground_height);
+                } else {
+                   removeTail(&head_position, length, &positions, playground_height);
+                }
+            } else {
+                if (positions[0][head_position - 1] == fruit_x && positions[1][head_position - 1] == fruit_y) {
+                    addNewFruit(fruit_x, fruit_y, playground_height);
+                } else {
+                    removeTail(&head_position, length, &positions, playground_height);
+                }
+            }
+ 
             newPos(&head_position, &positions, orientation, length, &command, playground_width, playground_height);
             addNewHead(head_position, &positions, playground_height);
             
