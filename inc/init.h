@@ -15,7 +15,7 @@ function for init and deinit
     #define PLAYGROUND_Y 20
     #define DEFAULT_SPEED 100
     #define TIME clock()
-    #define DEFAULT_MOVE_TIME 10
+    #define DEFAULT_MOVE_TIME 5
 #elif defined(NUMWORKS)
     #define PLAYGROUND_X 32 
     #define PLAYGROUND_Y 19
