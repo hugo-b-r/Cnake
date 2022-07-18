@@ -19,6 +19,10 @@ make clean
 make
 ```
 
+### Gameplay
+
+<img src="assets/gameplay.gif" alt="gameplay" width="282"/> 
+
 ### Roadmap
 
 - [x] menu
