@@ -27,6 +27,8 @@ make
 
 - [x] menu
 - [x] choice of difficulty
+- [ ] fix to big when starting and score > height
+- [ ] fix able to go on top border
 - [ ] create more general functions in menu.c
 - [ ] get level input and output on numworks calculator
 - [ ] add linux support
