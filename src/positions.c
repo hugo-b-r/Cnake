@@ -10,6 +10,7 @@ functions for positions matrix manipulations
 #include <stdlib.h>
 #include <time.h>
 
+#include "game.h"
 #include "init.h"
 #include "positions.h"
 
@@ -23,14 +24,8 @@ functions for positions matrix manipulations
 
 
 void newPosStorage(int *head_position, int current_length, int (*positions)[2][100], int x, int y) {
-    
-    if ( *head_position + 1 == current_length) {
-        (*positions)[0][0] = x;
-        (*positions)[1][0] = y;
-    } else {
-        (*positions)[0][*head_position + 1] = x;
-        (*positions)[1][*head_position + 1] = y;
-    }
+    (*positions)[0][tailPosition(*head_position, current_length)] = x;
+    (*positions)[1][tailPosition(*head_position, current_length)] = y;
 }
 
 

@@ -9,6 +9,7 @@ file for controls functions
 
 
 #include "controls.h"
+#include "game.h"
 
 
 
@@ -58,12 +59,8 @@ file for controls functions
     {
 
         extapp_waitForVBlank();
-        if (*head_position == (current_length - 1)) {
-            extapp_pushRectUniform((*positions)[0][0]*10, 208 - ((*positions)[1][0]*10), 10, 10, 0xFFFF);
-        } 
-        else {
-            extapp_pushRectUniform((*positions)[0][*head_position + 1]*10, 208 - ((*positions)[1][*head_position + 1]*10), 10, 10, 0xFFFF);
-        }
+        extapp_pushRectUniform((*positions)[0][tailPosition(*head_position, current_length)]*10, 208 - ((*positions)[1][tailPosition(*head_position, current_length)]*10), 10, 10, 0xFFFF);
+
     }
 
 
@@ -256,16 +253,8 @@ file for controls functions
     {
         
         COORD coord;
-
-        if (*head_position == (current_length - 1)) {
-            
-            coord.X = (*positions)[0][0] + 1;
-            coord.Y = playground_height - (*positions)[1][0];
-        } 
-        else {
-            coord.X = (*positions)[0][*head_position + 1] + 1;
-            coord.Y = playground_height - (*positions)[1][*head_position + 1];
-        }
+        coord.X = (*positions)[0][tailPosition(*head_position, current_length)] + 1;
+        coord.Y = playground_height - (*positions)[1][tailPosition(*head_position, current_length)];
         SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
         printf(" ");
     }

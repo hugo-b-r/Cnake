@@ -99,18 +99,10 @@ void game(int *level, int playground_width, int playground_height, int *game_con
         translateControl(&orientation, &command);
 
         if (last_clock + move_time <= TIME) {
-            if (head_position == current_length-1) {
-                if (fruit_x == positions[0][0] && fruit_y == positions[1][0]) {
-                    addNewFruit(fruit_x, fruit_y, playground_height);
-                } else {
-                    removeTail(&head_position, current_length, &positions, playground_height);
-                }
+            if (fruit_x == positions[0][0] && fruit_y == positions[1][0]) {
+                addNewFruit(fruit_x, fruit_y, playground_height);
             } else {
-                if (fruit_x == positions[0][head_position+1] && fruit_y == positions[1][head_position+1]) {
-                    addNewFruit(fruit_x, fruit_y, playground_height);
-                } else {
-                    removeTail(&head_position, current_length, &positions, playground_height);
-                }
+                removeTail(&head_position, current_length, &positions, playground_height);
             }
             removeTail(&head_position, current_length, &positions, playground_height);
             addNewFruit(fruit_x, fruit_y, playground_height);
