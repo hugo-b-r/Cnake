@@ -20,11 +20,12 @@ file for controls functions
     #include "peripherals.h"
 
 
-    void firstImage(int playground_width, int playground_height, int length, int positions[2][100], int fruit_x, int fruit_y, int *level) {
+    void firstImage(int playground_width, int playground_height, int current_length, int positions[2][100], int fruit_x, int fruit_y, int *level)
+    {
         extapp_waitForVBlank();
         extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
 
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < current_length; i++) {
             extapp_pushRectUniform(positions[0][i]*10, 208 - (positions[1][i]*10), 10, 10, 0x0F00);
         }
         extapp_waitForVBlank();
@@ -37,24 +38,27 @@ file for controls functions
 
 
 
-    void removeFruit(int fruit_x, int fruit_y, int playground_height) {
+    void removeFruit(int fruit_x, int fruit_y, int playground_height)
+    {
         extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0x0F00);
     }
 
 
 
 
-    void addNewFruit(int fruit_x, int fruit_y, int playground_height) {
+    void addNewFruit(int fruit_x, int fruit_y, int playground_height)
+    {
         extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0xF000);
     }
 
 
 
 
-    void removeTail(int *head_position, int length, int (*positions)[2][100], int playground_height) {
+    void removeTail(int *head_position, int current_length, int (*positions)[2][100], int playground_height)
+    {
 
         extapp_waitForVBlank();
-        if (*head_position == (length - 1)) {
+        if (*head_position == (current_length - 1)) {
             extapp_pushRectUniform((*positions)[0][0]*10, 208 - ((*positions)[1][0]*10), 10, 10, 0xFFFF);
         } 
         else {
@@ -65,7 +69,8 @@ file for controls functions
 
 
 
-    void addNewHead(int head_position, int (*positions)[2][100], int playground_height) {
+    void addNewHead(int head_position, int (*positions)[2][100], int playground_height)
+    {
 
         extapp_pushRectUniform(positions[0][head_position]*10, 208 - (positions[1][head_position]*10), 10, 10, 0x0F00);
     
@@ -74,7 +79,8 @@ file for controls functions
 
 
 
-    void reDraw(int playground_width, int playground_height, int length, int (*positions)[2][100], int fruit_x, int fruit_y, int *level) {
+    void reDraw(int playground_width, int playground_height, int current_length, int (*positions)[2][100], int fruit_x, int fruit_y, int *level)
+    {
         
         extapp_pushRectUniform(70, 218, 100, 22, 0x0000);
 
@@ -83,7 +89,8 @@ file for controls functions
 
 
 
-    void welcomeMessage() {
+    void welcomeMessage()
+    {
         extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
         /*extapp_drawTextLarge("Welcome in Cnake !", 0, 20 * 1, 0x00F0, 0xFFFF, false);
         extapp_waitForVBlank();
@@ -93,7 +100,8 @@ file for controls functions
 
 
 
-    int defaultMenu() {
+    int defaultMenu()
+    {
 
         extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
         int choice = 10;
@@ -118,7 +126,8 @@ file for controls functions
 
 
 
-    int preferencesMenu() {
+    int preferencesMenu()
+    {
         extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
         int choice = 10;
         
@@ -140,7 +149,8 @@ file for controls functions
 
 
 
-    int askLevel() {
+    int askLevel()
+    {
 
         extapp_pushRectUniform(0, 18, 320, 222, 0xFFFF);
 
@@ -179,7 +189,8 @@ file for controls functions
 
 
 
-    void firstImage(int playground_width, int playground_height, int length, int positions[2][100], int fruit_x, int fruit_y, int *level) {
+    void firstImage(int playground_width, int playground_height, int current_length, int positions[2][100], int fruit_x, int fruit_y, int *level)
+    {
         
         system("cls");
         
@@ -191,7 +202,7 @@ file for controls functions
         for (int i = playground_height - 1; i >= 0; i--) {
             printf("#");
             for (int j = 0; j < playground_width; j++) {
-                for (int k = 0; k < length; k++) {
+                for (int k = 0; k < current_length; k++) {
                     if (j == positions[0][k] && i == positions[1][k]) {
                         printf("o");
                         goto hell;
@@ -217,7 +228,8 @@ file for controls functions
 
 
 
-    void removeFruit(int fruit_x, int fruit_y, int playground_height) {
+    void removeFruit(int fruit_x, int fruit_y, int playground_height) 
+    {
         COORD coord;
         coord.X = fruit_x + 1;
         coord.Y = playground_height - fruit_y;
@@ -228,7 +240,8 @@ file for controls functions
 
 
 
-    void addNewFruit(int fruit_x, int fruit_y, int playground_height) {
+    void addNewFruit(int fruit_x, int fruit_y, int playground_height)
+    {
         COORD coord;
         coord.X = fruit_x + 1;
         coord.Y = playground_height - fruit_y;
@@ -239,11 +252,12 @@ file for controls functions
 
 
 
-    void removeTail(int *head_position, int length, int (*positions)[2][100], int playground_height) {
+    void removeTail(int *head_position, int current_length, int (*positions)[2][100], int playground_height) 
+    {
         
         COORD coord;
 
-        if (*head_position == (length - 1)) {
+        if (*head_position == (current_length - 1)) {
             
             coord.X = (*positions)[0][0] + 1;
             coord.Y = playground_height - (*positions)[1][0];
@@ -259,7 +273,8 @@ file for controls functions
 
 
 
-    void addNewHead(int head_position, int (*positions)[2][100], int playground_height) {
+    void addNewHead(int head_position, int (*positions)[2][100], int playground_height)
+    {
 
         COORD coord;
         coord.X = (*positions)[0][head_position] + 1;
@@ -271,7 +286,8 @@ file for controls functions
 
 
 
-    void flushBuffer() {
+    void flushBuffer()
+    {
         int c = 0;
         while (c != '\n' && c != EOF)
         {
@@ -282,20 +298,22 @@ file for controls functions
 
 
 
-    void reDraw(int playground_width, int playground_height, int length, int positions[2][100], int fruit_x, int fruit_y, int *level) {
+    void reDraw(int playground_width, int playground_height, int current_length, int positions[2][100], int fruit_x, int fruit_y, int *level)
+    {
         COORD coord;
         coord.X = 8;
         coord.Y = playground_height + 3;
         SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
         //do a init image like for NUMWORkS, maybe in a method
-        // go to height + 2# + 2; x = length("level = ");case <10 blabla, case <100 blabla...
+        // go to height + 2# + 2; x = current_length("level = ");case <10 blabla, case <100 blabla...
         printf("%d", *level);
     }
 
 
 
 
-    void welcomeMessage() {
+    void welcomeMessage()
+    {
         printf("\n\n");
         printf("\x1B[36mWelcome in Cnake !!\033[0m\t\t");
         printf("\n\n");
@@ -304,7 +322,8 @@ file for controls functions
 
 
 
-    int defaultMenu() {
+    int defaultMenu()
+    { 
         
         int choice = 0;
         
@@ -322,7 +341,8 @@ file for controls functions
 
 
 
-    int preferencesMenu() {
+    int preferencesMenu()
+    {
         int choice = 0;
         
         printf("\n");
@@ -342,7 +362,8 @@ file for controls functions
 
 
 
-    int askLevel() {
+    int askLevel()
+    {
         int level = 0;
 
         printf("\nWhat level do you want to start with ? \n");
@@ -357,7 +378,8 @@ file for controls functions
 
 
 
-    int askPlaygroundWidth() {
+    int askPlaygroundWidth()
+    {
         int playground_width = 0;
 
         printf("\nWhat width do you want to play with ? \n");
@@ -372,7 +394,8 @@ file for controls functions
 
 
 
-    int askPlaygroundHeight() {
+    int askPlaygroundHeight()
+    {
         int playground_height = 0;
 
         printf("\nWhat height do you want to play with ? \n");
