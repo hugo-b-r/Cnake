@@ -72,7 +72,7 @@ void newPos(int *head_position, int (*positions)[2][100], int orientation, int c
     }
 
     // if border
-    if ( (x > (playground_width-1)) || (y > (playground_height)) || (x < 0) || (y < 0) ) {
+    if ( (x > (playground_width-1)) || (y > (playground_height-1)) || (x < 0) || (y < 0) ) {
         newPosStorage(head_position, current_length, positions, x, y);
         printf("\nYou died crushed against the wall.\n");
         *command = ENDGAME;
