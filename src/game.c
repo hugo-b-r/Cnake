@@ -22,6 +22,16 @@ structure of a game and game related functions
 #endif
 
 
+int tailPosition(int head_position, int current_length)
+{
+    if (head_position == current_length - 1) {
+        return 0;
+    } else {
+        return head_position + 1;
+    }
+}
+
+
 
 
 void pauseLoop(int *command)
