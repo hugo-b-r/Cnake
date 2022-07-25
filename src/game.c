@@ -82,8 +82,11 @@ void game(int *level, int playground_width, int playground_height, int *game_con
     //speed set up
     int last_clock = TIME;
     int move_time;
-    if (*level <= 10) move_time = DEFAULT_SPEED + *level * DEFAULT_MOVE_TIME;
-    else move_time = DEFAULT_SPEED + DEFAULT_MOVE_TIME*10;
+    if (*level <= 10) {
+        move_time = DEFAULT_SPEED + *level * DEFAULT_MOVE_TIME;
+    } else {
+        move_time = DEFAULT_SPEED + DEFAULT_MOVE_TIME*10;
+    }
 
     srand(time(0));
     //fruit pos
