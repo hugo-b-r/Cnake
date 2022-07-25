@@ -33,6 +33,10 @@ function for init and deinit
 #define ENDGAME 362
 #define QUIT 363
 
+#define SNAKE 0
+#define FRUIT 1
+#define NOTHING 2
+
 void quit(int type);
 
 #endif

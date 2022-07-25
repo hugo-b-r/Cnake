@@ -102,27 +102,25 @@ void game(int *level, int playground_width, int playground_height, int *game_con
         translateControl(&orientation, &command);
 
         if (last_clock + move_time <= TIME) {
-            if (fruit_x == positions[0][0] && fruit_y == positions[1][0]) {
-                addNewFruit(fruit_x, fruit_y, playground_height);
+            if (fruit_x == positions[0][tailPosition(head_position, current_length)] && fruit_y == positions[1][tailPosition(head_position, current_length)]) {
+                drawPoint(fruit_x, fruit_y, playground_height, FRUIT);
             } else {
-                removeTail(&head_position, current_length, &positions, playground_height);
+                drawPoint(positions[0][tailPosition(head_position, current_length)], positions[1][tailPosition(head_position, current_length)], playground_height, NOTHING);
             }
-            removeTail(&head_position, current_length, &positions, playground_height);
-            addNewFruit(fruit_x, fruit_y, playground_height);
-              
+
             newPos(&head_position, &positions, orientation, current_length, &command, playground_width, playground_height);
-            addNewHead(head_position, &positions, playground_height);
-                 
+            drawPoint(positions[0][head_position], positions[1][head_position], playground_height, SNAKE);
+
             //if on fruit
             if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {
-                removeFruit(fruit_x, fruit_y, playground_height);
+                drawPoint(fruit_x, fruit_y, playground_height, SNAKE);
                 fruit_x = rand() % (playground_width);
                 fruit_y = rand() % (playground_height);
-                addNewFruit(fruit_x, fruit_y, playground_height);
+                drawPoint(fruit_x, fruit_y, playground_height, FRUIT);
                 assumed_length++;
                 incrLength(&positions, &current_length, 1, head_position);
                 *level += 1;
-                
+
                 if (move_time == 5 * DEFAULT_MOVE_TIME) move_time -= DEFAULT_MOVE_TIME;
 
             } else if (assumed_length > current_length) {
