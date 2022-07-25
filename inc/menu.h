@@ -11,6 +11,8 @@ file for controls functions
 
 void firstImage(int playground_width, int playground_height, int length, int positions[2][100], int fruit_x, int fruit_y, int *level);
 
+void drawPoint(int x, int y, int playground_height, int type);
+
 void removeFruit(int fruit_x, int fruit_y, int playground_height) ;
 
 void addNewFruit(int fruit_x, int fruit_y, int playground_height);
