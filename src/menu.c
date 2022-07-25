@@ -10,6 +10,7 @@ file for controls functions
 
 #include "controls.h"
 #include "game.h"
+#include "init.h"
 
 
 
@@ -39,38 +40,22 @@ file for controls functions
 
 
 
-    void removeFruit(int fruit_x, int fruit_y, int playground_height)
+
+    void drawPoint(int x, int y, int playground_height, int type)
     {
-        extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0x0F00);
-    }
+        switch (type) {
+            case SNAKE:
+                extapp_pushRectUniform(x*10, 208- (y*10), 10, 10, 0x0F00);
+                break;
 
+            case FRUIT:
+                extapp_pushRectUniform(x*10, 208- (y*10), 10, 10, 0xF000);
+                break;
 
-
-
-    void addNewFruit(int fruit_x, int fruit_y, int playground_height)
-    {
-        extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0xF000);
-    }
-
-
-
-
-    void removeTail(int *head_position, int current_length, int (*positions)[2][100], int playground_height)
-    {
-
-        extapp_waitForVBlank();
-        extapp_pushRectUniform((*positions)[0][tailPosition(*head_position, current_length)]*10, 208 - ((*positions)[1][tailPosition(*head_position, current_length)]*10), 10, 10, 0xFFFF);
-
-    }
-
-
-
-
-    void addNewHead(int head_position, int (*positions)[2][100], int playground_height)
-    {
-
-        extapp_pushRectUniform(positions[0][head_position]*10, 208 - (positions[1][head_position]*10), 10, 10, 0x0F00);
-    
+            case NOTHING:
+                extapp_pushRectUniform(x*10, 208- (y*10), 10, 10, 0x0000);
+                break;
+        }
     }
 
 
@@ -225,51 +210,26 @@ file for controls functions
 
 
 
-    void removeFruit(int fruit_x, int fruit_y, int playground_height) 
+
+    void drawPoint(int x, int y, int playground_height, int type)
     {
         COORD coord;
-        coord.X = fruit_x + 1;
-        coord.Y = playground_height - fruit_y;
+        coord.X = x + 1;
+        coord.Y = playground_height - y;
         SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-        printf("o");
-    }
+        switch (type) {
+            case SNAKE:
+                printf("o");
+                break;
 
+            case FRUIT:
+                printf("z");
+                break;
 
-
-
-    void addNewFruit(int fruit_x, int fruit_y, int playground_height)
-    {
-        COORD coord;
-        coord.X = fruit_x + 1;
-        coord.Y = playground_height - fruit_y;
-        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-        printf("z");
-    }
-
-
-
-
-    void removeTail(int *head_position, int current_length, int (*positions)[2][100], int playground_height) 
-    {
-        
-        COORD coord;
-        coord.X = (*positions)[0][tailPosition(*head_position, current_length)] + 1;
-        coord.Y = playground_height - (*positions)[1][tailPosition(*head_position, current_length)];
-        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-        printf(" ");
-    }
-
-
-
-
-    void addNewHead(int head_position, int (*positions)[2][100], int playground_height)
-    {
-
-        COORD coord;
-        coord.X = (*positions)[0][head_position] + 1;
-        coord.Y = playground_height - (*positions)[1][head_position];
-        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-        printf("o");
+            case NOTHING:
+                printf(" ");
+                break;
+        }
     }
 
 
