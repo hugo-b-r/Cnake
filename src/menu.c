@@ -20,6 +20,16 @@ file for controls functions
     
     #include "extapp_api.h"
     #include "peripherals.h"
+    
+   
+
+    void deathMsg(char *msg)
+    {
+        extapp_waitForVBlank();
+        extapp_drawTextSmall(msg, 0, 111, 0XFFFF, 0X0000, false);
+    }
+
+
 
 
     void firstImage(int playground_width, int playground_height, int current_length, int positions[2][100], int fruit_x, int fruit_y, int *level)
@@ -168,6 +178,18 @@ file for controls functions
     #include <stdio.h>
     #include <stdlib.h>
     #include <windows.h>
+
+
+
+    void deathMsg(char *msg) 
+    {
+        COORD coord;
+        coord.X = 0;
+        coord.Y = 0;
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+        printf("%s", msg);
+    }    
+    
 
 
 

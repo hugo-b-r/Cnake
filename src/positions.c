@@ -12,6 +12,7 @@ functions for positions matrix manipulations
 
 #include "game.h"
 #include "init.h"
+#include "menu.h"
 #include "positions.h"
 
 #if defined(NUMWORKS)
@@ -66,7 +67,7 @@ void newPos(int *head_position, int (*positions)[2][100], int orientation, int c
     for (int i = 0; i < current_length; i++) {
         if ( (x == (*positions)[0][i]) && (y == (*positions)[1][i]) ) {
             newPosStorage(head_position, current_length, positions, x, y);
-            printf("\nOuch. You died eating yourself.\n");
+            deathMsg("Ouch. You died eating yourself.");
             *command = ENDGAME;
         }
     }
@@ -74,7 +75,7 @@ void newPos(int *head_position, int (*positions)[2][100], int orientation, int c
     // if border
     if ( (x > (playground_width-1)) || (y > (playground_height-1)) || (x < 0) || (y < 0) ) {
         newPosStorage(head_position, current_length, positions, x, y);
-        printf("\nYou died crushed against the wall.\n");
+        deathMsg("You died crushed against the wall.");
         *command = ENDGAME;
         return;
     } else {
