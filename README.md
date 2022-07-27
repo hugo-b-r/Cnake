@@ -32,5 +32,5 @@ make
 - [x] create more general functions in menu.c
 - [ ] get level input and output on numworks calculator
 - [ ] add linux support
-- [ ] make error messages work on windows
+- [x] make error messages work on windows
 - [ ] log system
