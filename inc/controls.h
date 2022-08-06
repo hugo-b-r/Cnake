@@ -15,7 +15,7 @@ void translateControl(int *orientation, int *command);
 
 #if defined(NUMWORKS)
 
-    int numworksFiguresInput();
+    int numworksFiguresInput(int key);
 
 #endif
 
