@@ -11,11 +11,11 @@ file for controls functions
 #include <stdint.h>
 #if defined(NUMWORKS)
     #include "extapp_api.h"
-    #include "peripherals.h"
+    #include "inc/peripherals.h"
 #endif
 
-#include "init.h"
-#include "game.h"
+#include "inc/init.h"
+#include "inc/game.h"
 
 
 #if defined(NUMWORKS)
@@ -63,10 +63,8 @@ file for controls functions
 
 
 
-    int numworksFiguresInput()
+    int numworksFiguresInput(int key)
     {
-        waitForKeyPressed();
-        int key = extapp_getKey(true, NULL);
         switch (key) {
             case KEY_CHAR_0:
                 return 0;
@@ -98,7 +96,9 @@ file for controls functions
             case KEY_CHAR_9:
                 return 9; 
         }
+        return -1; //if no return before
     }
+
 #endif
 
 

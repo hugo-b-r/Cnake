@@ -10,12 +10,12 @@ structure of a game and game related functions
 #include <stdlib.h>
 #include <time.h>
 
-#include "init.h"
-#include "game.h"
-#include "positions.h"
-#include "preferences.h"
-#include "controls.h"
-#include "menu.h"
+#include "inc/init.h"
+#include "inc/game.h"
+#include "inc/positions.h"
+#include "inc/preferences.h"
+#include "inc/controls.h"
+#include "inc/menu.h"
 
 #if defined(NUMWORKS)
     #include "extapp_api.h"

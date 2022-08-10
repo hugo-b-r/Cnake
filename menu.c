@@ -8,9 +8,9 @@ file for controls functions
 
 
 
-#include "controls.h"
-#include "game.h"
-#include "init.h"
+#include "inc/controls.h"
+#include "inc/game.h"
+#include "inc/init.h"
 
 
 
@@ -19,7 +19,7 @@ file for controls functions
     #include <stdint.h>
     
     #include "extapp_api.h"
-    #include "peripherals.h"
+    #include "inc/peripherals.h"
     
    
 
@@ -109,8 +109,8 @@ file for controls functions
             choice = 2;
             return choice;
         }
-
-        choice = numworksFiguresInput();
+        int key = extapp_getKey(true, NULL);
+        choice = numworksFiguresInput(key);
 
         return choice;  
     }
@@ -129,8 +129,9 @@ file for controls functions
 
         extapp_waitForVBlank();
         
-       waitForKeyPressed();
-        choice = numworksFiguresInput();
+        waitForKeyPressed();
+        int key = extapp_getKey(true, NULL);
+        choice = numworksFiguresInput(key);
 
         if (choice == 1) choice = 3;
         if (choice == 2) choice = 4;
@@ -152,12 +153,17 @@ file for controls functions
 
         extapp_waitForVBlank();
         //find a way to draw numbers
-        if (numworksFiguresInput()) {
-            level *= 10;
-            level += numworksFiguresInput();
-        }
+        
         while (1) {
-            switch (extapp_getKey(true, NULL)) {
+            waitForKeyPressed();
+            
+            int key = extapp_getKey(true, NULL);
+            if (numworksFiguresInput(key) != -1) {
+                level *= 10;
+                level += numworksFiguresInput(key);
+                //function to actualise score shown
+            } else {
+                switch (extapp_getKey(true, NULL)) {
                 
                 case KEY_CTRL_DEL:
                     level /= 10;
@@ -168,9 +174,11 @@ file for controls functions
                 
                 case KEY_CTRL_EXE:
                     return level;
+                }
             }
         }
     }
+
 #endif
 
 #if defined(WIN32) || defined(__linux__)
