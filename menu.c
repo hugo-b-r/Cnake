@@ -152,8 +152,12 @@ file for interface functions
         extapp_drawTextSmall("Enter level:", 0, 20 * 1, 0x0000, 0xFFFF, false);
 
         extapp_waitForVBlank();
-        //find a way to draw numbers
         
+        extapp_pushRectUniform(85, 20, 1, 12, 0x0000);
+        
+        int figure_counter = 0;
+        char key_char = '0';
+
         while (1) {
             waitForKeyPressed();
             
@@ -161,7 +165,11 @@ file for interface functions
             if (numworksFiguresInput(key) != -1) {
                 level *= 10;
                 level += numworksFiguresInput(key);
-                //function to actualise score shown
+                key_char = numworksFiguresInput(key);
+                key_char += 48;
+                figure_counter += 1;
+                extapp_drawTextSmall(&key_char, 85 + 10 * figure_counter, 20, 0x0000, 0XFFFF, false);
+
             } else {
                 switch (extapp_getKey(true, NULL)) {
                 
