@@ -1,8 +1,8 @@
 /*
 
-controls.h
+menu.c
 
-file for controls functions
+file for interface functions
 
 */
 
