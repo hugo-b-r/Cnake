@@ -1,4 +1,4 @@
-app_external_src += $(addprefix apps/external/app,\
+app_external_src += $(addprefix $(EXTAPP_PATH)/,\
     main.c \
     menu.c \
     preferences.c \
