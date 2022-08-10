@@ -1,3 +1,5 @@
+#include "inc/init.h"
+
 #if defined(NUMWORKS)
 
 #include "inc/peripherals.h"

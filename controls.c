@@ -9,13 +9,15 @@ file for controls functions
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdint.h>
+
+#include "inc/init.h"
+#include "inc/game.h"
+
 #if defined(NUMWORKS)
     #include "extapp_api.h"
     #include "inc/peripherals.h"
 #endif
 
-#include "inc/init.h"
-#include "inc/game.h"
 
 
 #if defined(NUMWORKS)

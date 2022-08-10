@@ -20,7 +20,7 @@ main file for game
 
 
 
-int main()
+int mainFunction()
 {
     int game_continue = 1;
     int level = 0;
@@ -53,6 +53,14 @@ int main()
 
 
 
+#if defined(WIN32)
+
+int main()
+{
+    return mainFunction();
+}
+
+#endif
 
 #if defined(NUMWORKS)
 
@@ -60,7 +68,7 @@ int main()
 
 int extapp_main()
 {
-    return main();
+    return mainFunction();
 }
 
 #endif

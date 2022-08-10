@@ -8,9 +8,9 @@ file for controls functions
 
 
 
+#include "inc/init.h"
 #include "inc/controls.h"
 #include "inc/game.h"
-#include "inc/init.h"
 
 
 
@@ -181,7 +181,7 @@ file for controls functions
 
 #endif
 
-#if defined(WIN32) || defined(__linux__)
+#if defined(WIN32) 
 
     #include <stdio.h>
     #include <stdlib.h>

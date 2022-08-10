@@ -1,6 +1,8 @@
 #ifndef _PERIPHERALS_H_
 #define _PERIPHERALS_H_
 
+#include "init.h"
+
 #if defined(NUMWORKS)
 
 #include <stdint.h>

@@ -10,6 +10,10 @@ function for init and deinit
 #ifndef _INIT_H_
 #define _INIT_H_
 
+#ifndef NUMWORKS
+#define NUMWORKS
+#endif
+
 #if defined(WIN32)
     #define PLAYGROUND_X 35
     #define PLAYGROUND_Y 20
