@@ -63,7 +63,7 @@ file for controls functions
                 break;
 
             case NOTHING:
-                extapp_pushRectUniform(x*10, 208- (y*10), 10, 10, 0x0000);
+                extapp_pushRectUniform(x*10, 208- (y*10), 10, 10, 0xFFFF);
                 break;
         }
     }
