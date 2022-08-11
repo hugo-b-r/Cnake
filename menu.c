@@ -107,7 +107,8 @@ file for interface functions
         
         extapp_drawTextSmall("(0) Start a new game", 0, 20 * 1, 0x0000, 0xFFFF, false);
         extapp_drawTextSmall("(1) Preferences", 0, 20 * 2, 0x0000, 0xFFFF, false);
-        extapp_drawTextSmall("(2) Quit", 0, 20 * 3, 0x0000, 0xFFFF, false);
+        extapp_drawTextSmall("(2) Reset score", 0, 20 * 3, 0x0000, 0xFFFF, false);
+        extapp_drawTextSmall("(3) Quit", 0, 20 * 4, 0x0000, 0xFFFF, false);
 
         extapp_waitForVBlank();
 
@@ -325,7 +326,8 @@ file for interface functions
         
         printf("- (0) Start a new game\n");
         printf("- (1) Preferences\n");
-        printf("- (2) Quit\n");
+        printf("- (2) Reset score\n");
+        printf("- (3) Quit\n");
         printf(">");
 
         scanf("%d", &choice);

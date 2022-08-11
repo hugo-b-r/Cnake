@@ -42,8 +42,11 @@ int mainFunction()
                 break;
         
             case 2:
-                return 0;
+                level = 0;
+                break;
             
+            case 3:
+                return 0;
             default:
                 continue;
         }

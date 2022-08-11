@@ -134,7 +134,5 @@ void game(int *level, int playground_width, int playground_height, int *game_con
         }
     }
 
-    *level = 0;
-
     if (command == QUIT) *game_continue = 0;
 }
