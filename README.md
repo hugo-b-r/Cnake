@@ -53,7 +53,7 @@ Then just run the script:
 - [x] fix to big when starting and score > height
 - [x] fix able to go on top border
 - [x] create more general functions in menu.c
-- [ ] get level input and output on numworks calculator
+- [x] get level input and output on numworks calculator
 - [ ] clean input code (extapp_getKey or isKeypressed())
 - [ ] add linux support
 - [x] make error messages work on windows
