@@ -11,5 +11,4 @@ wget https://raw.githubusercontent.com/lemoustachu/Upsilon-External/Cnake/apps/C
 wget https://raw.githubusercontent.com/lemoustachu/Upsilon-External/Cnake/apps/Cnake/inc/init.h -O Upsilon/apps/external/app/inc/init.h
 
 cd Upsilon
-make cleanall
 make PLATFORM=simulator -j8 #you may want to configure building processes here.
