@@ -33,6 +33,7 @@ file for interface functions
 
 
 
+
     void updateScore(int playground_height, int *level)
     {   
         extapp_waitForVBlank();
@@ -161,29 +162,27 @@ file for interface functions
         
         //extapp_pushRectUniform(85, 20, 1, 12, 0x0000);
         
-        int figure_counter = 0;
-        char key_char = '0';
+        char level_char[3];
 
         while (1) {
             waitForKeyPressed();
             
             int key = extapp_getKey(true, NULL);
-            if (numworksFiguresInput(key) != -1) {
+            if (numworksFiguresInput(key) != -1  &&  level <= 100) {
                 level *= 10;
                 level += numworksFiguresInput(key);
-                key_char = numworksFiguresInput(key);
-                key_char += 48;
-                extapp_drawTextSmall(&key_char, 85 + 10 * figure_counter, 20, 0x0000, 0XFFFF, false);
-                figure_counter += 1;
-
+                snprintf(level_char, 3, "%d", level); 
+                extapp_pushRectUniform(80, 20, 100, 12, 0xFFFF);
+                extapp_drawTextSmall(level_char, 85, 20, 0x0000, 0XFFFF, false);
             } else {
                 switch (key) {
                 
                 case KEY_CTRL_DEL:
-                    level /= 10;
-                    if (figure_counter > 0) {
-                        figure_counter -= 1;
-                        extapp_pushRectUniform(85 + 10 * figure_counter, 20, 10, 12, 0XFFFF);
+                    if (level > 0) {
+                        level /= 10;
+                        snprintf(level_char, 3, "%d", level); 
+                        extapp_pushRectUniform(80, 20, 100, 12, 0xFFFF);
+                        extapp_drawTextSmall(level_char, 85, 20, 0x0000, 0XFFFF, false);
                     }
                     break;
                 
