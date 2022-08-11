@@ -28,7 +28,8 @@ file for interface functions
     void deathMsg(char *msg)
     {
         extapp_waitForVBlank();
-        extapp_drawTextSmall(msg, 0, 111, 0XFFFF, 0X0000, false);
+        extapp_drawTextSmall(msg, 0, 205, 0XFFFF, 0X0000, false);
+        waitForKeyPressed();
     }
 
 
@@ -41,7 +42,7 @@ file for interface functions
         char digit_char[3]; //max score is smaller than 100
         snprintf(digit_char, 3, "%d", *level);
         extapp_waitForVBlank();
-        extapp_drawTextLarge(digit_char, 100, 222, 0xFFFF, 0x0000, false);
+        extapp_drawTextSmall(digit_char, 100, 224, 0xFFFF, 0x0000, false);
         printf("%c", digit_char[0]);
     }
 
@@ -61,7 +62,7 @@ file for interface functions
 
         extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0xF000);
         extapp_pushRectUniform(0, 218, 320, 22, 0x0000);
-        extapp_drawTextLarge("Points:", 0, 222, 0xFFFF, 0x0000, false);
+        extapp_drawTextSmall("Points:", 0, 224, 0xFFFF, 0x0000, false);
         updateScore(playground_height, level);
     }
 
