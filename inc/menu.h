@@ -15,7 +15,7 @@ void firstImage(int playground_width, int playground_height, int length, int pos
 
 void drawPoint(int x, int y, int playground_height, int type);
 
-void reDraw(int playground_width, int playground_height, int length, int positions[2][100], int fruit_x, int fruit_y, int *level);
+void updateScore(int playground_height, int *level);    
 
 void welcomeMessage();
 

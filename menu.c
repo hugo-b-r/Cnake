@@ -17,6 +17,8 @@ file for interface functions
 #if defined(NUMWORKS)
 
     #include <stdint.h>
+    #include <stdio.h>
+    #include <stdlib.h>
     
     #include "extapp_api.h"
     #include "inc/peripherals.h"
@@ -28,6 +30,20 @@ file for interface functions
         extapp_waitForVBlank();
         extapp_drawTextSmall(msg, 0, 111, 0XFFFF, 0X0000, false);
     }
+
+
+
+    void updateScore(int playground_height, int *level)
+    {   
+        extapp_waitForVBlank();
+        extapp_pushRectUniform(100, 218, 220, 22, 0x0000);
+        char digit_char[3]; //max score is smaller than 100
+        snprintf(digit_char, 3, "%d", *level);
+        extapp_waitForVBlank();
+        extapp_drawTextLarge(digit_char, 100, 222, 0xFFFF, 0x0000, false);
+        printf("%c", digit_char[0]);
+    }
+
 
 
 
@@ -45,7 +61,7 @@ file for interface functions
         extapp_pushRectUniform(fruit_x*10, 208 - (fruit_y*10), 10, 10, 0xF000);
         extapp_pushRectUniform(0, 218, 320, 22, 0x0000);
         extapp_drawTextLarge("Points:", 0, 222, 0xFFFF, 0x0000, false);
-        extapp_waitForVBlank();
+        updateScore(playground_height, level);
     }
 
 
@@ -66,16 +82,6 @@ file for interface functions
                 extapp_pushRectUniform(x*10, 208- (y*10), 10, 10, 0xFFFF);
                 break;
         }
-    }
-
-
-
-
-    void reDraw(int playground_width, int playground_height, int current_length, int (*positions)[2][100], int fruit_x, int fruit_y, int *level)
-    {
-        
-        extapp_pushRectUniform(70, 218, 100, 22, 0x0000);
-
     }
 
 
@@ -153,7 +159,7 @@ file for interface functions
 
         extapp_waitForVBlank();
         
-        extapp_pushRectUniform(85, 20, 1, 12, 0x0000);
+        //extapp_pushRectUniform(85, 20, 1, 12, 0x0000);
         
         int figure_counter = 0;
         char key_char = '0';
@@ -167,14 +173,18 @@ file for interface functions
                 level += numworksFiguresInput(key);
                 key_char = numworksFiguresInput(key);
                 key_char += 48;
-                figure_counter += 1;
                 extapp_drawTextSmall(&key_char, 85 + 10 * figure_counter, 20, 0x0000, 0XFFFF, false);
+                figure_counter += 1;
 
             } else {
-                switch (extapp_getKey(true, NULL)) {
+                switch (key) {
                 
                 case KEY_CTRL_DEL:
                     level /= 10;
+                    if (figure_counter > 0) {
+                        figure_counter -= 1;
+                        extapp_pushRectUniform(85 + 10 * figure_counter, 20, 10, 12, 0XFFFF);
+                    }
                     break;
                 
                 case KEY_CTRL_OK:
@@ -285,7 +295,7 @@ file for interface functions
 
 
 
-    void reDraw(int playground_width, int playground_height, int current_length, int positions[2][100], int fruit_x, int fruit_y, int *level)
+    void updateScore(int playground_height, int *level)
     {
         COORD coord;
         coord.X = 8;

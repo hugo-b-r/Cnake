@@ -120,6 +120,8 @@ void game(int *level, int playground_width, int playground_height, int *game_con
                 assumed_length++;
                 incrLength(&positions, &current_length, 1, head_position);
                 *level += 1;
+                updateScore(playground_height, level);
+        
 
                 if (move_time == 5 * DEFAULT_MOVE_TIME) move_time -= DEFAULT_MOVE_TIME;
 
@@ -129,10 +131,8 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 
             last_clock = TIME;
 
-            reDraw(playground_width, playground_height, current_length, positions, fruit_x, fruit_y, level);
         }
     }
-    printf("\n");
 
     *level = 0;
 
