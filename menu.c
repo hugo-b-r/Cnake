@@ -220,6 +220,20 @@ file for interface functions
 
 
 
+    void updateScore(int playground_height, int *level)
+    {
+        COORD coord;
+        coord.X = 8;
+        coord.Y = playground_height + 3;
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+        //do a init image like for NUMWORkS, maybe in a method
+        // go to height + 2# + 2; x = current_length("level = ");case <10 blabla, case <100 blabla...
+        printf("%d", *level);
+    }
+
+
+
+
     void firstImage(int playground_width, int playground_height, int current_length, int positions[2][100], int fruit_x, int fruit_y, int *level)
     {
         
@@ -252,9 +266,11 @@ file for interface functions
         for (int i = 0; i <= playground_width+1; i++) {
             printf("#");
         }
-        printf("\n");
 
-        printf("\npoints: %d\n", *level);
+        printf("\n\nPoints: ");
+    
+        updateScore(playground_height, level);
+
     }
 
 
@@ -291,20 +307,6 @@ file for interface functions
         {
             c = getchar();
         }
-    }
-
-
-
-
-    void updateScore(int playground_height, int *level)
-    {
-        COORD coord;
-        coord.X = 8;
-        coord.Y = playground_height + 3;
-        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-        //do a init image like for NUMWORkS, maybe in a method
-        // go to height + 2# + 2; x = current_length("level = ");case <10 blabla, case <100 blabla...
-        printf("%d", *level);
     }
 
 

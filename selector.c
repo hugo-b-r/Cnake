@@ -1,3 +1,7 @@
+#include "inc/init.h"
+
+#if defined NUMWORKS
+
 #include "inc/selector.h"
 #include "inc/peripherals.h"
 #include <extapp_api.h>
@@ -134,3 +138,7 @@ const char * select_file(const char * extension_to_match, int max_files) {
     return filenames[selected_file];
   }
 }
+
+#endif
+
+
