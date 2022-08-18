@@ -37,6 +37,10 @@ int tailPosition(int head_position, int current_length)
 void pauseLoop(int *command)
 {
     while (*command == PAUSE) getEvent(command);
+    
+    #if defined NUMWORKS
+    extapp_msleep(10);
+    #endif
 }
 
 
