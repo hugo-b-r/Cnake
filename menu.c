@@ -519,10 +519,13 @@ file for interface functions
 
 
     void welcomeMessage()
-    {
+    {	
+
 		// message
         printw("\n\n");
-        printw("\x1B[36mWelcome in Cnake !!\033[0m\t\t");
+		attron(COLOR_PAIR(WELCOME_PAIR));
+        printw("Welcome in Cnake !!");
+		attroff(COLOR_PAIR(WELCOME_PAIR));
         printw("\n\n");
 		refresh();
     }

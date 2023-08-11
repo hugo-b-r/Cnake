@@ -31,6 +31,18 @@ int mainFunction()
 		raw();
 		curs_set(FALSE);
 		nodelay(stdscr, TRUE);
+		if (has_colors() == FALSE) {
+			endwin();
+			printf("Your terminal does not support color.\n");
+			exit(1);
+		}
+		start_color();
+
+		init_pair(NORMAL_PAIR, COLOR_WHITE, COLOR_BLACK);
+		attron(COLOR_PAIR(NORMAL_PAIR));
+
+		init_pair(WELCOME_PAIR, COLOR_BLACK, COLOR_GREEN);
+
 	#endif
 
     int game_continue = 1;
@@ -40,8 +52,6 @@ int mainFunction()
     int playground_height = PLAYGROUND_Y;
 
 	getmaxyx(stdscr, playground_height, playground_width);
-
-
 
     welcomeMessage();
 

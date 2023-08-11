@@ -41,6 +41,10 @@ function for init and deinit
 #define ENDGAME 362
 #define QUIT 363
 
+// colors pairs
+#define NORMAL_PAIR 1
+#define WELCOME_PAIR 2
+
 #define SNAKE 0
 #define FRUIT 1
 #define NOTHING 2
