@@ -22,11 +22,26 @@ main file for game
 
 int mainFunction()
 {	
+	#if defined(__linux__)
+		#include <ncurses.h>
+
+		// init ncurses
+		initscr();
+		noecho();
+		raw();
+		curs_set(FALSE);
+		nodelay(stdscr, TRUE);
+	#endif
+
     int game_continue = 1;
     int level = 0;
 
     int playground_width = PLAYGROUND_X;
     int playground_height = PLAYGROUND_Y;
+
+	getmaxyx(stdscr, playground_height, playground_width);
+
+
 
     welcomeMessage();
 
@@ -81,6 +96,7 @@ int extapp_main()
 
 #if defined(__linux__)
 #include <ncurses.h>
+
 
 int main() {
 		// the game

@@ -520,13 +520,6 @@ file for interface functions
 
     void welcomeMessage()
     {
-		
-		// init ncurses
-		initscr();
-		noecho();
-		raw();
-		curs_set(FALSE);
-		nodelay(stdscr, TRUE);
 		// message
         printw("\n\n");
         printw("\x1B[36mWelcome in Cnake !!\033[0m\t\t");
@@ -546,7 +539,6 @@ file for interface functions
         printw("- (1) Preferences\n");
         printw("- (2) Reset score\n");
         printw("- (3) Quit\n");
-        printw(">");
 		refresh();
 
         scanf("%d", &choice);
