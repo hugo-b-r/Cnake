@@ -54,10 +54,11 @@ int mainFunction()
 	getmaxyx(stdscr, playground_height, playground_width);
 
     welcomeMessage();
-
+	int value = defaultMenu();
+	printw("%d", value);
     while (game_continue) {
         
-        switch (defaultMenu()) {
+        switch (value) {
             case 0:
                 game(&level, playground_width, playground_height, &game_continue);
                 break;
@@ -74,6 +75,7 @@ int mainFunction()
                 return 0;
             default:
                 continue;
+
         }
     }
 	#if defined(__linux__)

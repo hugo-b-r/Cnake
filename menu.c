@@ -543,8 +543,20 @@ file for interface functions
         printw("- (2) Reset score\n");
         printw("- (3) Quit\n");
 		refresh();
-
-        scanf("%d", &choice);
+		
+		while(choice == 0 || choice == ERR) {
+			choice = getch();
+		}
+		switch(choice) {
+			case 48:
+				return 0;
+			case 49:
+				return 1;
+			case 50:
+				return 2;
+			case 51:
+				return 3;
+		}
         flushBuffer();
 
         return choice;
