@@ -15,6 +15,10 @@ function for init and deinit
 
 void quit(int type)
 {
+	#if defined(__linux__)
+		#include <ncurses.h>
+		endwin();
+	#endif
     switch (type) {
         case 1:
             printf("\nOuch!\n");
@@ -25,5 +29,5 @@ void quit(int type)
         case 3:
             printf("\nBye bye !\n\n");
     }
-    //exit(0);
+    exit(0);
 }

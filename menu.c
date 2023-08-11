@@ -575,13 +575,23 @@ file for interface functions
         printw("- (2) Height of the playground\n");
         printw("- (3) Return to main menu\n");
         printw("- (4) Quit\n");
-        printw(">");
 		refresh();
-
-        scanf("%d", &choice);
-        flushBuffer();
-
-        return choice;
+		while(choice == 0 || choice == ERR) {
+			choice = getch();
+		}
+		switch(choice) {
+			case 48:
+				return 0;
+			case 49:
+				return 1;
+			case 50:
+				return 2;
+			case 51:
+				return 3;
+			case 52:
+				return 4;
+		}
+		return 3;
     }
 
 
