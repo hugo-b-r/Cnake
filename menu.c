@@ -409,3 +409,223 @@ file for interface functions
     }
 
 #endif
+
+
+#if defined(__linux__) 
+
+    #include <stdio.h>
+    #include <stdlib.h>
+	#include <curses.h>
+
+
+
+    void deathMsg(char *msg) 
+    {
+		move(0, 0);
+        printw("%s", msg);
+		refresh();
+    }    
+    
+
+
+
+    void updateScore(int playground_height, int *level)
+    {
+		move(8, playground_height + 3);
+        //do a init image like for NUMWORkS, maybe in a method
+        // go to height + 2# + 2; x = current_length("level = ");case <10 blabla, case <100 blabla...
+        printw("%d", *level);
+		refresh();
+    }
+
+
+
+
+    void firstImage(int playground_width, int playground_height, int current_length, int positions[2][100], int fruit_x, int fruit_y, int *level)
+    { 
+	    clear();
+		refresh();
+        
+        for (int i = 0; i <= playground_width+1; i++) {
+            printw("#");
+        }
+        printw("\n");
+
+        for (int i = playground_height - 1; i >= 0; i--) {
+            printw("#");
+            for (int j = 0; j < playground_width; j++) {
+                for (int k = 0; k < current_length; k++) {
+                    if (j == positions[0][k] && i == positions[1][k]) {
+                        printw("o");
+                        goto hell;
+                    }
+                }
+                if (j == fruit_x && i == fruit_y) {
+                    printw("z");
+                }
+                else {
+                    printw(" ");
+                }
+                hell:
+					printw("");
+            }
+            printw("#\n");
+        }
+        for (int i = 0; i <= playground_width+1; i++) {
+            printw("#");
+        }
+
+        printw("\n\nPoints: ");
+    
+        updateScore(playground_height, level);
+
+    }
+
+
+
+
+    void drawPoint(int x, int y, int playground_height, int type)
+    {
+        move(x+1, playground_height-y);
+		switch (type) {
+            case SNAKE:
+                printw("o");
+                break;
+
+            case FRUIT:
+                printw("z");
+                break;
+
+            case NOTHING:
+                printw(" ");
+                break;
+        }
+		refresh();
+    }
+
+
+
+
+    void flushBuffer()
+    {
+        int c = 0;
+        while (c != '\n' && c != EOF)
+        {
+            c = getch();
+        }
+    }
+
+
+
+
+    void welcomeMessage()
+    {
+		
+		// init ncurses
+		initscr();
+		noecho();
+		raw();
+		curs_set(FALSE);
+		nodelay(stdscr, TRUE);
+		// message
+        printw("\n\n");
+        printw("\x1B[36mWelcome in Cnake !!\033[0m\t\t");
+        printw("\n\n");
+		refresh();
+    }
+
+
+
+
+    int defaultMenu()
+    { 
+        
+        int choice = 0;
+        
+        printw("- (0) Start a new game\n");
+        printw("- (1) Preferences\n");
+        printw("- (2) Reset score\n");
+        printw("- (3) Quit\n");
+        printw(">");
+		refresh();
+
+        scanf("%d", &choice);
+        flushBuffer();
+
+        return choice;
+    }
+
+
+
+
+    int preferencesMenu()
+    {
+        int choice = 0;
+        
+        printw("\n");
+        printw("- (0) Level\n");
+        printw("- (1) Width of the playground\n");
+        printw("- (2) Height of the playground\n");
+        printw("- (3) Return to main menu\n");
+        printw("- (4) Quit\n");
+        printw(">");
+		refresh();
+
+        scanf("%d", &choice);
+        flushBuffer();
+
+        return choice;
+    }
+
+
+
+
+    int askLevel()
+    {
+        int level = 0;
+
+        printw("\nWhat level do you want to start with ? \n");
+        printw(">");
+		refresh();
+
+        scanf("%d", &level);
+        flushBuffer();
+
+        return level;
+    }
+
+
+
+
+    int askPlaygroundWidth()
+    {
+        int playground_width = 0;
+
+        printw("\nWhat width do you want to play with ? \n");
+        printw(">");
+		refresh();
+
+        scanf("%d", &playground_width);
+        flushBuffer();
+
+        return playground_width;
+    }
+
+
+
+
+    int askPlaygroundHeight()
+    {
+        int playground_height = 0;
+
+        printw("\nWhat height do you want to play with ? \n");
+        printw(">");
+		refresh();
+
+        scanf("%d", &playground_height);
+        flushBuffer();
+
+        return playground_height;
+    }
+
+#endif

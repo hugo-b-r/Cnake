@@ -23,6 +23,13 @@ function for init and deinit
     #define DEFAULT_SPEED 100
     #define TIME extapp_millis()
     #define DEFAULT_MOVE_TIME 1
+#elif defined(__linux__)
+    #define PLAYGROUND_X 35
+    #define PLAYGROUND_Y 20
+    #define DEFAULT_SPEED 100
+    #define TIME clock()
+    #define DEFAULT_MOVE_TIME 5
+	#include <ncurses.h>
 #endif
 #define DEFAULT_LENGTH 5
 

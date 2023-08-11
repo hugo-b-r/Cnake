@@ -21,7 +21,7 @@ main file for game
 
 
 int mainFunction()
-{
+{	
     int game_continue = 1;
     int level = 0;
 
@@ -51,6 +51,9 @@ int mainFunction()
                 continue;
         }
     }
+	#if defined(__linux__)
+		endwin();
+	#endif
     return 0; 
 }
 
@@ -73,5 +76,17 @@ int extapp_main()
 {
     return mainFunction();
 }
+
+#endif
+
+#if defined(__linux__)
+#include <ncurses.h>
+
+int main() {
+		// the game
+	return mainFunction();
+}
+
+
 
 #endif

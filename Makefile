@@ -23,6 +23,7 @@ ifeq ($(PLATFORM), windows)
 endif
 ifeq ($(PLATFORM), linux)
     CC = gcc
+	LDFLAGS += -lncurses -ltinfo
     CFLAGS += -D __linux__ -D CLI
 endif
 ifeq ($(PLATFORM), numworks)
@@ -41,6 +42,7 @@ else
         CFLAGS += -D WIN32 -D CLI
     endif
     ifeq ($(UNAME_S),Linux)
+		LDFLAGS += -lncurses -ltinfo
         CCFLAGS += -D __linux__
     endif
     ifeq ($(UNAME_S),Darwin)
@@ -57,7 +59,7 @@ all: $(TARGET)
 	@echo -e "Done.\n"
 
 $(TARGET): $(OBJ) | $(BIN_DIR)
-	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+	$(CC) $^ $(LDLIBS) -o $@ $(LDFLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@

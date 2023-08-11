@@ -26,7 +26,7 @@ void preferences(int *level, int *playground_width, int *playground_height) {
         case 0:
             *level = askLevel();
             break;
-        #if defined(WIN32)
+        #if defined(POSIX)
         case 1:
             *playground_width = askPlaygroundWidth();
             break;
