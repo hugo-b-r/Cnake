@@ -11,12 +11,11 @@ function for init and deinit
 #define _INIT_H_
 
 
-
-#define PLAYGROUND_X 32 
-#define PLAYGROUND_Y 20 //18px top border, 20 * 10 playground and 22 px ottom border = 18 + 22 + 200 = 240
+#define PLAYGROUND_X 35
+#define PLAYGROUND_Y 20
 #define DEFAULT_SPEED 100
-#define TIME extapp_millis()
-#define DEFAULT_MOVE_TIME 1
+#define TIME clock()
+#define DEFAULT_MOVE_TIME 5
 #define DEFAULT_LENGTH 5
 
 #define UP 0
