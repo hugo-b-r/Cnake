@@ -18,9 +18,6 @@ structure of a game and game related functions
 #include "inc/menu.h"
 #include "inc/main.h"
 
-#if defined(NUMWORKS)
-    #include "extapp_api.h"
-#endif
 
 
 int tailPosition(int head_position, int current_length)
@@ -38,10 +35,6 @@ int tailPosition(int head_position, int current_length)
 void pauseLoop(int *command)
 {
     while (*command == PAUSE) getEvent(command);
-    
-    #if defined NUMWORKS
-    extapp_msleep(10);
-    #endif
 }
 
 
@@ -84,15 +77,6 @@ void game(int *level, int playground_width, int playground_height, int *game_con
     }
 
      
-    //speed set up
-    int last_clock = TIME;
-    int move_time;
-    if (*level <= 10) {
-        move_time = DEFAULT_SPEED + *level * DEFAULT_MOVE_TIME;
-    } else {
-        move_time = DEFAULT_SPEED + DEFAULT_MOVE_TIME*10;
-    }
-
     srand(time(0));
     //fruit pos
     int fruit_x = rand() % (playground_width);
@@ -117,37 +101,34 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 				;
 		};
 
-        if (last_clock + move_time <= TIME) {
-            if (fruit_x == positions[0][tailPosition(head_position, current_length)] && fruit_y == positions[1][tailPosition(head_position, current_length)]) {
-                drawPoint(fruit_x, fruit_y, playground_height, FRUIT);
-            } else {
-                drawPoint(positions[0][tailPosition(head_position, current_length)], positions[1][tailPosition(head_position, current_length)], playground_height, NOTHING);
-            }
-
-            newPos(&head_position, &positions, orientation, current_length, &control, playground_width, playground_height);
-            drawPoint(positions[0][head_position], positions[1][head_position], playground_height, SNAKE);
-
-            //if on fruit
-            if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {
-                drawPoint(fruit_x, fruit_y, playground_height, SNAKE);
-                fruit_x = rand() % (playground_width);
-                fruit_y = rand() % (playground_height);
-                drawPoint(fruit_x, fruit_y, playground_height, FRUIT);
-                assumed_length++;
-                incrLength(&positions, &current_length, 1, head_position);
-                *level += 1;
-                updateScore(playground_height, level);
-        
-
-                if (move_time == 5 * DEFAULT_MOVE_TIME) move_time -= DEFAULT_MOVE_TIME;
-
-            } else if (assumed_length > current_length) {
-                incrLength(&positions, &current_length, 1, head_position);
-            }
-
-            last_clock = TIME;
-
+        if (fruit_x == positions[0][tailPosition(head_position, current_length)] && fruit_y == positions[1][tailPosition(head_position, current_length)]) {
+            drawPoint(fruit_x, fruit_y, playground_height, FRUIT);
+        } else {
+            drawPoint(positions[0][tailPosition(head_position, current_length)], positions[1][tailPosition(head_position, current_length)], playground_height, NOTHING);
         }
+
+        newPos(&head_position, &positions, orientation, current_length, &control, playground_width, playground_height);
+        drawPoint(positions[0][head_position], positions[1][head_position], playground_height, SNAKE);
+
+        //if on fruit
+        if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {
+            drawPoint(fruit_x, fruit_y, playground_height, SNAKE);
+            fruit_x = rand() % (playground_width);
+            fruit_y = rand() % (playground_height);
+            drawPoint(fruit_x, fruit_y, playground_height, FRUIT);
+            assumed_length++;
+            incrLength(&positions, &current_length, 1, head_position);
+            *level += 1;
+            updateScore(playground_height, level);
+    
+
+
+        } else if (assumed_length > current_length) {
+            incrLength(&positions, &current_length, 1, head_position);
+        }
+
+        uni_sleep(DEFAULT_SPEED);
+
     }
 
     if (command == QUIT) *game_continue = 0;

@@ -1,6 +1,6 @@
 /*
  *
- * console.c
+ * platform.c
  *
  * */
 #include "inc/main.h"
@@ -24,6 +24,10 @@ int screen_x() {
 
 int screen_y() {
 
+}
+
+void uni_sleep() {
+ 
 }
 
 
