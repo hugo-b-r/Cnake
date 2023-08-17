@@ -16,6 +16,7 @@ structure of a game and game related functions
 #include "inc/preferences.h"
 #include "inc/controls.h"
 #include "inc/menu.h"
+#include "inc/main.h"
 
 #if defined(NUMWORKS)
     #include "extapp_api.h"
@@ -60,9 +61,9 @@ void incrLength(int (*positions)[2][100], int *current_length, int length_diff, 
 
 void game(int *level, int playground_width, int playground_height, int *game_continue)
 {
-    int orientation = 0;
+    Orientation orientation = north;
 
-    int command = -1;
+    Control control = up;
 
 
     int current_length = DEFAULT_LENGTH;
@@ -100,10 +101,21 @@ void game(int *level, int playground_width, int playground_height, int *game_con
     firstImage(playground_width, playground_height, current_length, positions, fruit_x, fruit_y, level);
 
 
-    while (command != ENDGAME && command != QUIT) {
+    while (control != end_game && control != quit) {
         
-        getEvent(&command);
-        translateControl(&orientation, &command);
+		control = get_control();
+		switch(control) {
+			case up:
+				orientation = north;
+			case left:
+				orientation = west;
+			case down:
+				orientation = south;
+			case right:
+				orientation = east;
+			default:
+				;
+		};
 
         if (last_clock + move_time <= TIME) {
             if (fruit_x == positions[0][tailPosition(head_position, current_length)] && fruit_y == positions[1][tailPosition(head_position, current_length)]) {

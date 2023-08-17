@@ -3,13 +3,14 @@
  * console.c
  *
  * */
+#include "inc/main.h"
 
 void print_at(int x, int y, char * text) {
 
 }
 
 // to get a character but non blocking
-char get_character() {
+Control get_control() {
 	
 }
 

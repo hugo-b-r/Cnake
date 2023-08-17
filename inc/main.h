@@ -13,7 +13,15 @@ typedef enum {
 	right,
 	pause,
 	quit,
-	new_game
+	new_game,
+	end_game
 } Control;
+
+typedef enum {
+	north,
+	west,
+	south,
+	east
+} Orientation;
 
 #endif
