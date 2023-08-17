@@ -10,12 +10,12 @@ file for controls functions
 #include <stdio.h>
 #include <stdint.h>
 
-#include "inc/init.h"
-#include "inc/game.h"
+#include "init.h"
+#include "game.h"
 
 #if defined(NUMWORKS)
     #include "extapp_api.h"
-    #include "inc/peripherals.h"
+    #include "peripherals.h"
 #endif
 
 

@@ -3,7 +3,7 @@
  * platform.c
  *
  * */
-#include "inc/main.h"
+#include "main.h"
 
 void print_at(int x, int y, char * text) {
 

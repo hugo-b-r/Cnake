@@ -8,9 +8,9 @@ file for interface functions
 
 
 
-#include "inc/init.h"
-#include "inc/controls.h"
-#include "inc/game.h"
+#include "init.h"
+#include "controls.h"
+#include "game.h"
 
 
 
@@ -21,7 +21,7 @@ file for interface functions
     #include <stdlib.h>
     
     #include "extapp_api.h"
-    #include "inc/peripherals.h"
+    #include "peripherals.h"
     
    
 
@@ -415,7 +415,7 @@ file for interface functions
 
     #include <stdio.h>
     #include <stdlib.h>
-	#include <curses.h>
+  	#include <curses.h>
 
 
 

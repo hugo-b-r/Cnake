@@ -9,7 +9,7 @@ functions for positions matrix manipulations
 #ifndef _POSITIONS_H_
 #define _POSITIONS_H_
 
-#include "inc/main.h"
+#include "main.h"
 
 void newPosStorage(int *head_position, int current_length, int (*positions)[2][100], int x, int y);
 

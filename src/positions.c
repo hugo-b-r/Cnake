@@ -10,11 +10,11 @@ functions for positions matrix manipulations
 #include <stdlib.h>
 #include <time.h>
 
-#include "inc/game.h"
-#include "inc/main.h"
-#include "inc/init.h"
-#include "inc/menu.h"
-#include "inc/positions.h"
+#include "game.h"
+#include "main.h"
+#include "init.h"
+#include "menu.h"
+#include "positions.h"
 
 #if defined(NUMWORKS)
 
