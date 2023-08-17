@@ -32,9 +32,12 @@ int tailPosition(int head_position, int current_length)
 
 
 
-void pauseLoop(int *command)
+void pauseLoop(Control *control)
 {
-    while (*command == PAUSE) getEvent(command);
+    while (*control == pause) {
+        *control = get_control();
+        uni_sleep(20);
+    }
 }
 
 
