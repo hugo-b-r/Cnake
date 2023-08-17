@@ -124,7 +124,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
                 drawPoint(positions[0][tailPosition(head_position, current_length)], positions[1][tailPosition(head_position, current_length)], playground_height, NOTHING);
             }
 
-            newPos(&head_position, &positions, orientation, current_length, &command, playground_width, playground_height);
+            newPos(&head_position, &positions, orientation, current_length, &control, playground_width, playground_height);
             drawPoint(positions[0][head_position], positions[1][head_position], playground_height, SNAKE);
 
             //if on fruit

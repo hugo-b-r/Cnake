@@ -11,6 +11,7 @@ functions for positions matrix manipulations
 #include <time.h>
 
 #include "inc/game.h"
+#include "inc/main.h"
 #include "inc/init.h"
 #include "inc/menu.h"
 #include "inc/positions.h"
@@ -43,22 +44,22 @@ void incrPos(int *head_position, int current_length)
 
 
 
-void newPos(int *head_position, int (*positions)[2][100], int orientation, int current_length, int *command, int playground_width, int playground_height)
+void newPos(int *head_position, int (*positions)[2][100], Orientation orientation, int current_length, Control *command, int playground_width, int playground_height)
 {
     int x = (*positions)[0][*head_position];
     int y = (*positions)[1][*head_position];
 
     switch (orientation) {
-    case 0:
+    case north:
         y += 1;
         break;
-    case 90:
+    case west:
         x += 1;
         break;
-    case 180:
+    case south:
         y -= 1;
         break;
-    case 270:
+    case east:
         x -= 1;
         break;
     }
