@@ -19,18 +19,18 @@ LDLIBS :=
 ifeq ($(PLATFORM), windows)
     CC = gcc
     LDLIBS += -lmingw32
-    CFLAGS += -D WIN32 -D CLI
+    CFLAGS += -D WIN32 -D CLI -D PLATFORM=windows
 endif
 ifeq ($(PLATFORM), linux)
     CC = gcc
 	LDFLAGS += -lncurses -ltinfo
-    CFLAGS += -D __linux__ -D CLI
+    CFLAGS += -D __linux__ -D CLI -D PLATFORM=linux
 endif
 ifeq ($(PLATFORM), numworks)
     CC = arm-none-eabi-gcc
     OBJCOPY = arm-none-eabi-OBJCOPY
     AR = arm-none-eabi-ar
-    CFLAGS += -D NUMWORKS -DNDEBUG -ggdb3 -Os -mcpu=cortex-m7 -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=soft -fno-common -fdata-sections -ffunction-sections -fno-exceptions
+    CFLAGS += -D NUMWORKS -DNDEBUG -ggdb3 -Os -mcpu=cortex-m7 -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=soft -fno-common -fdata-sections -ffunction-sections -fno-exceptions -D PLATFORM=numworks
     CPPFLAGS += -Iapi
     LDFLAGS += -Wl,-Lapi -Wl,--gc-sections -Wl,--entry=entrypoint --specs=nosys.specs -nostartfiles -Wl,-Ur 
     LDLIBS += -lapi -lc
