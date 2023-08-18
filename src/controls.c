@@ -10,7 +10,13 @@ file for controls functions
 #include <stdio.h>
 #include <stdint.h>
 
-#include "init.h"
+#if defined (WIN32)
+    #include "windows/init.h"
+#elif defined (__linux__)
+    #include "linux/init.h"
+#elif defined (numworks)
+    #include "numworks/init.h"
+#endif
 #include "game.h"
 
 #if defined(NUMWORKS)

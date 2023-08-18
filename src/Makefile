@@ -9,7 +9,7 @@ SRC := $(wildcard *.c)
 OBJ := $(SRC:%.c=%.o)
 
 CFLAGS := -Wall
-CPPFLAGS := -Iinc -MMD -MP
+CPPFLAGS := -MMD -MP
 LDFLAGS :=
 LDLIBS :=
 
