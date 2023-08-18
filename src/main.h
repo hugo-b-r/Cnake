@@ -14,7 +14,12 @@ typedef enum {
 	pause,
 	quit,
 	new_game,
-	end_game
+	end_game,
+	zero,
+	one,
+	two,
+	three,
+	four
 } Control;
 
 typedef enum {
