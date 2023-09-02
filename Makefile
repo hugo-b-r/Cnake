@@ -6,7 +6,7 @@ NUMWORKS_API := api/ibapi.a
 TARGET = game
 
 SRC := $(addprefix src/, main.c game.c positions.c)
-OBJ := $(SRC:%.c=%.o)
+
 
 CFLAGS := -Wall
 CPPFLAGS := -MMD -MP
@@ -62,6 +62,8 @@ else
         CFLAGS += -D __linux__ $(INCLUDE_PATH)
     endif
 endif
+
+OBJ := $(SRC:%.c=%.o)
 
 
 .PHONY: all clean
