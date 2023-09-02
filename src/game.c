@@ -13,8 +13,6 @@ structure of a game and game related functions
 #include "init.h"
 #include "game.h"
 #include "positions.h"
-#include "preferences.h"
-#include "controls.h"
 #include "menu.h"
 #include "main.h"
 

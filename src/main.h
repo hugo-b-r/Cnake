@@ -11,7 +11,7 @@ typedef enum {
 	left,
 	down,
 	right,
-	pause,
+	holdon,
 	quit,
 	new_game,
 	end_game,

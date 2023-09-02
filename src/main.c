@@ -13,9 +13,8 @@ main file for game
 #include "init.h"
 #include "positions.h"
 #include "game.h"
-#include "preferences.h"
-#include "controls.h"
 #include "menu.h"
+#include "platform.h"
 
 
 
@@ -27,10 +26,10 @@ int mainFunction()
     int game_continue = 1;
     int level = 0;
 
-    int playground_width = PLAYGROUND_X;
-    int playground_height = PLAYGROUND_Y;
+    int playground_width = screen_x();
+    int playground_height = screen_y();
 
-	getmaxyx(stdscr, playground_height, playground_width);
+
 
     welcomeMessage();
     while (game_continue) {
