@@ -22,28 +22,7 @@ main file for game
 
 int mainFunction()
 {	
-	#if defined(__linux__)
-		#include <ncurses.h>
-
-		// init ncurses
-		initscr();
-		noecho();
-		raw();
-		curs_set(FALSE);
-		nodelay(stdscr, TRUE);
-		if (has_colors() == FALSE) {
-			endwin();
-			printf("Your terminal does not support color.\n");
-			exit(1);
-		}
-		start_color();
-
-		init_pair(NORMAL_PAIR, COLOR_WHITE, COLOR_BLACK);
-		attron(COLOR_PAIR(NORMAL_PAIR));
-
-		init_pair(WELCOME_PAIR, COLOR_BLACK, COLOR_GREEN);
-
-	#endif
+	init_platform();
 
     int game_continue = 1;
     int level = 0;
@@ -70,15 +49,13 @@ int mainFunction()
                 break;
             
             case 3:
-               quit(3);
+               gracefully_shutdown("Aloa...");
             default:
                 continue;
 
         }
     }
-	#if defined(__linux__)
-		endwin();
-	#endif
+    gracefully_shutdown("Bye, bye...");
     return 0; 
 }
 

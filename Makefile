@@ -63,8 +63,6 @@ else
     endif
 endif
 
-$(info  $(INCLUDE_PATH))
-# $(info $$var is [${var}])
 
 .PHONY: all clean
 
