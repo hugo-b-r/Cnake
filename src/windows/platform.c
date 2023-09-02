@@ -31,7 +31,7 @@ Control get_control() {
         case 'd':
             return right;
         case 'p':
-            return pause;
+            return holdon;
         case 'x':
             return end_game;
         case 'k':

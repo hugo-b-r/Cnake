@@ -31,7 +31,7 @@ int tailPosition(int head_position, int current_length)
 
 void pauseLoop(Control *control)
 {
-    while (*control == pause) {
+    while (*control == holdon) {
         *control = get_control();
         uni_sleep(20);
     }
