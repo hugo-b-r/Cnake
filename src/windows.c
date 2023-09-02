@@ -4,6 +4,7 @@
  *
  * */
 #include "main.h"
+#include "windows.h"
 #include <conio.h>
 #include <stdlib.h>
 #include <windows.h>
@@ -67,5 +68,9 @@ int screen_y() {
 }
 
 void uni_sleep(int time_ms) { sleep(time_ms); }
+
+void draw_top_separator(int x, int y) {
+    print_at(x, y, "_");
+}
 
                                               

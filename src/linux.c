@@ -4,6 +4,7 @@
  *
  * */
 #include "main.h"
+#include "linux.h"
 #include <ncurses.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -99,6 +100,11 @@ void draw_sth(int x, int y, DrawObject draw_object) {
             print_at(x, y, " ");
             break;
     }
+}
+
+
+void draw_top_separator(int x, int y) {
+    print_at(x, y, "_");
 }
 
 
