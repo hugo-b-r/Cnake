@@ -31,7 +31,7 @@ int mainFunction()
     int level = 0;
 
     int playground_width = screen_x();
-    int playground_height = screen_y();
+    int playground_height = screen_y()-1; // Minus 1 for the score line
 
     print_at(0, 0, "Welcome in Cnake!");    // Welcome the player
     uni_sleep(1000);                        // The message lasts 1 second
