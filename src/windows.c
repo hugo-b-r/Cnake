@@ -8,6 +8,14 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <stdio.h>
+#include <time.h>
+
+void init_platform() { ; }
+
+void gracefully_shutdown(char *message) {
+  printf("%s", message);
+  exit(0);
+}
 
 void print_at(int x, int y, char *text) {
     COORD coord;

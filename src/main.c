@@ -10,12 +10,16 @@ main file for game
 #include <stdlib.h>
 #include <time.h>
 
-#include "init.h"
 #include "positions.h"
 #include "game.h"
-#include "menu.h"
-#include "platform.h"
 
+#ifdef WIN32
+    #include "windows.h"
+#elif defined __linux__
+    #include "linux.h"
+#elif defined NUMWORKS
+    #include "numworks.h"
+#endif
 
 
 

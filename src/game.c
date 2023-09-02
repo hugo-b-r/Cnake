@@ -10,11 +10,17 @@ structure of a game and game related functions
 #include <stdlib.h>
 #include <time.h>
 
-#include "init.h"
+
 #include "game.h"
 #include "positions.h"
-#include "menu.h"
 #include "main.h"
+#ifdef WIN32
+    #include "windows.h"
+#elif defined __linux__
+    #include "linux.h"
+#elif defined NUMWORKS
+    #include "numworks.h"
+#endif
 
 
 int tailPosition(int head_position, int current_length)

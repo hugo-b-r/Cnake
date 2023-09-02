@@ -8,40 +8,34 @@ TARGET = game
 SRC := $(addprefix src/, main.c game.c positions.c)
 
 
-CFLAGS := -Wall
+CFLAGS := -Wall -Isrc
 CPPFLAGS := -MMD -MP
 LDFLAGS :=
 LDLIBS :=
 
-WINDOWS_INCLUDE := windows
-LINUX_INCLUDE := linux
-NUMWORKS_INCLUDE := numworks
-INCLUDE_PATH := -Isrc
+
 
 
 
 ifeq ($(PLATFORM), windows)
-    SRC += $(addprefix src/windows/, init.c platform.c)
-    INCLUDE_PATH += $(addprefix -I, src/windows)
+    SRC += src/windows.c
     CC = gcc
     LDLIBS += -lmingw32
-    CFLAGS += -D WIN32 -D CLI -D PLATFORM=windows $(INCLUDE_PATH)
+    CFLAGS += -D WIN32 -D CLI -D PLATFORM=windows
 
 endif
 ifeq ($(PLATFORM), linux)
-    SRC += $(addprefix src/linux/, init.c platform.c)
-    INCLUDE_PATH += $(addprefix -I, src/linux)
+    SRC += src/linux.c
     CC = gcc
 	LDFLAGS += -lncurses -ltinfo
-    CFLAGS += -D __linux__ -D CLI -D PLATFORM=linux $(INCLUDE_PATH)
+    CFLAGS += -D __linux__ -D CLI -D PLATFORM=linux
 endif
 ifeq ($(PLATFORM), numworks)
-    SRC += $(addprefix src/numworks/, init.c platform.c)
-    INCLUDE_PATH += $(addprefix -I, src/numworks)
+    SRC += src/numworks.c
     CC = arm-none-eabi-gcc
     OBJCOPY = arm-none-eabi-OBJCOPY
     AR = arm-none-eabi-ar
-    CFLAGS += -D NUMWORKS -DNDEBUG -ggdb3 -Os -mcpu=cortex-m7 -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=soft -fno-common -fdata-sections -ffunction-sections -fno-exceptions -D PLATFORM=numworks $(INCLUDE_PATH)
+    CFLAGS += -D NUMWORKS -DNDEBUG -ggdb3 -Os -mcpu=cortex-m7 -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=soft -fno-common -fdata-sections -ffunction-sections -fno-exceptions -D PLATFORM=numworks
     CPPFLAGS += -Iapi
     LDFLAGS += -Wl,-Lapi -Wl,--gc-sections -Wl,--entry=entrypoint --specs=nosys.specs -nostartfiles -Wl,-Ur
     LDLIBS += -lapi -lc
@@ -49,17 +43,15 @@ ifeq ($(PLATFORM), numworks)
     SRC += $(addprefix src/numworks/, init.c platform.c)
 else
     ifeq ($(OS), Windows_NT)
-        SRC += $(addprefix src/windows/, init.c platform.c)
-        INCLUDE_PATH += $(addprefix -I, src/windows)
+        SRC += src/windows.c
         CC = gcc
         LDLIBS += -lmingw32
-        CFLAGS += -D WIN32 -D CLI $(INCLUDE_PATH)
+        CFLAGS += -D WIN32 -D CLI
     endif
     ifeq ($(UNAME_S),Linux)
-        SRC += $(addprefix src/linux/, init.c platform.c)
-        INCLUDE_PATH += $(addprefix -I, src/linux)
+        SRC += src/linux.c
 		LDFLAGS += -lncurses -ltinfo
-        CFLAGS += -D __linux__ $(INCLUDE_PATH)
+        CFLAGS += -D __linux__
     endif
 endif
 

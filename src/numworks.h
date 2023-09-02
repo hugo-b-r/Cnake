@@ -1,0 +1,33 @@
+/*
+ *
+ * platform.h
+ *
+ * */
+
+#ifndef NUMWORKS_H
+#define NUMWORKS_H
+
+#include "main.h"
+#include <ncurses.h>
+#include <unistd.h>
+
+#define PLAYGROUND_X 32
+#define PLAYGROUND_Y 20 //18px top border, 20 * 10 playground and 22 px ottom border = 18 + 22 + 200 = 240
+#define DEFAULT_SPEED 100
+#define DEFAULT_MOVE_TIME 1
+#define DEFAULT_LENGTH 5
+
+// EVERY FUNCTION OF THIS FILE MUSTE BE DEFINED
+void init_platform();
+void gracefully_shutdown(char* message);
+
+
+void print_at(int x, int y, char * text);
+// to get a character but non blocking
+Control get_control();
+void clear_screen();
+int screen_x();
+int screen_y();
+void uni_sleep(int time_ms);
+
+#endif
