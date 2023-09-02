@@ -5,7 +5,7 @@ NUMWORKS_API := api/ibapi.a
 
 TARGET = game
 
-SRC := $(addprefix src/, main.c game.c menu.c positions.c preferences.c)
+SRC := $(addprefix src/, main.c game.c positions.c)
 OBJ := $(SRC:%.c=%.o)
 
 CFLAGS := -Wall
@@ -43,11 +43,11 @@ ifeq ($(PLATFORM), numworks)
     AR = arm-none-eabi-ar
     CFLAGS += -D NUMWORKS -DNDEBUG -ggdb3 -Os -mcpu=cortex-m7 -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=soft -fno-common -fdata-sections -ffunction-sections -fno-exceptions -D PLATFORM=numworks $(INCLUDE_PATH)
     CPPFLAGS += -Iapi
-    LDFLAGS += -Wl,-Lapi -Wl,--gc-sections -Wl,--entry=entrypoint --specs=nosys.specs -nostartfiles -Wl,-Ur 
+    LDFLAGS += -Wl,-Lapi -Wl,--gc-sections -Wl,--entry=entrypoint --specs=nosys.specs -nostartfiles -Wl,-Ur
     LDLIBS += -lapi -lc
     TARGET = app.elf
     SRC += $(addprefix src/numworks/, init.c platform.c)
-else 
+else
     ifeq ($(OS), Windows_NT)
         SRC += $(addprefix src/windows/, init.c platform.c)
         INCLUDE_PATH += $(addprefix -I, src/windows)
