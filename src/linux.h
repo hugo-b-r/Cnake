@@ -31,6 +31,6 @@ void clear_screen();
 int screen_x();
 int screen_y();
 void uni_sleep(int time_ms);
-void draw_top_separator(int x, int y);
+void draw_top_separator(int x);
 
 #endif

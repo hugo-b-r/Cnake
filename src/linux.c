@@ -103,8 +103,8 @@ void draw_sth(int x, int y, DrawObject draw_object) {
 }
 
 
-void draw_top_separator(int x, int y) {
-    print_at(x, y, "_");
+void draw_top_separator(int x) {
+    print_at(x, 0, "_");
 }
 
 

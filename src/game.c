@@ -87,8 +87,17 @@ void game(int *level, int playground_width, int playground_height, int *game_con
     //fruit pos
     int fruit_x = rand() % (playground_width);
     int fruit_y = rand() % (playground_height);
+    clear_screen();
 
-    firstImage(playground_width, playground_height, current_length, positions, fruit_x, fruit_y, level);
+    // Print underscore line to show that the snake can't go on this line
+    for(int i = 0; i < playground_width; i++) {
+        draw_top_separator(i);
+    }
+    // Print score
+    char str[9];
+    sprintf(str, "%d", *level); // Unsafe if too good at this game i.e. score too high
+    print_at(0, 0, str);
+
 
 
     while (control != end_game && control != quit) {

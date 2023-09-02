@@ -69,8 +69,8 @@ int screen_y() {
 
 void uni_sleep(int time_ms) { sleep(time_ms); }
 
-void draw_top_separator(int x, int y) {
-    print_at(x, y, "_");
+void draw_top_separator(int x) {
+    print_at(x, 0, "_");
 }
 
                                               
