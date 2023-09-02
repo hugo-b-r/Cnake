@@ -29,4 +29,10 @@ typedef enum {
 	east
 } Orientation;
 
+typedef enum {
+  snake_body,
+  fruit_dr,
+  nothing_dr
+} DrawObject;
+
 #endif

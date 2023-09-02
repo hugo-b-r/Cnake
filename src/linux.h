@@ -16,7 +16,6 @@
 #define DEFAULT_SPEED 100
 #define TIME clock()
 #define DEFAULT_MOVE_TIME 5
-#include <ncurses.h>
 
 #define DEFAULT_LENGTH 5
 
@@ -25,6 +24,7 @@ void init_platform();
 void gracefully_shutdown(char* message);
 
 void print_at(int x, int y, char * text);
+void draw_sth(int x, int y, DrawObject draw_object);
 // to get a character but non blocking
 Control get_control();
 void clear_screen();

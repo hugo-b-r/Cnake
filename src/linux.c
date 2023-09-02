@@ -87,3 +87,18 @@ void uni_sleep(int time_ms) {
 }
 
 
+void draw_sth(int x, int y, DrawObject draw_object) {
+    switch(draw_object) {
+        case snake_body:
+            print_at(x, y, "o");
+            break;
+        case fruit_dr:
+            print_at(x, y, "f");
+            break;
+        case nothing_dr:
+            print_at(x, y, " ");
+            break;
+    }
+}
+
+

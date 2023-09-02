@@ -23,6 +23,7 @@ void gracefully_shutdown(char* message);
 
 
 void print_at(int x, int y, char * text);
+void draw_sth(int x, int y, DrawObject draw_object);
 // to get a character but non blocking
 Control get_control();
 void clear_screen();
