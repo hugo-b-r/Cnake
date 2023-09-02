@@ -12,14 +12,14 @@ functions for positions matrix manipulations
 
 #include "game.h"
 #include "main.h"
-#include "init.h"
-#include "menu.h"
 #include "positions.h"
 
-#if defined(NUMWORKS)
-
-#include "extapp_api.h"
-
+#ifdef WIN32
+    #include "windows.h"
+#elif defined __linux__
+    #include "linux.h"
+#elif defined NUMWORKS
+    #include "numworks.h"
 #endif
 
 
@@ -88,6 +88,7 @@ void newPos(int *head_position, int (*positions)[2][100], Orientation orientatio
     }
 
 }
+
 
 
 

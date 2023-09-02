@@ -108,20 +108,20 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 		};
 
         if (fruit_x == positions[0][tailPosition(head_position, current_length)] && fruit_y == positions[1][tailPosition(head_position, current_length)]) {
-            drawPoint(fruit_x, fruit_y, playground_height, FRUIT);
+            draw_sth(fruit_x, fruit_y, fruit_dr);
         } else {
-            drawPoint(positions[0][tailPosition(head_position, current_length)], positions[1][tailPosition(head_position, current_length)], playground_height, NOTHING);
+            draw_sth(positions[0][tailPosition(head_position, current_length)], positions[1][tailPosition(head_position, current_length)], nothing_dr);
         }
 
         newPos(&head_position, &positions, orientation, current_length, &control, playground_width, playground_height);
-        drawPoint(positions[0][head_position], positions[1][head_position], playground_height, SNAKE);
+        draw_sth(positions[0][head_position], positions[1][head_position], snake_body);
 
         //if on fruit
         if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {
-            drawPoint(fruit_x, fruit_y, playground_height, SNAKE);
+            draw_sth(fruit_x, fruit_y, snake_body);
             fruit_x = rand() % (playground_width);
             fruit_y = rand() % (playground_height);
-            drawPoint(fruit_x, fruit_y, playground_height, FRUIT);
+            draw_sth(fruit_x, fruit_y, fruit_dr);
             assumed_length++;
             incrLength(&positions, &current_length, 1, head_position);
             *level += 1;
