@@ -29,27 +29,27 @@ int mainFunction()
     int playground_width = screen_x();
     int playground_height = screen_y();
 
-
-
-    welcomeMessage();
+    print_at(0, 0, "Welcome in Cnake!");    // Welcome the player
+    uni_sleep(1000);                        // The message lasts 1 second
     while (game_continue) {
-        
-        switch (defaultMenu()) {
-            case 0:
+        // Display options
+        print_at(0, 0, "0 - Play!");
+        print_at(0, 2, "1 - Exit");
+        switch (get_control()) {
+            case zero:
+                // Start a new game
                 game(&level, playground_width, playground_height, &game_continue);
                 break;
         
-            case 1:
-                preferences(&level, &playground_width, &playground_height);
-                break;
-        
-            case 2:
-                level = 0;
-                break;
-            
-            case 3:
+            case one:
                gracefully_shutdown("Aloa...");
+                break;
             default:
+                clear_screen();
+                print_at(0, 0, "Not a good answer !");
+                print_at(0, 1, "Please choose between");
+                print_at(0, 2, "0 or 1.");
+                uni_sleep(1000);
                 continue;
 
         }
