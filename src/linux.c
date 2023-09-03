@@ -20,13 +20,12 @@ void init_platform() {
 	noecho();
 	raw();
 	curs_set(FALSE);
-	nodelay(stdscr, TRUE);
+	//nodelay(stdscr, TRUE);
 	if (has_colors() == FALSE) {
 		endwin();
 		printf("Your terminal does not support color.\n");
 		exit(1);
 	}
-	start_color();
 
 	/*init_pair(NORMAL_PAIR, COLOR_WHITE, COLOR_BLACK);
 	attron(COLOR_PAIR(NORMAL_PAIR));
@@ -47,8 +46,9 @@ void gracefully_shutdown(char* message)
 
 
 void print_at(int x, int y, char * text) {
-    move(x, y);
+    move(y, x);
     printw("%s", text);
+    refresh();
 }
 
 // to get a character but non blocking
@@ -84,7 +84,10 @@ int screen_y() {
 
 
 void uni_sleep(int time_ms) {
-    sleep(time_ms);
+    struct timespec ts;
+    ts.tv_sec = time_ms / 1000;
+    ts.tv_nsec = (time_ms % 1000) * 1000000;
+    nanosleep(&ts, NULL);
 }
 
 

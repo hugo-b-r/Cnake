@@ -31,13 +31,12 @@ int mainFunction()
     int level = 0;
 
     int playground_width = screen_x();
-    int playground_height = screen_y()-1; // Minus 1 for the score line
-
+    int playground_height = screen_y()-1;   // Minus 1 for the score line
     print_at(0, 0, "Welcome in Cnake!");    // Welcome the player
-    uni_sleep(1000);                        // The message lasts 1 second
+    uni_sleep(1000);                       // The message lasts 1 second
     while (game_continue) {
         // Display options
-        print_at(0, 0, "0 - Play!");
+        print_at(0, 1, "0 - Play!");
         print_at(0, 2, "1 - Exit");
         switch (get_control()) {
             case zero:
@@ -46,7 +45,7 @@ int mainFunction()
                 break;
         
             case one:
-               gracefully_shutdown("Aloa...");
+                gracefully_shutdown("Aloa...");
                 break;
             default:
                 clear_screen();
