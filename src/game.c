@@ -105,14 +105,18 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 		switch(control) {
 			case up:
 				orientation = north;
+                break;
 			case left:
 				orientation = west;
+                break;
 			case down:
 				orientation = south;
+                break;
 			case right:
 				orientation = east;
+                break;
 			default:
-				;
+				break;
 		};
 
         if (fruit_x == positions[0][tailPosition(head_position, current_length)] && fruit_y == positions[1][tailPosition(head_position, current_length)]) {

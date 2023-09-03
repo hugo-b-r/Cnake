@@ -51,15 +51,19 @@ void newPos(int *head_position, int (*positions)[2][100], Orientation orientatio
 
     switch (orientation) {
     case north:
+        printf("north");
         y += 1;
         break;
     case west:
+        printf("west");
         x += 1;
         break;
     case south:
+        printf("south");
         y -= 1;
         break;
     case east:
+        printf("east");
         x -= 1;
         break;
     }
