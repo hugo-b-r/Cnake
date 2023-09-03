@@ -59,9 +59,9 @@ void incrLength(int (*positions)[2][100], int *current_length, int length_diff, 
 
 void game(int *level, int playground_width, int playground_height, int *game_continue)
 {
-    Orientation orientation = north;
+    Orientation orientation = south;
 
-    Control control = up;
+    Control control = down;
 
 
     int current_length = DEFAULT_LENGTH;
