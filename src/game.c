@@ -158,5 +158,5 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 
     }
 
-    if (control == end_game) *game_continue = 0;
+    if (control == quit) *game_continue = 0;
 }
