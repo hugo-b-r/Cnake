@@ -68,6 +68,7 @@ void newPos(int *head_position, int (*positions)[2][100], Orientation orientatio
     for (int i = 0; i < current_length; i++) {
         if ( (x == (*positions)[0][i]) && (y == (*positions)[1][i]) ) {
             newPosStorage(head_position, current_length, positions, x, y);
+            clear_screen();
             print_at(0, 0, "Ouch. You died eating yourself.");
             *command = end_game;
         }
@@ -76,6 +77,7 @@ void newPos(int *head_position, int (*positions)[2][100], Orientation orientatio
     // if border
     if ( (x > (playground_width-1)) || (y > (playground_height-1)) || (x < 0) || (y < 0) ) {
         newPosStorage(head_position, current_length, positions, x, y);
+        clear_screen();
         print_at(0, 0, "You died crushed against the wall.");
         *command = end_game;
         return;
@@ -86,7 +88,6 @@ void newPos(int *head_position, int (*positions)[2][100], Orientation orientatio
         incrPos(head_position, current_length);
 
     }
-
 }
 
 

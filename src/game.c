@@ -63,7 +63,6 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 
     Control control = down;
 
-
     int current_length = DEFAULT_LENGTH;
     int positions[2][100];
     int head_position = current_length - 1;
@@ -128,6 +127,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
         }
 
         newPos(&head_position, &positions, orientation, current_length, &control, playground_width, playground_height);
+        if (control == end_game) return; // to immediately engame if new pos not good
         draw_sth(positions[0][head_position], positions[1][head_position], snake_body);
 
         //if on fruit
@@ -157,9 +157,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
         }
 
         uni_sleep(DEFAULT_SPEED);
-
     }
 
     if (control == quit) *game_continue = 0;
-    clear_screen();
 }
