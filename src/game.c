@@ -81,12 +81,14 @@ void game(int *level, int playground_width, int playground_height, int *game_con
         positions[1][i] += i;      
     }
 
-     
     srand(time(0));
+
+    clear_screen();
     //fruit pos
     int fruit_x = rand() % (playground_width);
     int fruit_y = rand() % (playground_height);
-    clear_screen();
+    draw_sth (fruit_x, fruit_y, fruit_dr);
+
 
     // Print underscore line to show that the snake can't go on this line
     for(int i = 0; i < playground_width; i++) {
@@ -159,4 +161,5 @@ void game(int *level, int playground_width, int playground_height, int *game_con
     }
 
     if (control == quit) *game_continue = 0;
+    clear_screen();
 }
