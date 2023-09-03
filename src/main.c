@@ -38,7 +38,7 @@ int mainFunction()
         // Display options
         print_at(0, 1, "0 - Play!");
         print_at(0, 2, "1 - Exit");
-        switch (get_control()) {
+        switch (get_control_blocking()) {
             case zero:
                 // Start a new game
                 game(&level, playground_width, playground_height, &game_continue);
@@ -53,7 +53,8 @@ int mainFunction()
                 print_at(0, 1, "Please choose between");
                 print_at(0, 2, "0 or 1.");
                 uni_sleep(1000);
-                continue;
+                clear_screen();
+                break;
 
         }
     }

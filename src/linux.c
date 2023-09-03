@@ -20,7 +20,7 @@ void init_platform() {
 	noecho();
 	raw();
 	curs_set(FALSE);
-	//nodelay(stdscr, TRUE);
+	nodelay(stdscr, TRUE);
 	if (has_colors() == FALSE) {
 		endwin();
 		printf("Your terminal does not support color.\n");
@@ -51,9 +51,8 @@ void print_at(int x, int y, char * text) {
     refresh();
 }
 
-// to get a character but non blocking
-Control get_control() {
-
+// To get a character but non blocking
+Control get_control_non_blocking() {
 	int choice = getch();
     if (choice != ERR) {
         switch(choice) {
@@ -67,6 +66,14 @@ Control get_control() {
 			case 51:  return three;
         }
     }
+}
+
+// To get a character but blocking
+Control get_control_blocking() {
+	nodelay(stdscr, FALSE);
+    Control control =  get_control_non_blocking();
+    nodelay(stdscr, TRUE);
+    return control;
 }
 
 void clear_screen() {

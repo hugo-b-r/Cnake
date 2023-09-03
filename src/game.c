@@ -38,8 +38,7 @@ int tailPosition(int head_position, int current_length)
 void pauseLoop(Control *control)
 {
     while (*control == holdon) {
-        *control = get_control();
-        uni_sleep(20);
+        *control = get_control_blocking();
     }
 }
 
@@ -102,7 +101,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 
     while (control != end_game && control != quit) {
         
-		control = get_control();
+		control = get_control_non_blocking();
 		switch(control) {
 			case up:
 				orientation = north;
