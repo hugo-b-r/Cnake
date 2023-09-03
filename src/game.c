@@ -134,7 +134,16 @@ void game(int *level, int playground_width, int playground_height, int *game_con
             assumed_length++;
             incrLength(&positions, &current_length, 1, head_position);
             *level += 1;
-            updateScore(playground_height, level);
+            // Update the score
+            // Print underscore line to show that the snake can't go on this line
+            // Only for 9 because the score can't have more digits anyway.
+            for(int i = 0; i < 10; i++) {
+                draw_top_separator(i);
+            }
+            // Print score
+            char str[9];
+            sprintf(str, "%d", *level); // Unsafe if too good at this game i.e. score too high
+            print_at(0, 0, str);
     
 
 
