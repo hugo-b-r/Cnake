@@ -74,7 +74,9 @@ $(BIN_DIR) $(OBJ_DIR):
 
 clean:
 	$(RM) *.o
+	$(RM) src/*.o
 	$(RM) *.d
+	$(RM) src/*.d
 	$(RM) app.elf
 	$(RM) game
 
