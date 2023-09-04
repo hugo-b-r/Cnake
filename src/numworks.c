@@ -5,28 +5,34 @@
  * */
 #include "main.h"
 
+
+// to get a character but non blocking
+void init_platform() {
+
+}
+
+void gracefully_shutdown(char* message) {
+
+}
+
+
 void print_at(int x, int y, char * text) {
 
 }
+void draw_sth(int x, int y, DrawObject draw_object) {
 
+}
 // to get a character but non blocking
-Control get_control() {
-	
-}
-
-void clear_screen() {
+Control get_control_non_blocking() {
 
 }
-
-int screen_x() {
-
-}
-
-int screen_y() {
+// To get a character but blocking
+Control get_control_blocking() {
 
 }
-
-void uni_sleep() {
- 
-}
+void clear_screen() {}
+int screen_x() {}
+int screen_y() {}
+void uni_sleep(int time_ms){}
+void draw_top_separator(int x) {}
 

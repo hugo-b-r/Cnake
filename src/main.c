@@ -22,7 +22,6 @@ main file for game
 #endif
 
 
-
 int mainFunction()
 {	
 	init_platform();
@@ -66,32 +65,29 @@ int mainFunction()
 
 #if defined(WINDOWS)
 
-int main()
-{
-    return mainFunction();
-}
+    int main()
+    {
+        return mainFunction();
+    }
 
-#endif
+#elif defined NUMWORKS || defined EPSILON_VERSION
 
-#if defined(NUMWORKS)
+    #include "extapp_api.h"
 
-#include "extapp_api.h"
+    int extapp_main()
+    {
+        return mainFunction();
+    }
 
-int extapp_main()
-{
-    return mainFunction();
-}
+#elif defined LINUX
 
-#endif
-
-#if defined(LINUX)
-#include <ncurses.h>
+    #include <ncurses.h>
 
 
-int main() {
-		// the game
-	return mainFunction();
-}
+    int main() {
+            // the game
+        return mainFunction();
+    }
 
 
 
