@@ -86,7 +86,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
     //fruit pos
     int fruit_x = rand() % (playground_width);
     int fruit_y = rand() % (playground_height);
-    draw_sth (fruit_x, fruit_y, fruit_dr);
+    draw_sth (fruit_x, fruit_y+1, fruit_dr);
 
 
     // Print underscore line to show that the snake can't go on this line
@@ -121,9 +121,9 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 		};
 
         if (fruit_x == positions[0][tailPosition(head_position, current_length)] && fruit_y == positions[1][tailPosition(head_position, current_length)]) {
-            draw_sth(fruit_x, fruit_y, fruit_dr);
+            draw_sth(fruit_x, fruit_y+1, fruit_dr);
         } else {
-            draw_sth(positions[0][tailPosition(head_position, current_length)], positions[1][tailPosition(head_position, current_length)], nothing_dr);
+            draw_sth(positions[0][tailPosition(head_position, current_length)], positions[1][tailPosition(head_position, current_length)]+1, nothing_dr);
         }
         // Compute the new position of the head
         int x = positions[0][head_position];
@@ -167,14 +167,14 @@ void game(int *level, int playground_width, int playground_height, int *game_con
             newPosStorage(&head_position, current_length, &positions, x, y);
             incrPos(&head_position, current_length);
         }
-        draw_sth(positions[0][head_position], positions[1][head_position], snake_body);
+        draw_sth(positions[0][head_position], positions[1][head_position]+1, snake_body);
 
         //if on fruit
         if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {
-            draw_sth(fruit_x, fruit_y, snake_body);
+            draw_sth(fruit_x, fruit_y+1, snake_body);
             fruit_x = rand() % (playground_width);
             fruit_y = rand() % (playground_height);
-            draw_sth(fruit_x, fruit_y, fruit_dr);
+            draw_sth(fruit_x, fruit_y+1, fruit_dr);
             assumed_length++;
             incrLength(&positions, &current_length, 1, head_position);
             *level += 1;
