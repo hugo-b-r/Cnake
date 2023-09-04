@@ -13,11 +13,11 @@ main file for game
 #include "positions.h"
 #include "game.h"
 
-#ifdef WIN32
+#ifdef WINDOWS
     #include "windows.h"
-#elif defined __linux__
+#elif defined LINUX
     #include "linux.h"
-#elif defined NUMWORKS
+#elif defined NUMWORKS || defined EPSILON_VERSION
     #include "numworks.h"
 #endif
 
@@ -64,7 +64,7 @@ int mainFunction()
 
 
 
-#if defined(WIN32)
+#if defined(WINDOWS)
 
 int main()
 {
@@ -84,7 +84,7 @@ int extapp_main()
 
 #endif
 
-#if defined(__linux__)
+#if defined(LINUX)
 #include <ncurses.h>
 
 

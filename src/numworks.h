@@ -8,7 +8,6 @@
 #define NUMWORKS_H
 
 #include "main.h"
-#include <ncurses.h>
 #include <unistd.h>
 
 #define PLAYGROUND_X 32

@@ -14,11 +14,11 @@ functions for positions matrix manipulations
 #include "main.h"
 #include "positions.h"
 
-#ifdef WIN32
+#ifdef WINDOWS
     #include "windows.h"
-#elif defined __linux__
+#elif defined LINUX
     #include "linux.h"
-#elif defined NUMWORKS
+#elif defined NUMWORKS || defined EPSILON_VERSION
     #include "numworks.h"
 #endif
 
