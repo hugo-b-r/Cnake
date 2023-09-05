@@ -30,12 +30,12 @@ int mainFunction()
 
     int playground_width = screen_x();
     int playground_height = screen_y()-1;   // Minus 1 for the score line
-    print_at(0, 0, "Welcome in Cnake!");    // Welcome the player
+    print_at(playground_width/2-8, playground_height/2-3, "Welcome in Cnake!");    // Welcome the player
     uni_sleep(1000);                       // The message lasts 1 second
     while (game_continue) {
         // Display options
-        print_at(0, 1, "0 - Play!");
-        print_at(0, 2, "1 - Exit");
+        print_at(playground_width/2-4, playground_height/2-1, "0 - Play!");
+        print_at(playground_width/2-4, playground_height/2+1, "1 - Exit");
         switch (get_control_blocking()) {
             case zero:
                 // Start a new game
@@ -52,9 +52,9 @@ int mainFunction()
                 break;
             default:
                 clear_screen();
-                print_at(0, 0, "Not a good answer !");
-                print_at(0, 1, "Please choose between");
-                print_at(0, 2, "0 or 1.");
+                print_at(playground_width/2-9, playground_height/2-2, "Not a good answer !");
+                print_at(playground_width/2-10, playground_height/2, "Please choose between");
+                print_at(playground_width/2-3, playground_height/2+2, "0 or 1.");
                 uni_sleep(1000);
                 clear_screen();
                 break;
