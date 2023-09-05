@@ -1,8 +1,8 @@
 # Cnake
-Cnake is a simple Snake game made in C. It will work in Linux and Windows, maybe MacOS. I'll do it on my free time.
+Cnake is a simple Snake game made in C. It will work in Linux and Windows, maybe MacOS (I could never try).
 
 
-### Installation
+### Building
 
 Clone repo:
 ```shell
@@ -20,6 +20,13 @@ make clean
 make
 ```
 
+If you want to build for another platform, declare PLATFORM among `windows`,
+`linux` & `numworks`. For example on linux to build for windows:
+```bash
+make clean
+make PLATFORM=windows
+```
+
 
 ### Gameplay
 
@@ -29,7 +36,7 @@ make
 ### Installing
 
 #### Numworks n0110 running Omega/Upsilon
-You can go to this [website](https://lemoustachu.github.io/Upsilon-External/) using a chromium-based browser to install this app on your calculator. 
+You can go to this [website](https://lemoustachu.github.io/Upsilon-External/) using a chromium-based browser to install this app (FOr now, the old app from 2022) on your calculator. 
 WARNING: The installation of a new app will erase the old external apps and games. 
 
 #### Simulator
@@ -40,21 +47,35 @@ apt install wget gdb gcc g++ libgmp-dev libmpfr-dev libmpfi-dev libpari-dev libg
 ```
 Please refer to [this doc](https://github.com/UpsilonNumworks/Upsilon-External/blob/master/docs/install-sdk.md) to get sdk for your operating system.
 
-Then just run the script:
+Then, to get the repo, just:
 ```bash
-./build_upsilon_simulator.sh
+make upsilonrepo
+```
+
+And for building:
+```bash
+make upsilon
+```
+
+Before rebuilding:
+```bash
+make upsilonclean
+```
+
+Rebuilding without cleaning:
+```bash
+make upsilonsimulator
 ```
 
 
 ### Roadmap
 
-- [x] menu
-- [x] choice of difficulty
-- [x] fix to big when starting and score > height
-- [x] fix able to go on top border
-- [x] create more general functions in menu.c
-- [x] get level input and output on numworks calculator
-- [ ] clean input code (extapp_getKey or isKeypressed())
-- [ ] add linux support
-- [x] make error messages work on windows
-- [ ] log system
+- [x] Menu
+- [x] Fix to big when starting and score > height
+- [x] Fix able to go on top border
+- [x] Create more general functions in menu.c
+- [x] Get level input and output on numworks calculator
+- [x] Clean input code (extapp_getKey or isKeypressed())
+- [x] Add linux support
+- [x] Make error messages work on windows
+- [ ] Finish winows support
