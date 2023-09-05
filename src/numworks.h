@@ -11,7 +11,7 @@
 #include <unistd.h>
 
 #define PLAYGROUND_X 32
-#define PLAYGROUND_Y 20 //18px top border, 20 * 10 playground and 22 px ottom border = 18 + 22 + 200 = 240
+#define PLAYGROUND_Y 24 
 #define DEFAULT_SPEED 75
 #define DEFAULT_MOVE_TIME 1
 #define DEFAULT_LENGTH 5

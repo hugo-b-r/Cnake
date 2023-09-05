@@ -15,8 +15,7 @@ void init_platform() {
 
 
 void gracefully_shutdown(char* message) {
-    // Draw a rectangle to fill all the screen
-    extapp_pushRectUniform(0, 0, 320, 240, 0xFFFF);
+    clear_screen();
     // Print the end text
     print_at(0, 0, message);
     uni_sleep(1000);
@@ -27,24 +26,26 @@ void print_at(int x, int y, char * text) {
     // The screen is 320 x 240 px
     // We divide the screen by 15 squares vertically and 20 squares
     // horizontally of 16 pixels each side.
-    extapp_drawTextSmall(text, x*16, y*16, 0X0000, 0XFFFF, false);
+    extapp_drawTextSmall(text, x*10, y*10, 0X0000, 0XFFFF, false);
     extapp_waitForVBlank();
 }
 
 
 void draw_sth(int x, int y, DrawObject draw_object) {
     // The screen is 320 x 240 px
-    // We divide the screen by 15 squares vertically and 20 squares
-    // horizontally of 16 pixels each side.
+    // We divide the screen by 24 squares vertically and 32 squares
+    // horizontally of 10 pixels each side.
+    // Because we draw on the playground, we avoid the first line so we add
+    // 10 to y coordinates.
     switch(draw_object) {
         case snake_body:
-            extapp_pushRectUniform(x*16, y*16, 16, 16, 0x0F00);
+            extapp_pushRectUniform(x*10, y*10+10, 10, 10, 0x0F00);
             break;
         case fruit_dr:
-            extapp_pushRectUniform(x*16, y*16, 16, 16, 0xF000);
+            extapp_pushRectUniform(x*10, y*10+10, 10, 10, 0xF000);
             break;
         case nothing_dr:
-            extapp_pushRectUniform(x*16, y*16, 16, 16, 0xFFFF);
+            extapp_pushRectUniform(x*10, y*10+10, 10, 10, 0xFFFF);
             break;
     }
     extapp_waitForVBlank();
@@ -142,7 +143,7 @@ int screen_x() {
     // The screen is 320 x 240 px
     // We divide the screen by 15 squares vertically and 20 squares
     // horizontally of 16 pixels each side.
-    return 20;
+    return 32;
 }
 
 
@@ -150,7 +151,7 @@ int screen_y() {
     // The screen is 320 x 240 px
     // We divide the screen by 15 squares vertically and 20 squares
     // horizontally of 16 pixels each side.
-    return 15;
+    return 24;
 }
 
 
@@ -162,7 +163,7 @@ void uni_sleep(int time_ms) {
 void draw_top_separator(int x) {
     /* Draw some sort of black bar on top to show that the first line is not
     usable. */
-    extapp_pushRectUniform(x*16, 13, 16, 3, 0X0000);
+    extapp_pushRectUniform(x*10, 13, 10, 3, 0X0000);
     extapp_waitForVBlank();
 }
 
