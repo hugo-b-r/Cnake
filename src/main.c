@@ -22,6 +22,7 @@ main file for game
 #endif
 
 
+
 int mainFunction()
 {	
 	init_platform();
@@ -66,7 +67,6 @@ int mainFunction()
 }
 
 
-
 #if defined(WINDOWS)
 
     int main()
@@ -92,7 +92,5 @@ int mainFunction()
             // the game
         return mainFunction();
     }
-
-
 
 #endif

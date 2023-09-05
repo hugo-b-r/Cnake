@@ -24,7 +24,6 @@ structure of a game and game related functions
 
 
 
-
 int tailPosition(int head_position, int current_length)
 {
     if (head_position == current_length - 1) {
@@ -33,8 +32,6 @@ int tailPosition(int head_position, int current_length)
         return head_position + 1;
     }
 }
-
-
 
 
 void pauseLoop(Control *control)
@@ -50,8 +47,6 @@ void pauseLoop(Control *control)
 }
 
 
-
-
 void incrLength(int (*positions)[2][100], int *current_length, int length_diff, int head_position)
 {   
     for (int i = 0; i < ((*current_length) - head_position - 1); i++) {
@@ -60,8 +55,6 @@ void incrLength(int (*positions)[2][100], int *current_length, int length_diff, 
     }
     (*current_length) += length_diff;
 }
-
-
 
 
 void game(int playground_width, int playground_height, int *game_continue)

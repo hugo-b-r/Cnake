@@ -13,7 +13,6 @@
 
 
 
-
 void init_platform() {
   	// init ncurses
   	initscr();
@@ -26,13 +25,7 @@ void init_platform() {
 		printf("Your terminal does not support color.\n");
 		exit(1);
 	}
-
-	/*init_pair(NORMAL_PAIR, COLOR_WHITE, COLOR_BLACK);
-	attron(COLOR_PAIR(NORMAL_PAIR));
-
-	init_pair(WELCOME_PAIR, COLOR_BLACK, COLOR_GREEN);*/
 }
-
 
 
 void gracefully_shutdown(char* message)
@@ -43,13 +36,12 @@ void gracefully_shutdown(char* message)
 }
 
 
-
-
 void print_at(int x, int y, char * text) {
     move(y, x);
     printw("%s", text);
     refresh();
 }
+
 
 // To get a character but non blocking
 Control get_control_non_blocking() {
@@ -72,6 +64,7 @@ Control get_control_non_blocking() {
     }
 }
 
+
 // To get a character but blocking
 Control get_control_blocking() {
 	nodelay(stdscr, FALSE);
@@ -80,14 +73,17 @@ Control get_control_blocking() {
     return control;
 }
 
+
 void clear_screen() {
     clear();
 	refresh();
 }
 
+
 int screen_x() {
 	return getmaxx(stdscr);
 }
+
 
 int screen_y() {
 	return getmaxy(stdscr);
@@ -120,5 +116,3 @@ void draw_sth(int x, int y, DrawObject draw_object) {
 void draw_top_separator(int x) {
     print_at(x, 0, "_");
 }
-
-

@@ -8,6 +8,7 @@
 #include "numworks.h"
 
 
+
 // to get a character but non blocking
 void init_platform() {
     clear_screen();
@@ -166,4 +167,3 @@ void draw_top_separator(int x) {
     extapp_pushRectUniform(x*10, 13, 10, 3, 0X0000);
     extapp_waitForVBlank();
 }
-

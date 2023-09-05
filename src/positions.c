@@ -24,13 +24,10 @@ functions for positions matrix manipulations
 
 
 
-
 void newPosStorage(int *head_position, int current_length, int (*positions)[2][100], int x, int y) {
     (*positions)[0][tailPosition(*head_position, current_length)] = x;
     (*positions)[1][tailPosition(*head_position, current_length)] = y;
 }
-
-
 
 
 void incrPos(int *head_position, int current_length)
@@ -40,8 +37,6 @@ void incrPos(int *head_position, int current_length)
         *head_position = 0;
     }
 }
-
-
 
 
 void newPos(int *head_position, int (*positions)[2][100], Orientation orientation, int current_length, Control *command, int playground_width, int playground_height)
@@ -89,7 +84,3 @@ void newPos(int *head_position, int (*positions)[2][100], Orientation orientatio
 
     }
 }
-
-
-
-

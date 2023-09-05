@@ -6,6 +6,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+
+
 typedef enum {
 	up,
 	left,
@@ -22,6 +24,7 @@ typedef enum {
 	nullissime
 } Control;
 
+
 typedef enum {
 	north,
 	west,
@@ -29,10 +32,13 @@ typedef enum {
 	east
 } Orientation;
 
+
 typedef enum {
   snake_body,
   fruit_dr,
   nothing_dr
 } DrawObject;
+
+
 
 #endif
