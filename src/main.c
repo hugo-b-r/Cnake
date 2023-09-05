@@ -27,7 +27,6 @@ int mainFunction()
 	init_platform();
 
     int game_continue = 1;
-    int level = 0;
 
     int playground_width = screen_x();
     int playground_height = screen_y()-1;   // Minus 1 for the score line
@@ -40,7 +39,7 @@ int mainFunction()
         switch (get_control_blocking()) {
             case zero:
                 // Start a new game
-                game(&level, playground_width, playground_height, &game_continue);
+                game(playground_width, playground_height, &game_continue);
                 break;
         
             case quit:

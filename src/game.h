@@ -17,7 +17,7 @@ void pauseLoop(Control *command);
 
 void incrLength(int (*positions)[2][100], int *length, int length_diff, int head_position);
 
-void game(int *level, int playground_width, int playground_height, int *game_continue);
+void game(int playground_width, int playground_height, int *game_continue);
 /*
 struct fruit
 {

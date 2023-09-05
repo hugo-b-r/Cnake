@@ -59,16 +59,17 @@ void incrLength(int (*positions)[2][100], int *current_length, int length_diff, 
 
 
 
-void game(int *level, int playground_width, int playground_height, int *game_continue)
+void game(int playground_width, int playground_height, int *game_continue)
 {
     Orientation orientation = south;
+    int level = 0;
 
     Control control = down;
 
     int current_length = DEFAULT_LENGTH;
     int positions[2][100];
     int head_position = current_length - 1;
-    int assumed_length = *level + DEFAULT_LENGTH;
+    int assumed_length = level + DEFAULT_LENGTH;
 
     for (int i = 0; i < 100; i++) {
         positions[0][i] = -1;    
@@ -97,7 +98,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
     }
     // Print score
     char str[9];
-    sprintf(str, "%d", *level); // Unsafe if too good at this game i.e. score too high
+    sprintf(str, "%d", level); // Unsafe if too good at this game i.e. score too high
     print_at(0, 0, str);
 
 
@@ -181,7 +182,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
             draw_sth(fruit_x, fruit_y+1, fruit_dr);
             assumed_length++;
             incrLength(&positions, &current_length, 1, head_position);
-            *level += 1;
+            level += 1;
             // Update the score
             // Print underscore line to show that the snake can't go on this line
             // Only for 9 because the score can't have more digits anyway.
@@ -190,7 +191,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
             }
             // Print score
             char str[9];
-            sprintf(str, "%d", *level); // Unsafe if too good at this game i.e. score too high
+            sprintf(str, "%d", level); // Unsafe if too good at this game i.e. score too high
             print_at(0, 0, str);
     
 
