@@ -60,10 +60,14 @@ Control get_control_non_blocking() {
 			case 113: return left;
 			case 115: return down;
 			case 100: return right;
-            case 48:  return zero;
+            case 48:  return zero; // To choose in the menu
 			case 49:  return one;
 			case 50:  return two;
 			case 51:  return three;
+            case 52:  return four;
+            case 112: return holdon;  // 'p' to pause
+            case 101: return end_game; // 'e' to end a game
+            case 120: return quit;    // 'x' to quit
         }
     }
 }

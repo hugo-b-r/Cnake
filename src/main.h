@@ -11,10 +11,9 @@ typedef enum {
 	left,
 	down,
 	right,
-	holdon,
-	quit,
-	new_game,
-	end_game,
+	holdon, 	// Pause.
+	quit, 		// Entirely exit the program.
+	end_game,	// End the game but continue to the menu.
 	zero,
 	one,
 	two,

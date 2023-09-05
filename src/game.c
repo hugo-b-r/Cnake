@@ -120,6 +120,14 @@ void game(int playground_width, int playground_height, int *game_continue)
 			case right:
 				if (orientation != west) orientation = east;
                 break;
+            case holdon:
+                pauseLoop(&control);
+                break;
+            case end_game:
+                clear_screen();
+                game_continue = 0;
+                return;
+                break;
 			default:
 				break;
 		};
