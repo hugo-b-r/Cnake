@@ -38,9 +38,14 @@ int tailPosition(int head_position, int current_length)
 
 
 void pauseLoop(Control *control)
-{
+{   
+    int playground_width = screen_x();
+    print_at(playground_width/2-10, 0, "Pause - press any key");
     while (*control == holdon) {
         *control = get_control_blocking();
+    }
+    for (int i = playground_width/2-10; i < playground_width/2+11; i++) {
+        draw_top_separator(i);
     }
 }
 
