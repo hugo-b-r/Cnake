@@ -84,17 +84,27 @@ clean:
 
 cleanandbuild: clean all
 
-cloneupsilon:
+upsilon: upsilonclean upsilonsimulator
+
+upsilonrepo:
 	git clone --recursive https://github.com/UpsilonNumworks/Upsilon.git
+
+upsilonclean:
+    # headers
+	cp src/*.h Upsilon/apps/external/app
+	cp src/*.c Upsilon/apps/external/app
+	cp src/sources.mak Upsilon/apps/external/app
+	cp MakefileUpsilon Upsilon/apps/external/app/Makefile
+    
+	make -C Upsilon PLATFORM=simulator clean -j8 
 
 upsilonsimulator:
 	# headers
 	cp src/*.h Upsilon/apps/external/app
 	cp src/*.c Upsilon/apps/external/app
 	cp src/sources.mak Upsilon/apps/external/app
-	# cp MakefileUpsilon Upsilon/apps/external/app/Makefile
+	cp MakefileUpsilon Upsilon/apps/external/app/Makefile
 
-	make -C Upsilon PLATFORM=simulator clean -j8 
 	make -C Upsilon PLATFORM=simulator -j8 #you may want to configure building processes here.
 
 
