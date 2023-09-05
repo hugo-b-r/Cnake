@@ -78,4 +78,5 @@ make upsilonsimulator
 - [x] Clean input code (extapp_getKey or isKeypressed())
 - [x] Add linux support
 - [x] Make error messages work on windows
-- [ ] Finish winows support
+- [x] Finish windows support
+- [ ] Finish correct controls in game
