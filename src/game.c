@@ -107,16 +107,16 @@ void game(int *level, int playground_width, int playground_height, int *game_con
 		control = get_control_non_blocking();
 		switch(control) {
 			case up:
-				orientation = north;
+                if (orientation != south) orientation = north;
                 break;
 			case left:
-				orientation = west;
+				if (orientation != east) orientation = west;
                 break;
 			case down:
-				orientation = south;
+				if (orientation != north) orientation = south;
                 break;
 			case right:
-				orientation = east;
+				if (orientation != west) orientation = east;
                 break;
 			default:
 				break;
