@@ -19,7 +19,8 @@ typedef enum {
 	one,
 	two,
 	three,
-	four
+	four,
+	nullissime
 } Control;
 
 typedef enum {

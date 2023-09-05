@@ -153,6 +153,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
                 clear_screen();
                 print_at(0, 0, "Ouch. You died eating yourself.");
                 control = end_game;
+                uni_sleep(1000);
                 return; // Engame if new pos not good
             }
         }
@@ -163,6 +164,7 @@ void game(int *level, int playground_width, int playground_height, int *game_con
             clear_screen();
             print_at(0, 0, "You died crushed against the wall.");
             control = end_game;
+            uni_sleep(1000);
             return; // Engame if new pos not good
         } else {
 

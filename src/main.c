@@ -43,8 +43,13 @@ int mainFunction()
                 game(&level, playground_width, playground_height, &game_continue);
                 break;
         
+            case quit:
+                gracefully_shutdown("Aloa...");
+                game_continue = 0;
+                break;
             case one:
                 gracefully_shutdown("Aloa...");
+                game_continue = 0;
                 break;
             default:
                 clear_screen();
