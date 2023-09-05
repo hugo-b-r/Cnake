@@ -20,7 +20,7 @@ LDLIBS :=
 ifeq ($(PLATFORM), windows)
     SRC += src/windows.c
     CC = gcc
-    LDLIBS += -lmingw32
+    LDLIBS +=  -lncurses
     CFLAGS += -D WINDOWS -D CLI -D PLATFORM=windows
 
 endif
@@ -45,7 +45,7 @@ else
     ifeq ($(OS), Windows_NT)
         SRC += src/windows.c
         CC = gcc
-        LDLIBS += -lmingw32
+        LDLIBS +=  -lncurses
         CFLAGS += -D WINDOWS -D CLI
     endif
     ifeq ($(UNAME_S),Linux)
