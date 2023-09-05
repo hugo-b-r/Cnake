@@ -12,11 +12,10 @@
 
 #define PLAYGROUND_X 32
 #define PLAYGROUND_Y 24 
-#define DEFAULT_SPEED 75
+#define DEFAULT_SPEED 150 // The higher the slower
 #define DEFAULT_MOVE_TIME 1
 #define DEFAULT_LENGTH 5
 
-// EVERY FUNCTION OF THIS FILE MUSTE BE DEFINED
 void init_platform();
 void gracefully_shutdown(char* message);
 
