@@ -1,10 +1,19 @@
 /*
- * main.h
- *
- * */
+
+    main.h
+    Copyright (c) 2022 - 2023 Hugo Berthet-Rambaud
+
+    This file is part of Cnake which is MIT licensed. It should be included
+    with your copy of the code. See http://opensource.org/licenses/MIT.
+ 
+*/
+
+
 
 #ifndef MAIN_H
 #define MAIN_H
+
+
 
 typedef enum {
 	up,
@@ -22,6 +31,7 @@ typedef enum {
 	nullissime
 } Control;
 
+
 typedef enum {
 	north,
 	west,
@@ -29,10 +39,13 @@ typedef enum {
 	east
 } Orientation;
 
+
 typedef enum {
   snake_body,
   fruit_dr,
   nothing_dr
 } DrawObject;
+
+
 
 #endif

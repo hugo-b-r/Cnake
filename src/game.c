@@ -1,10 +1,14 @@
 /*
 
-game.c
+    game.c
+    Copyright (c) 2022 - 2023 Hugo Berthet-Rambaud
 
-structure of a game and game related functions
-
+    This file is part of Cnake which is MIT licensed. It should be included
+    with your copy of the code. See http://opensource.org/licenses/MIT.
+ 
 */
+
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,8 +28,7 @@ structure of a game and game related functions
 
 
 
-
-int tailPosition(int head_position, int current_length)
+int tail_position(int head_position, int current_length)
 {
     if (head_position == current_length - 1) {
         return 0;
@@ -35,9 +38,7 @@ int tailPosition(int head_position, int current_length)
 }
 
 
-
-
-void pauseLoop(Control *control)
+void pause_loop(Control *control)
 {   
     int playground_width = screen_x();
     print_at(playground_width/2-10, 0, "Pause - press any key");
@@ -50,10 +51,12 @@ void pauseLoop(Control *control)
 }
 
 
-
-
-void incrLength(int (*positions)[2][100], int *current_length, int length_diff, int head_position)
-{   
+void increase_snake_length(
+    int (*positions)[2][100],
+    int *current_length,
+    int length_diff,
+    int head_position
+) {   
     for (int i = 0; i < ((*current_length) - head_position - 1); i++) {
         (*positions)[0][(*current_length) - i - 1 + length_diff] = (*positions)[0][(*current_length) - i - 1];
         (*positions)[1][(*current_length) - i - 1 + length_diff] = (*positions)[1][(*current_length) - i - 1];
@@ -62,10 +65,11 @@ void incrLength(int (*positions)[2][100], int *current_length, int length_diff, 
 }
 
 
-
-
-void game(int playground_width, int playground_height, int *game_continue)
-{
+void game(
+    int playground_width,
+    int playground_height,
+    int *game_continue
+) {
     Orientation orientation = south;
     int level = 0;
 
@@ -126,7 +130,7 @@ void game(int playground_width, int playground_height, int *game_continue)
 				if (orientation != west) orientation = east;
                 break;
             case holdon:
-                pauseLoop(&control);
+                pause_loop(&control);
                 break;
             case end_game:
                 clear_screen();
@@ -137,10 +141,10 @@ void game(int playground_width, int playground_height, int *game_continue)
 				break;
 		};
 
-        if (fruit_x == positions[0][tailPosition(head_position, current_length)] && fruit_y == positions[1][tailPosition(head_position, current_length)]) {
+        if (fruit_x == positions[0][tail_position(head_position, current_length)] && fruit_y == positions[1][tail_position(head_position, current_length)]) {
             draw_sth(fruit_x, fruit_y+1, fruit_dr);
         } else {
-            draw_sth(positions[0][tailPosition(head_position, current_length)], positions[1][tailPosition(head_position, current_length)]+1, nothing_dr);
+            draw_sth(positions[0][tail_position(head_position, current_length)], positions[1][tail_position(head_position, current_length)]+1, nothing_dr);
         }
         // Compute the new position of the head
         int x = positions[0][head_position];
@@ -164,7 +168,7 @@ void game(int playground_width, int playground_height, int *game_continue)
         //if on itself
         for (int i = 0; i < current_length; i++) {
             if ( (x == positions[0][i]) && (y == positions[1][i]) ) {
-                newPosStorage(&head_position, current_length, &positions, x, y);
+                new_position_storage(&head_position, current_length, &positions, x, y);
                 clear_screen();
                 print_at(0, 0, "Ouch. You died eating yourself.");
                 control = end_game;
@@ -175,7 +179,7 @@ void game(int playground_width, int playground_height, int *game_continue)
 
         // if border
         if ( (x > (playground_width-1)) || (y > (playground_height-1)) || (x < 0) || (y < 0) ) {
-            newPosStorage(&head_position, current_length, &positions, x, y);
+            new_position_storage(&head_position, current_length, &positions, x, y);
             clear_screen();
             print_at(0, 0, "You died crushed against the wall.");
             control = end_game;
@@ -183,8 +187,8 @@ void game(int playground_width, int playground_height, int *game_continue)
             return; // Engame if new pos not good
         } else {
 
-            newPosStorage(&head_position, current_length, &positions, x, y);
-            incrPos(&head_position, current_length);
+            new_position_storage(&head_position, current_length, &positions, x, y);
+            increase_position(&head_position, current_length);
         }
         draw_sth(positions[0][head_position], positions[1][head_position]+1, snake_body);
 
@@ -195,7 +199,7 @@ void game(int playground_width, int playground_height, int *game_continue)
             fruit_y = rand() % (playground_height);
             draw_sth(fruit_x, fruit_y+1, fruit_dr);
             assumed_length++;
-            incrLength(&positions, &current_length, 1, head_position);
+            increase_snake_length(&positions, &current_length, 1, head_position);
             level += 1;
             // Update the score
             // Print underscore line to show that the snake can't go on this line
@@ -211,7 +215,7 @@ void game(int playground_width, int playground_height, int *game_continue)
 
 
         } else if (assumed_length > current_length) {
-            incrLength(&positions, &current_length, 1, head_position);
+            increase_snake_length(&positions, &current_length, 1, head_position);
         }
 
         uni_sleep(DEFAULT_SPEED);

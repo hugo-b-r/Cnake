@@ -1,11 +1,19 @@
 /*
- *
- * platform.c
- *
- * */
+
+    numworks.c
+    Copyright (c) 2022 - 2023 Hugo Berthet-Rambaud
+
+    This file is part of Cnake which is MIT licensed. It should be included
+    with your copy of the code. See http://opensource.org/licenses/MIT.
+ 
+*/
+
+
+
 #include "main.h"
 #include "extapp_api.h"
 #include "numworks.h"
+
 
 
 // to get a character but non blocking
@@ -166,4 +174,3 @@ void draw_top_separator(int x) {
     extapp_pushRectUniform(x*10, 13, 10, 3, 0X0000);
     extapp_waitForVBlank();
 }
-

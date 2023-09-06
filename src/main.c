@@ -1,10 +1,14 @@
 /*
 
-main.c
+    main.c
+    Copyright (c) 2022 - 2023 Hugo Berthet-Rambaud
 
-main file for game
-
+    This file is part of Cnake which is MIT licensed. It should be included
+    with your copy of the code. See http://opensource.org/licenses/MIT.
+ 
 */
+
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,7 +26,8 @@ main file for game
 #endif
 
 
-int mainFunction()
+
+int main_function()
 {	
 	init_platform();
 
@@ -66,12 +71,11 @@ int mainFunction()
 }
 
 
-
 #if defined(WINDOWS)
 
     int main()
     {
-        return mainFunction();
+        return main_function();
     }
 
 #elif defined NUMWORKS || defined EPSILON_VERSION
@@ -80,7 +84,7 @@ int mainFunction()
 
     int extapp_main()
     {
-        return mainFunction();
+        return main_function();
     }
 
 #elif defined LINUX
@@ -90,9 +94,7 @@ int mainFunction()
 
     int main() {
             // the game
-        return mainFunction();
+        return main_function();
     }
-
-
 
 #endif
