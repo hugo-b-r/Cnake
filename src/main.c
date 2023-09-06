@@ -27,7 +27,7 @@
 
 
 
-int mainFunction()
+int main_function()
 {	
 	init_platform();
 
@@ -75,7 +75,7 @@ int mainFunction()
 
     int main()
     {
-        return mainFunction();
+        return main_function();
     }
 
 #elif defined NUMWORKS || defined EPSILON_VERSION
@@ -84,7 +84,7 @@ int mainFunction()
 
     int extapp_main()
     {
-        return mainFunction();
+        return main_function();
     }
 
 #elif defined LINUX
@@ -94,7 +94,7 @@ int mainFunction()
 
     int main() {
             // the game
-        return mainFunction();
+        return main_function();
     }
 
 #endif

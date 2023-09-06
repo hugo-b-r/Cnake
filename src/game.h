@@ -17,13 +17,13 @@
 
 
 
-int tailPosition(int head_position, int current_length);
+int tail_position(int head_position, int current_length);
 
 
-void pauseLoop(Control *command);
+void pause_loop(Control *command);
 
 
-void incrLength(
+void increase_snake_length(
     int (*positions)[2][100],
     int *length,
     int length_diff,
