@@ -1,10 +1,14 @@
 /*
 
-positions.h
+    positions.h
+    Copyright (c) 2022 - 2023 Hugo Berthet-Rambaud
 
-functions for positions matrix manipulations
-
+    This file is part of Cnake which is MIT licensed. It should be included
+    with your copy of the code. See http://opensource.org/licenses/MIT.
+ 
 */
+
+
 
 #ifndef _POSITIONS_H_
 #define _POSITIONS_H_

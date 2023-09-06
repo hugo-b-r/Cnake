@@ -1,10 +1,14 @@
 /*
 
-game.c
+    game.c
+    Copyright (c) 2022 - 2023 Hugo Berthet-Rambaud
 
-structure of a game and game related functions
-
+    This file is part of Cnake which is MIT licensed. It should be included
+    with your copy of the code. See http://opensource.org/licenses/MIT.
+ 
 */
+
+
 
 #include <stdio.h>
 #include <stdlib.h>
