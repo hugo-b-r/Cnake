@@ -6,7 +6,7 @@ NUMWORKS_API := api/ibapi.a
 TARGET = game
 
 SRC := $(addprefix src/, main.c game.c positions.c)
-
+API = ./src/api
 
 CFLAGS := -Wall -Isrc
 CPPFLAGS := -MMD -MP
@@ -35,12 +35,12 @@ ifeq ($(PLATFORM), numworks)
     CC = arm-none-eabi-gcc
     OBJCOPY = arm-none-eabi-OBJCOPY
     AR = arm-none-eabi-ar
-    CFLAGS += -D NUMWORKS -DNDEBUG -ggdb3 -Os -mcpu=cortex-m7 -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=soft -fno-common -fdata-sections -ffunction-sections -fno-exceptions -D PLATFORM=numworks
-    CPPFLAGS += -Iapi
-    LDFLAGS += -Wl,-Lapi -Wl,--gc-sections -Wl,--entry=entrypoint --specs=nosys.specs -nostartfiles -Wl,-Ur
-    LDLIBS += -lapi -lc
+    CFLAGS += -D NUMWORKS -I$(API) -DNDEBUG -ggdb3 -Os -mcpu=cortex-m7 -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=soft -fno-common -fdata-sections -ffunction-sections -fno-exceptions -D PLATFORM=numworks
+    CPPFLAGS += -Isrc/api
+    LDFLAGS += -Wl,-L$(API) -Wl,--gc-sections -Wl,--entry=entrypoint --specs=nosys.specs -nostartfiles -Wl,-Ur -lapi
+    LDLIBS +=  -lc
     TARGET = app.elf
-    SRC += $(addprefix src/numworks/, init.c platform.c)
+    SRC += src/numworks.c
 else
     ifeq ($(OS), Windows_NT)
         SRC += src/windows.c
@@ -64,7 +64,7 @@ all: $(TARGET)
 	@echo -e "Done.\n"
 
 $(TARGET): $(OBJ) | $(BIN_DIR)
-	$(CC) $^ $(LDLIBS) -o $@ $(LDFLAGS)
+	$(CC) $^ -o $@ $(LDFLAGS) $(LDLIBS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
