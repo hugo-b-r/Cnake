@@ -5,7 +5,7 @@
 
     This file is part of Cnake which is MIT licensed. It should be included
     with your copy of the code. See http://opensource.org/licenses/MIT.
- 
+
 */
 
 
@@ -39,7 +39,7 @@ int tail_position(int head_position, int current_length)
 
 
 void pause_loop(Control *control)
-{   
+{
     int playground_width = screen_x();
     print_at(playground_width/2-10, 0, "Pause - press any key");
     while (*control == holdon) {
@@ -56,7 +56,7 @@ void increase_snake_length(
     int *current_length,
     int length_diff,
     int head_position
-) {   
+) {
     for (int i = 0; i < ((*current_length) - head_position - 1); i++) {
         (*positions)[0][(*current_length) - i - 1 + length_diff] = (*positions)[0][(*current_length) - i - 1];
         (*positions)[1][(*current_length) - i - 1 + length_diff] = (*positions)[1][(*current_length) - i - 1];
@@ -81,15 +81,15 @@ void game(
     int assumed_length = level + DEFAULT_LENGTH;
 
     for (int i = 0; i < 100; i++) {
-        positions[0][i] = -1;    
-        positions[1][i] = -1; 
+        positions[0][i] = -1;
+        positions[1][i] = -1;
     }
 
     for (int i = 0; i < current_length; i++) {
         positions[0][i] = playground_width/2;
         positions[1][i] = playground_height/2;
         positions[1][i] -= current_length/2;
-        positions[1][i] += i;      
+        positions[1][i] += i;
     }
 
     srand(time(0));
@@ -99,6 +99,7 @@ void game(
     int fruit_x = rand() % (playground_width);
     int fruit_y = rand() % (playground_height);
     draw_sth (fruit_x, fruit_y+1, fruit_dr);
+    draw_sth (fruit_x+1, fruit_y+1, fruit_dr);
 
 
     // Print underscore line to show that the snake can't go on this line
@@ -114,7 +115,7 @@ void game(
 
 
     while (control != end_game && control != quit) {
-        
+
 		control = get_control_non_blocking();
 		switch(control) {
 			case up:
@@ -141,6 +142,7 @@ void game(
 				break;
 		};
 
+		// If the fruit apppears under the snake
         if (fruit_x == positions[0][tail_position(head_position, current_length)] && fruit_y == positions[1][tail_position(head_position, current_length)]) {
             draw_sth(fruit_x, fruit_y+1, fruit_dr);
         } else {
@@ -155,13 +157,13 @@ void game(
             y -= 1; // Remember coordinates are "reversed"
             break;
         case west:
-            x -= 1; // i.e.
+            x -= 2; // i.e.
             break;
         case south:
             y += 1; // i.e.
             break;
         case east:
-            x += 1; // i.e.
+            x += 2; // i.e.
             break;
         }
 
@@ -192,12 +194,21 @@ void game(
         }
         draw_sth(positions[0][head_position], positions[1][head_position]+1, snake_body);
 
-        //if on fruit
-        if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {
-            draw_sth(fruit_x, fruit_y+1, snake_body);
-            fruit_x = rand() % (playground_width);
-            fruit_y = rand() % (playground_height);
+        //if on fruit or just next to it because well the display should have been larger
+        if (((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y))
+            ||((positions[0][head_position] == fruit_x+1) && (positions[1][head_position] == fruit_y))) {
+                if ((positions[0][head_position] == fruit_x) && (positions[1][head_position] == fruit_y)) {
+                    draw_sth(fruit_x, fruit_y+1, snake_body);
+                    draw_sth(fruit_x+1, fruit_y+1, nothing_dr);
+                } else {
+                    draw_sth(fruit_x, fruit_y+1, nothing_dr);
+                    draw_sth(fruit_x+1, fruit_y+1, snake_body);
+                }
+
+            fruit_x = rand() % (playground_width-1);
+            fruit_y = rand() % (playground_height-1);
             draw_sth(fruit_x, fruit_y+1, fruit_dr);
+            draw_sth(fruit_x+1, fruit_y+1, fruit_dr);
             assumed_length++;
             increase_snake_length(&positions, &current_length, 1, head_position);
             level += 1;
@@ -211,7 +222,7 @@ void game(
             char str[9];
             sprintf(str, "%d", level); // Unsafe if too good at this game i.e. score too high
             print_at(8, 0, str);
-    
+
 
 
         } else if (assumed_length > current_length) {
