@@ -2,6 +2,14 @@
 Cnake is a simple Snake game made in C. It will work in Linux and Windows, maybe MacOS (I could never try).
 
 
+
+### Gameplay
+
+<p align="center">
+    <img src="assets/gameplay.gif" alt="gameplay" width="512"/> 
+</p>
+
+
 ### Building
 
 Clone repo:
@@ -26,12 +34,6 @@ If you want to build for another platform, declare PLATFORM among `windows`,
 make clean
 make PLATFORM=windows
 ```
-
-
-### Gameplay
-
-<img src="assets/gameplay.gif" alt="gameplay" width="282"/> 
-
 
 ### Installing
 
