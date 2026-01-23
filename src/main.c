@@ -35,7 +35,7 @@ int main_function()
 
     int playground_width = screen_x();
     int playground_height = screen_y()-1;   // Minus 1 for the score line
-    print_at(playground_width/2-8, playground_height/2-3, "Welcome in Cnake!");    // Welcome the player
+    print_at(playground_width/2-8, playground_height/2-3, "Welcome to Cnake!");    // Welcome the player
     uni_sleep(1000);                       // The message lasts 1 second
     while (game_continue) {
         // Display options
